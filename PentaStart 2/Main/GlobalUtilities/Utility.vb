@@ -203,7 +203,7 @@ Public Class Utility
         LogFile.WriteLog("[INI] Modificata Key PentaStart.ini: Percorso: " + Variable.Percorso + " - Key: " + Variable.Key + " - Valore: " + value)
         Dim nomevariabilestatica As String = Variable.Value
         Variable.Value = value
-        LogFile.WriteLog("Valore globale caricato: " + nomevariabilestatica + ": " + Variable.Value)
+        LogFile.WriteLog("[INI] Valore globale caricato: Prima: " + nomevariabilestatica + " - Adesso: " + Variable.Value)
     End Sub
     Public Shared Function EsisteStampanteMCT() As Boolean
         If mct.Value = "true" Then

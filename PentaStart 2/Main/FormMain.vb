@@ -32,7 +32,7 @@ Public Class FormMain
             AvvioProgramma()
         Catch ex As Exception
             MostraErrore(Me, "ERRORE CRITICO AVVIO PROGRAMMA. CONTATTERE L'ASSISTENZA.", ex)
-            Application.Exit()
+            Environment.Exit(0)
         End Try
     End Sub
 
@@ -882,6 +882,7 @@ ERRORE: " & err.Message, MsgBoxStyle.Information, "PentaStart")
         CaricamentoKeyIni(ini, DettaglioCapi, "false")
         CaricamentoKeyIni(ini, ScontrinoParlante, "false")
         CaricamentoKeyIni(ini, Postazione, "1")
+        CaricamentoKeyIni(ini, MatricolaRT, "null")
         CaricamentoKeyIni(ini, FatturazioneElett, "false")
         CaricamentoKeyIni(ini, SpeakerNomePronto, "false")
         CaricamentoKeyIni(ini, InvioSYNC, "false")

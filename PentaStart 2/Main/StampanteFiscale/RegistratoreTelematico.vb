@@ -58,7 +58,12 @@ Public Class RegistratoreTelematico
                 Me.Show()
             End If
         ElseIf EsisteStampanteEpson() Then
-            InSviluppo(Me)
+            Dim commandi() As String = {"printerFiscalReport", "Printer|1", "printXReport"}
+            Dim Percorso As String = Variables.PercorsoFpMate.Value + "/TOSEND/scontrino.txt"
+            ScrivereFile(commandi, Percorso)
+            Me.Hide()
+            AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA LETTURA GIORNALERA. RIPROVARE")
+            Me.Show()
         End If
     End Sub
 

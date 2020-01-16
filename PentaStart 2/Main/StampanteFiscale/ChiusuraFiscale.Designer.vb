@@ -39,7 +39,7 @@ Partial Class ChiusuraFiscale
         Me.ButtonSI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonSI.Font = New System.Drawing.Font("Century Gothic", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSI.ForeColor = System.Drawing.Color.Black
-        Me.ButtonSI.Location = New System.Drawing.Point(37, 326)
+        Me.ButtonSI.Location = New System.Drawing.Point(285, 326)
         Me.ButtonSI.Name = "ButtonSI"
         Me.ButtonSI.Size = New System.Drawing.Size(168, 89)
         Me.ButtonSI.TabIndex = 17
@@ -57,7 +57,7 @@ Partial Class ChiusuraFiscale
         Me.ButtonNO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonNO.Font = New System.Drawing.Font("Century Gothic", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonNO.ForeColor = System.Drawing.Color.Black
-        Me.ButtonNO.Location = New System.Drawing.Point(285, 326)
+        Me.ButtonNO.Location = New System.Drawing.Point(37, 326)
         Me.ButtonNO.Name = "ButtonNO"
         Me.ButtonNO.Size = New System.Drawing.Size(168, 89)
         Me.ButtonNO.TabIndex = 18
@@ -92,7 +92,7 @@ Partial Class ChiusuraFiscale
         Me.Label1.Text = "ATTENZIONE"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'chiusura
+        'ChiusuraFiscale
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -107,7 +107,7 @@ Partial Class ChiusuraFiscale
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "chiusura"
+        Me.Name = "ChiusuraFiscale"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Chiusura fiscale"
         Me.ResumeLayout(False)

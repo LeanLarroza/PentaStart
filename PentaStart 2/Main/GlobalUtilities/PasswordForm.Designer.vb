@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class AdminPassword
+Partial Class PasswordForm
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -22,7 +22,7 @@ Partial Class AdminPassword
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AdminPassword))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PasswordForm))
         Me.textPassword = New System.Windows.Forms.TextBox()
         Me.N8 = New System.Windows.Forms.Button()
         Me.ButtonIndietro = New System.Windows.Forms.Button()
@@ -63,9 +63,10 @@ Partial Class AdminPassword
         Me.Button34 = New System.Windows.Forms.Button()
         Me.Button35 = New System.Windows.Forms.Button()
         Me.Button36 = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Button37 = New System.Windows.Forms.Button()
         Me.Button38 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Button39 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'textPassword
@@ -75,7 +76,6 @@ Partial Class AdminPassword
         Me.textPassword.Name = "textPassword"
         Me.textPassword.Size = New System.Drawing.Size(554, 60)
         Me.textPassword.TabIndex = 47
-        Me.textPassword.Text = "PASSWORD"
         Me.textPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'N8
@@ -780,20 +780,6 @@ Partial Class AdminPassword
         Me.Button36.Text = "<<"
         Me.Button36.UseVisualStyleBackColor = False
         '
-        'Label1
-        '
-        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label1.AutoEllipsis = True
-        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Label1.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 45.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(0, 0)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(790, 117)
-        Me.Label1.TabIndex = 48
-        Me.Label1.Text = "AMMINISTRATORE"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'Button37
         '
         Me.Button37.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -829,7 +815,39 @@ Partial Class AdminPassword
         Me.Button38.Text = "VISUALIZZA"
         Me.Button38.UseVisualStyleBackColor = False
         '
-        'AdminPassword
+        'Label1
+        '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label1.AutoEllipsis = True
+        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Label1.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 45.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(0, 0)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(790, 117)
+        Me.Label1.TabIndex = 48
+        Me.Label1.Text = "AMMINISTRATORE"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Button39
+        '
+        Me.Button39.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Button39.BackColor = System.Drawing.Color.Gainsboro
+        Me.Button39.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.Button39.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.WindowFrame
+        Me.Button39.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.WindowFrame
+        Me.Button39.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button39.Font = New System.Drawing.Font("Century Gothic", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.Button39.ForeColor = System.Drawing.Color.Black
+        Me.Button39.Location = New System.Drawing.Point(41, 463)
+        Me.Button39.Name = "Button39"
+        Me.Button39.Size = New System.Drawing.Size(78, 50)
+        Me.Button39.TabIndex = 37
+        Me.Button39.TabStop = False
+        Me.Button39.Text = "SHIFT"
+        Me.Button39.UseVisualStyleBackColor = False
+        '
+        'TestoForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -874,6 +892,7 @@ Partial Class AdminPassword
         Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button27)
         Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.Button39)
         Me.Controls.Add(Me.Button20)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button19)
@@ -885,7 +904,7 @@ Partial Class AdminPassword
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "AdminPassword"
+        Me.Name = "TestoForm"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "AdminPassword"
@@ -934,7 +953,8 @@ Partial Class AdminPassword
     Friend WithEvents Button34 As Button
     Friend WithEvents Button35 As Button
     Friend WithEvents Button36 As Button
-    Friend WithEvents Label1 As Label
     Friend WithEvents Button37 As Button
     Friend WithEvents Button38 As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Button39 As Button
 End Class

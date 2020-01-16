@@ -13,7 +13,7 @@ Public Class formutility
     Private Sub AvvioImpostazioneStampante(Stampante As String)
         Dim Inizio As Date = Now
         LogFile.WriteLog("Avvio impostazione Stampante " & Stampante)
-        Dim adminpassword As New AdminPassword()
+        Dim adminpassword As New PasswordForm()
         Dim result = adminpassword.ShowDialog()
         If (result = DialogResult.OK) Then
             MostraAttenzione("Si consiglia di eseguire un backup del database prima della impostazione")
@@ -28,6 +28,7 @@ Public Class formutility
                             MostraAttenzione("Stampante MCT cancellata con sucesso." & Environment.NewLine & "Riavvio PentaStart In corso...")
                             LogFile.WriteLog("Fine impostazione Stampante MCT (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
                             RiavvioPentaStart()
+                            Return
                         Else
                             Me.Activate()
                             Me.BringToFront()
@@ -78,6 +79,7 @@ Public Class formutility
                             MostraAttenzione("Stampante Ditron cancellata con sucesso." & Environment.NewLine & "Riavvio PentaStart In corso...")
                             LogFile.WriteLog("Fine impostazione Stampante DITRON (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
                             RiavvioPentaStart()
+                            Return
                         Else
                             Me.Activate()
                             Me.BringToFront()
@@ -130,14 +132,24 @@ Public Class formutility
                         If (result9 = DialogResult.Yes) Then
                             ModificaKey(epson, "false")
                             ModificaKey(PercorsoFpMate, "null")
-                            MostraAttenzione("Stampante EPSON cancellata con sucesso." & Environment.NewLine & "Riavvio PentaStart In corso...")
+                            ModificaKey(MatricolaRT, "null")
+                            MostraAttenzione("Stampante EPSON cancellata con sucesso." & Environment.NewLine & "Riavvio PentaStart in corso...")
                             LogFile.WriteLog("Fine impostazione Stampante EPSON (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
                             RiavvioPentaStart()
+                            Return
                         Else
                             Me.Activate()
                             Me.BringToFront()
                             Return
                         End If
+                    End If
+
+                    Dim FormInserimentoMatricolaRT As New TestoForm With {.Intestazione = "INSERIRE MATRICOLA RT", .MinLenght = 11, .MaxLenght = 11}
+                    Dim resultinserimento As DialogResult = FormInserimentoMatricolaRT.ShowDialog()
+                    If resultinserimento = DialogResult.OK Then
+                        ModificaKey(MatricolaRT, FormInserimentoMatricolaRT.TestoScritto)
+                    Else
+                        MostraErrore(Me, "ERRORE INSERIMENTO MATRICOLA RT. INSERIRE MATRICOLA RT MANUALMENTE DENTRO PENTASTART.INI")
                     End If
 
                     Try
@@ -297,7 +309,7 @@ Public Class formutility
         Dim Inizio As Date = Now
         LogFile.WriteLog("Avvio impostazione Modulo SpeakerPronto")
         If Variables.Software.Value = "trilogis" Then
-            Dim adminpassword As New AdminPassword()
+            Dim adminpassword As New PasswordForm()
             Dim result = adminpassword.ShowDialog()
             If (result = DialogResult.OK) Then
                 If SpeakerNomePronto.Value = "true" Then
@@ -339,7 +351,7 @@ Public Class formutility
         Dim Inizio As Date = Now
         LogFile.WriteLog("Avvio impostazione Fatturazione Elettronica")
         If Variables.Software.Value = "trilogis" Then
-            Dim adminpassword As New AdminPassword()
+            Dim adminpassword As New PasswordForm()
             Dim result = adminpassword.ShowDialog()
             If (result = DialogResult.OK) Then
 
@@ -420,7 +432,7 @@ Public Class formutility
         LogFile.WriteLog("Avvio impostazione Modulo SYNC")
 
 
-        Dim adminpassword As New AdminPassword()
+        Dim adminpassword As New PasswordForm()
         Dim resultpassword = adminpassword.ShowDialog()
         If (resultpassword = DialogResult.OK) Then
 
@@ -643,7 +655,7 @@ Percorso: " + Variables.PercorsoSYNC.Value, MsgBoxStyle.Critical, "PentaStart")
         LogFile.WriteLog("Avvio impostazione Archiviazione Database")
 
 
-        Dim adminpassword As New AdminPassword()
+        Dim adminpassword As New PasswordForm()
         Dim result = adminpassword.ShowDialog()
         If (result = DialogResult.OK) Then
 
@@ -676,7 +688,7 @@ Percorso: " + Variables.PercorsoSYNC.Value, MsgBoxStyle.Critical, "PentaStart")
         LogFile.WriteLog("Avvio impostazione Logo Penta")
 
 
-        Dim adminpassword As New AdminPassword()
+        Dim adminpassword As New PasswordForm()
         Dim result = adminpassword.ShowDialog()
         If (result = DialogResult.OK) Then
             Dim fmTipoLogo As New TipoLogoPenta()

@@ -87,7 +87,12 @@ Public Class LetturaMF
                 InSviluppo(Me)
             End If
         ElseIf EsisteStampanteEpson() Then
-            InSviluppo(Me)
+            Dim commandi() As String = {"printContentByDate|1|5|" & DataIniziale.Day.ToString("00") & "|" & DataIniziale.Month.ToString("00") & "|" & DataIniziale.Year.ToString("0000") & "|" & DataFinale.Day.ToString("00") & "|" & DataFinale.Month.ToString("00") & "|" & DataFinale.Year.ToString("0000") & ""}
+            Dim Percorso As String = Variables.PercorsoFpMate.Value + "/TOSEND/scontrino.txt"
+            ScrivereFile(commandi, Percorso)
+            Me.Hide()
+            AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA LETTURA CONTENUTO MEMORIA DGFE.")
+            Me.Show()
         End If
     End Sub
 

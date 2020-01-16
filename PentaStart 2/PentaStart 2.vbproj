@@ -130,10 +130,16 @@
     <Compile Include="Main\Comus\TipoPagamento.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main\GlobalUtilities\AdminPassword.Designer.vb">
-      <DependentUpon>AdminPassword.vb</DependentUpon>
+    <Compile Include="Main\GlobalUtilities\TestoForm.Designer.vb">
+      <DependentUpon>TestoForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Main\GlobalUtilities\AdminPassword.vb">
+    <Compile Include="Main\GlobalUtilities\TestoForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\PasswordForm.Designer.vb">
+      <DependentUpon>PasswordForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\PasswordForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main\ArchiviazioneStorico\AnnoStorico.Designer.vb">
@@ -338,8 +344,11 @@
     <EmbeddedResource Include="Main\Comus\TipoPagamento.resx">
       <DependentUpon>TipoPagamento.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main\GlobalUtilities\AdminPassword.resx">
-      <DependentUpon>AdminPassword.vb</DependentUpon>
+    <EmbeddedResource Include="Main\GlobalUtilities\TestoForm.resx">
+      <DependentUpon>TestoForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\GlobalUtilities\PasswordForm.resx">
+      <DependentUpon>PasswordForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\ArchiviazioneStorico\AnnoStorico.resx">
       <DependentUpon>AnnoStorico.vb</DependentUpon>

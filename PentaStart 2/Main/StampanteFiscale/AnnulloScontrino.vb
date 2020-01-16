@@ -3,6 +3,7 @@ Imports IWshRuntimeLibrary
 Imports File = System.IO.File
 Imports PentaStart.Utility
 Imports System.Globalization
+Imports PentaStart.Variables
 
 Public Class AnnulloScontrino
     Private result As String = ""
@@ -36,13 +37,36 @@ Public Class AnnulloScontrino
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles ButtonConferma.Click
+    Private Sub TextBox1_MouseClick(sender As Object, e As MouseEventArgs) Handles TextBox1.MouseClick
+        MostraCalendarioEAggiornaTesto(Me, Date.ParseExact(TextBox1.Text, "dd/MM/yy", CultureInfo.InvariantCulture), TextBox1)
+        Me.Show()
+    End Sub
+
+    Private Sub TextBox2_Click(sender As Object, e As EventArgs) Handles TextBox2.Click
+        MostraEAggiornaNumero(Me, TextBox2.Text, TextBox2)
+        Me.Show()
+    End Sub
+
+    Private Sub ImportoAnn_Click(sender As Object, e As EventArgs) Handles ImportoAnn.Click
+        MostraEAggiornaNumero(Me, ImportoAnn.Text, ImportoAnn)
+        Me.Show()
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim nazz, nscont As String
+
         If Not TextBox2.Text.Replace("-", "").Length = 8 Then
+            LogFile.WriteLog("Numero di documento errato: " & TextBox2.Text)
+            MostraErrore(Me, "NUMERO DI DOCUMENTO NON VALIDO.")
+            Return
+        ElseIf Not Integer.TryParse(TextBox2.Text.Substring(0, 4), nazz) And Not Integer.TryParse(TextBox2.Text.Substring(4), nscont) Then
             LogFile.WriteLog("Numero di documento errato: " & TextBox2.Text)
             MostraErrore(Me, "NUMERO DI DOCUMENTO NON VALIDO.")
             Return
         End If
 
+        nazz = CInt(nazz).ToString("0000")
+        nscont = CInt(nscont).ToString("0000")
         Dim DataTextBox As Date
         If Not Date.TryParseExact(TextBox1.Text, "dd/MM/yy", New CultureInfo("it-IT"), DateTimeStyles.None, DataTextBox) Then
             LogFile.WriteLog("Data documento errata: " & TextBox2.Text)
@@ -51,11 +75,9 @@ Public Class AnnulloScontrino
         End If
 
         TextBox2.Text = TextBox2.Text.Replace("-", "")
-        Dim nazz = TextBox2.Text.Substring(0, 4)
-        Dim nscont = TextBox2.Text.Substring(4)
         LogFile.WriteLog("Data inserita: " & TextBox1.Text)
-        LogFile.WriteLog("Numero Azzeramento: " & CInt(nazz).ToString("0000"))
-        LogFile.WriteLog("Numero Scontrino: " & CInt(nscont).ToString("0000"))
+        LogFile.WriteLog("Numero Azzeramento: " & nazz)
+        LogFile.WriteLog("Numero Scontrino: " & nscont)
 
         If (ImportoAnn.Text = "0" Or ImportoAnn.Text = "" Or ImportoAnn.Text = "00") And Not EsisteStampanteMCT() And Not EsisteStampanteEpson() Then
             MostraErrore(Me, "INSERIRE IMPORTO TOTALE SCONTRINO.")
@@ -63,7 +85,8 @@ Public Class AnnulloScontrino
         End If
 
         If EsisteStampanteMCT() Then
-            Dim result3 As DialogResult = MessageBox.Show("Sei sicuro di annullare lo scontrino N." + TextBox2.Text + "?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            Dim domandascontrino As New Domanda With {.Messagio = "Annullare lo scontrino N. " & TextBox2.Text & "?"}
+            Dim result3 As DialogResult = domandascontrino.ShowDialog()
             If (result3 = DialogResult.Yes) Then
                 LogFile.WriteLog("Stampa documento di annullamento per lo scontrino " & TextBox2.Text.Replace("-", "") & " con data " & TextBox1.Text & " in corso...")
                 Dim commandi() As String = {"=K", "=C1", "=k/&" + TextBox1.Text.Replace("/", "") + "/[" + CInt(nazz).ToString() + "/]" + CInt(nscont).ToString(), "=C1"}
@@ -77,7 +100,8 @@ Public Class AnnulloScontrino
             If Variables.Software.Value = "menu" Then
                 ImportoAnn.Text = ImportoAnn.Text.Replace(".", ",")
                 Dim ImportoAnnullo As String = Convert.ToDouble(ImportoAnn.Text).ToString("0.00")
-                Dim result3 As DialogResult = MessageBox.Show("Sei sicuro di annullare lo scontrino N." + TextBox2.Text + " Importo:  €" + ImportoAnnullo + "?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                Dim domandascontrino As New Domanda With {.Messagio = "Sei sicuro di annullare lo scontrino N." + TextBox2.Text + ", Importo: €" + ImportoAnnullo + "?"}
+                Dim result3 As DialogResult = domandascontrino.ShowDialog()
                 If (result3 = DialogResult.Yes) Then
                     Dim sOpz = "PORT = 1"
                     If Variables.PercorsoDatabase.Value <> "" Then
@@ -115,7 +139,8 @@ Public Class AnnulloScontrino
             ElseIf Variables.Software.Value = "laundry" Then
                 InSviluppo(Me)
             ElseIf Variables.Software.Value = "comus" Or Variables.Software.Value = "trilogis" Then
-                Dim result3 As DialogResult = MessageBox.Show("Sei sicuro di annullare lo scontrino N." + TextBox2.Text + " Importo:  €" + ImportoAnn.Text + "?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                Dim domandascontrino As New Domanda With {.Messagio = "Annullare lo scontrino N." + TextBox2.Text + ", Importo: €" + ImportoAnn.Text + "?"}
+                Dim result3 As DialogResult = domandascontrino.ShowDialog()
                 If (result3 = DialogResult.Yes) Then
                     LogFile.WriteLog("Stampa documento di annullamento per lo scontrino " & TextBox2.Text.Replace("-", "") & ", Importo: €" & ImportoAnn.Text & " con data " & TextBox1.Text & " in corso...")
                     ImportoAnn.Text = ImportoAnn.Text.Replace(".", ",")
@@ -125,19 +150,35 @@ Public Class AnnulloScontrino
                     ScrivereFile(commandi, Percorso)
                     Me.Hide()
                     AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA DOCUMENTO DI ANNULLAMENTO. RIPROVARE")
-                    ImportoAnn.Text = ""
                     Me.Dispose()
                     RegistratoreTelematico.Show()
                 End If
             End If
         ElseIf EsisteStampanteEpson() Then
-            InSviluppo(Me)
+            LogFile.WriteLog("Stampa documento di annullamento per lo scontrino " & TextBox2.Text.Replace("-", "") & " con data " & TextBox1.Text & " in corso...")
+            If Variables.Software.Value = "comus" Or Variables.Software.Value = "trilogis" Then
+                Dim domandascontrino As New Domanda With {.Messagio = "Annullare lo scontrino N." & TextBox2.Text & "?"}
+                Dim result3 As DialogResult = domandascontrino.ShowDialog()
+                If (result3 = DialogResult.Yes) Then
+                    LogFile.WriteLog("Stampa documento di annullamento per lo scontrino " & TextBox2.Text.Replace("-", "") & " con data " & TextBox1.Text & " in corso...")
+                    Dim commandi() As String = {"printerFiscalReceipt", "Printer|1", "printRecMessage|1|1|1|1|DOCUMENTO DI ANNULLO", "printRecMessage|1|4|1|1|VOID " & nazz & " " & nscont & " " & DataTextBox.ToString("ddMMyyyy") & " " & MatricolaRT.Value, "printRecTotal|1"}
+                    Dim Percorso As String = Variables.PercorsoFpMate.Value.Replace("/", "\") + "\TOSEND\scontrino.txt"
+                    ScrivereFile(commandi, Percorso)
+                    Me.Hide()
+                    AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA DOCUMENTO DI ANNULLAMENTO. RIPROVARE")
+                    ImportoAnn.Text = ""
+                    Me.Dispose()
+                    RegistratoreTelematico.Show()
+                End If
+            Else
+                InSviluppo(Me)
+            End If
         End If
         Me.Dispose()
         RegistratoreTelematico.Show()
     End Sub
 
-    Private Sub Indietro_Click(sender As Object, e As EventArgs) Handles indietro.Click
+    Private Sub ButtonIndietro_Click(sender As Object, e As EventArgs) Handles ButtonIndietro.Click
         ImportoAnn.Text = ""
         Try
             AxCoEcrCom1.Close()
@@ -145,17 +186,5 @@ Public Class AnnulloScontrino
         End Try
         Me.Dispose()
         RegistratoreTelematico.Show()
-    End Sub
-
-    Private Sub TextBox1_MouseClick(sender As Object, e As MouseEventArgs) Handles TextBox1.MouseClick
-        MostraCalendarioEAggiornaTesto(Me, Date.ParseExact(TextBox1.Text, "dd/MM/yy", CultureInfo.InvariantCulture), TextBox1)
-    End Sub
-
-    Private Sub TextBox2_Click(sender As Object, e As EventArgs) Handles TextBox2.Click
-        MostraEAggiornaNumero(Me, TextBox2.Text, TextBox2)
-    End Sub
-
-    Private Sub ImportoAnn_Click(sender As Object, e As EventArgs) Handles ImportoAnn.Click
-        MostraEAggiornaNumero(Me, ImportoAnn.Text, ImportoAnn)
     End Sub
 End Class

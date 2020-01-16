@@ -26,13 +26,13 @@ Partial Class AnnulloScontrino
         Me.ImportoAnn = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.ButtonConferma = New System.Windows.Forms.Button()
-        Me.indietro = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.ButtonIndietro = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ImportoAnn
@@ -62,40 +62,6 @@ Partial Class AnnulloScontrino
         Me.TextBox1.Size = New System.Drawing.Size(435, 60)
         Me.TextBox1.TabIndex = 29
         Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'ButtonConferma
-        '
-        Me.ButtonConferma.BackColor = System.Drawing.Color.White
-        Me.ButtonConferma.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue
-        Me.ButtonConferma.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
-        Me.ButtonConferma.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
-        Me.ButtonConferma.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonConferma.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 25.0!)
-        Me.ButtonConferma.ForeColor = System.Drawing.Color.Black
-        Me.ButtonConferma.Location = New System.Drawing.Point(32, 455)
-        Me.ButtonConferma.Name = "ButtonConferma"
-        Me.ButtonConferma.Size = New System.Drawing.Size(312, 69)
-        Me.ButtonConferma.TabIndex = 24
-        Me.ButtonConferma.TabStop = False
-        Me.ButtonConferma.Text = "Conferma"
-        Me.ButtonConferma.UseVisualStyleBackColor = False
-        '
-        'indietro
-        '
-        Me.indietro.BackColor = System.Drawing.Color.White
-        Me.indietro.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue
-        Me.indietro.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
-        Me.indietro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
-        Me.indietro.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.indietro.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 25.0!)
-        Me.indietro.ForeColor = System.Drawing.Color.Black
-        Me.indietro.Location = New System.Drawing.Point(449, 455)
-        Me.indietro.Name = "indietro"
-        Me.indietro.Size = New System.Drawing.Size(312, 69)
-        Me.indietro.TabIndex = 25
-        Me.indietro.TabStop = False
-        Me.indietro.Text = "Indietro"
-        Me.indietro.UseVisualStyleBackColor = False
         '
         'Label5
         '
@@ -168,6 +134,42 @@ Partial Class AnnulloScontrino
         Me.Label6.Text = "€"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'ButtonIndietro
+        '
+        Me.ButtonIndietro.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ButtonIndietro.BackColor = System.Drawing.Color.Gainsboro
+        Me.ButtonIndietro.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.ButtonIndietro.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro
+        Me.ButtonIndietro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro
+        Me.ButtonIndietro.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonIndietro.Font = New System.Drawing.Font("Century Gothic", 20.0!, System.Drawing.FontStyle.Bold)
+        Me.ButtonIndietro.ForeColor = System.Drawing.Color.Black
+        Me.ButtonIndietro.Location = New System.Drawing.Point(46, 463)
+        Me.ButtonIndietro.Name = "ButtonIndietro"
+        Me.ButtonIndietro.Size = New System.Drawing.Size(259, 52)
+        Me.ButtonIndietro.TabIndex = 34
+        Me.ButtonIndietro.TabStop = False
+        Me.ButtonIndietro.Text = "INDIETRO"
+        Me.ButtonIndietro.UseVisualStyleBackColor = False
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Century Gothic", 20.0!, System.Drawing.FontStyle.Bold)
+        Me.Button1.ForeColor = System.Drawing.Color.Black
+        Me.Button1.Location = New System.Drawing.Point(490, 463)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(259, 52)
+        Me.Button1.TabIndex = 35
+        Me.Button1.TabStop = False
+        Me.Button1.Text = "CONFERMA"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
         'AnnulloScontrino
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -175,12 +177,12 @@ Partial Class AnnulloScontrino
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(790, 550)
+        Me.Controls.Add(Me.ButtonIndietro)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.ImportoAnn)
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.ButtonConferma)
-        Me.Controls.Add(Me.indietro)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -200,11 +202,11 @@ Partial Class AnnulloScontrino
     Friend WithEvents ImportoAnn As TextBox
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents ButtonConferma As Button
-    Friend WithEvents indietro As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents ButtonIndietro As Button
+    Friend WithEvents Button1 As Button
 End Class

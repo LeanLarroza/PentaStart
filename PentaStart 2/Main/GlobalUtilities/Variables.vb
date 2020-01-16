@@ -21,6 +21,7 @@
     Public Shared DettaglioCapi As New KeyIni With {.Percorso = "STAMPANTI", .Key = "DettaglioCapi"}
     Public Shared ScontrinoParlante As New KeyIni With {.Percorso = "STAMPANTI", .Key = "ScontrinoParlante"}
     Public Shared Postazione As New KeyIni With {.Percorso = "STAMPANTI", .Key = "Postazione"}
+    Public Shared MatricolaRT As New KeyIni With {.Percorso = "STAMPANTI", .Key = "MatricolaRT"}
     Public Shared FatturazioneElett As New KeyIni With {.Percorso = "MODULI", .Key = "FattElett"}
     Public Shared SpeakerNomePronto As New KeyIni With {.Percorso = "MODULI", .Key = "SpeakerPronto"}
     Public Shared InvioSYNC As New KeyIni With {.Percorso = "MODULI", .Key = "InvioSYNC"}

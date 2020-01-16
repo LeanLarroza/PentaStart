@@ -149,7 +149,7 @@ Partial Class RegistratoreTelematico
         Me.ButtonInvioAE.Size = New System.Drawing.Size(312, 69)
         Me.ButtonInvioAE.TabIndex = 14
         Me.ButtonInvioAE.TabStop = False
-        Me.ButtonInvioAE.Text = "Invio Corrisp.  AE"
+        Me.ButtonInvioAE.Text = "Forzare Invio A.E"
         Me.ButtonInvioAE.UseVisualStyleBackColor = False
         '
         'LettMF

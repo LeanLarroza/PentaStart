@@ -72,7 +72,7 @@ Public Class ChiusuraFiscale
             End If
         ElseIf EsisteStampanteEpson() Then
             LogFile.WriteLog("Chiusura fiscale stampante Epson in corso...")
-            Dim commandi() As String = {"CHIAVE Z", "azzgio tipo=2", "CHIAVE REG"}
+            Dim commandi() As String = {"printerFiscalReport", "Printer|1", "printZReport|1"}
             Dim Percorso As String = Variables.PercorsoFpMate.Value.Replace("/", "\") + "\TOSEND\scontrino.txt"
             ScrivereFile(commandi, Variables.PercorsoFpMate.Value.Replace("/", "\") + "\TOSEND\scontrino.txt")
             Me.Hide()

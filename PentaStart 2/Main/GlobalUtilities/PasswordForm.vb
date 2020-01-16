@@ -1,13 +1,16 @@
 ﻿Imports System.Windows.Forms
 Imports PentaStart.Utility
-Public Class AdminPassword
+Public Class PasswordForm
 
     Private NasconderePassword As Boolean = False
+    Private Maioscolo As Boolean = False
+    Private abc As String() = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
 
     Private Sub AdminPassword_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogFile.WriteLog("Inserimento password amministratore in corso...")
         textPassword.PasswordChar = ""
         NasconderePassword = True
+        Maioscolo = False
         Me.ActiveControl = textPassword
     End Sub
 
@@ -61,6 +64,24 @@ Public Class AdminPassword
     Private Sub TextPassword_TextChanged(sender As Object, e As EventArgs) Handles textPassword.TextChanged
         If NasconderePassword Then
             textPassword.PasswordChar = "•"
+        End If
+    End Sub
+
+    Private Sub Button39_Click_1(sender As Object, e As EventArgs) Handles Button39.Click
+        If Maioscolo Then
+            For Each button As Control In Me.Controls
+                If abc.Contains(button.Text.ToLower) Then
+                    button.Text = button.Text.ToLower()
+                End If
+            Next
+            Maioscolo = False
+        Else
+            For Each button As Control In Me.Controls
+                If abc.Contains(button.Text.ToLower) Then
+                    button.Text = button.Text.ToUpper()
+                End If
+            Next
+            Maioscolo = True
         End If
     End Sub
 End Class

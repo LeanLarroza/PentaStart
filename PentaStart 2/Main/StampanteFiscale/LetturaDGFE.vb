@@ -114,6 +114,7 @@ Public Class LetturaDGFE
                 ScrivereFile(commandi, Percorso)
                 Me.Hide()
                 AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA LETTURA CONTENUTO MEMORIA DGFE.")
+                Me.Show()
             Else
                 Dim commandi() As String = {"=K", "=C3", "=C452/$1/&" & TextBox1.Text.Replace("/", "") & "/[" & CInt(iscon.Text).ToString() & "/]" & CInt(fscon.Text).ToString(), "=C1"}
                 Dim Percorso As String = Variables.PercorsoMultiDriver.Value + "/TOSEND/scontrino.txt"
@@ -164,7 +165,21 @@ Public Class LetturaDGFE
                 Me.Show()
             End If
         ElseIf EsisteStampanteEpson() Then
-            InSviluppo(Me)
+            If iscon.Text = "0" And fscon.Text = "0" Then
+                Dim commandi() As String = {"printContentByDate|1|0|" & DataIniziale.Day.ToString("00") & "|" & DataIniziale.Month.ToString("00") & "|" & DataIniziale.Year.ToString("0000") & "|" & DataFinale.Day.ToString("00") & "|" & DataFinale.Month.ToString("00") & "|" & DataFinale.Year.ToString("0000") & ""}
+                Dim Percorso As String = Variables.PercorsoFpMate.Value + "/TOSEND/scontrino.txt"
+                ScrivereFile(commandi, Percorso)
+                Me.Hide()
+                AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA LETTURA CONTENUTO MEMORIA DGFE.")
+                Me.Show()
+            Else
+                Dim commandi() As String = {"printContentByDate|1|0|" & DataIniziale.Day.ToString("00") & "|" & DataIniziale.Month.ToString("00") & "|" & DataIniziale.Year.ToString("0000") & "|" & CInt(iscon.Text).ToString("0000") & "|" & CInt(fscon.Text).ToString("0000")}
+                Dim Percorso As String = Variables.PercorsoFpMate.Value + "/TOSEND/scontrino.txt"
+                ScrivereFile(commandi, Percorso)
+                Me.Hide()
+                AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA LETTURA CONTENUTO MEMORIA DGFE.")
+                Me.Show()
+            End If
         End If
     End Sub
 
