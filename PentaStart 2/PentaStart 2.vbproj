@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{593A5E4C-BA1C-4C48-B17D-AC7533105E79}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>PentaStart.My.MyApplication</StartupObject>
+    <RootNamespace>PentaStart</RootNamespace>
+    <AssemblyName>PentaStart</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Proyectos VB.Net\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>..\..\..\..\..\..\Proyectos VB.Net\PentaStart\Output\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\Desktop\Proyectos VB.Net\PentaStart2\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Text</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>Off</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Logo solo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>DF0C7235B85E509B8C694D5EAECD9BBD0AE4B14C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>PentaStart 2_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxInterop.COECRCOMLib">
+      <HintPath>..\..\..\..\..\..\Proyectos VB.Net\MultiServer 3logis\AxInterop.COECRCOMLib.dll</HintPath>
+    </Reference>
+    <Reference Include="FirebirdSql.Data.FirebirdClientOLD">
+      <HintPath>..\..\..\..\..\..\Proyectos VB.Net\FireBirdOld\FirebirdSql.Data.FirebirdClientOLD.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="WindowsInputLib, Version=1.3.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsInputLibrary.1.3.7\lib\net46\WindowsInputLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main\Comus\TipoPagamento.Designer.vb">
+      <DependentUpon>TipoPagamento.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Comus\TipoPagamento.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\AdminPassword.Designer.vb">
+      <DependentUpon>AdminPassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\AdminPassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\AnnoStorico.Designer.vb">
+      <DependentUpon>AnnoStorico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\AnnoStorico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\CalendarForm.Designer.vb">
+      <DependentUpon>CalendarForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\CalendarForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\Domanda.Designer.vb">
+      <DependentUpon>Domanda.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\Domanda.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\KeyIni.vb" />
+    <Compile Include="Main\GlobalUtilities\NumeroForm.Designer.vb">
+      <DependentUpon>NumeroForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\NumeroForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\StampanteFiscale\AnnulloScontrino.Designer.vb">
+      <DependentUpon>AnnulloScontrino.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\StampanteFiscale\AnnulloScontrino.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\ArchiviazioneTrilogis.Designer.vb">
+      <DependentUpon>ArchiviazioneTrilogis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\ArchiviazioneTrilogis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\Attendere.Designer.vb">
+      <DependentUpon>Attendere.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\Attendere.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Backup\Backup.Designer.vb">
+      <DependentUpon>Backup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Backup\Backup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\ChiusuraPentaStart.Designer.vb">
+      <DependentUpon>ChiusuraPentaStart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\ChiusuraPentaStart.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\StampanteFiscale\ChiusuraFiscale.Designer.vb">
+      <DependentUpon>ChiusuraFiscale.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\StampanteFiscale\ChiusuraFiscale.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\FatturazioneElettronica\CoordinateSYNC.Designer.vb">
+      <DependentUpon>CoordinateSYNC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\FatturazioneElettronica\CoordinateSYNC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\Errore.Designer.vb">
+      <DependentUpon>Errore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\Errore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\FatturazioneElettronica\InvioFatture.Designer.vb">
+      <DependentUpon>InvioFatture.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\FatturazioneElettronica\InvioFatture.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\Utility.vb" />
+    <Compile Include="Main\GlobalUtilities\Variables.vb" />
+    <Compile Include="Main\GlobalUtilities\KeyBoard.vb" />
+    <Compile Include="Main\StampanteFiscale\LetturaMF.Designer.vb">
+      <DependentUpon>LetturaMF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\StampanteFiscale\LetturaMF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\StampanteFiscale\LetturaDGFE.Designer.vb">
+      <DependentUpon>LetturaDGFE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\StampanteFiscale\LetturaDGFE.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\Log.vb" />
+    <Compile Include="Module.vb" />
+    <Compile Include="Main\StampanteFiscale\RegistratoreTelematico.Designer.vb">
+      <DependentUpon>RegistratoreTelematico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\StampanteFiscale\RegistratoreTelematico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\RipristinoDBOriginale.Designer.vb">
+      <DependentUpon>RipristinoDBOriginale.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\RipristinoDBOriginale.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\CaricamentoDBStorico.Designer.vb">
+      <DependentUpon>CaricamentoDBStorico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\CaricamentoDBStorico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Impostazione\FormUtility.Designer.vb">
+      <DependentUpon>FormUtility.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Impostazione\FormUtility.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\IniFile.vb" />
+    <Compile Include="Main\GlobalUtilities\Attenzione.Designer.vb">
+      <DependentUpon>Attenzione.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\GlobalUtilities\Attenzione.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\FormMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\FormMain.Designer.vb">
+      <DependentUpon>FormMain.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Main\SAT.Designer.vb">
+      <DependentUpon>SAT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\SAT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\BannerLogoPenta.Designer.vb">
+      <DependentUpon>BannerLogoPenta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\BannerLogoPenta.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\BannerStorico.Designer.vb">
+      <DependentUpon>BannerStorico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\BannerStorico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\SpegniPC.Designer.vb">
+      <DependentUpon>SpegniPC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\SpegniPC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\RiavvioPC.Designer.vb">
+      <DependentUpon>RiavvioPC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\RiavvioPC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Impostazione\TipoLogoPenta.Designer.vb">
+      <DependentUpon>TipoLogoPenta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Impostazione\TipoLogoPenta.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Manutenzione\AvvioTricovers.Designer.vb">
+      <DependentUpon>AvvioTricovers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Manutenzione\AvvioTricovers.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\UnitaArchiviazioneStorico.Designer.vb">
+      <DependentUpon>UnitaArchiviazioneStorico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\ArchiviazioneStorico\UnitaArchiviazioneStorico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Main\Comus\TipoPagamento.resx">
+      <DependentUpon>TipoPagamento.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\GlobalUtilities\AdminPassword.resx">
+      <DependentUpon>AdminPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\ArchiviazioneStorico\AnnoStorico.resx">
+      <DependentUpon>AnnoStorico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\GlobalUtilities\CalendarForm.resx">
+      <DependentUpon>CalendarForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\GlobalUtilities\Domanda.resx">
+      <DependentUpon>Domanda.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\GlobalUtilities\NumeroForm.resx">
+      <DependentUpon>NumeroForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\StampanteFiscale\AnnulloScontrino.resx">
+      <DependentUpon>AnnulloScontrino.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\ArchiviazioneStorico\ArchiviazioneTrilogis.resx">
+      <DependentUpon>ArchiviazioneTrilogis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\GlobalUtilities\Attendere.resx">
+      <DependentUpon>Attendere.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Backup\Backup.resx">
+      <DependentUpon>Backup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\ChiusuraPentaStart.resx">
+      <DependentUpon>ChiusuraPentaStart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\StampanteFiscale\ChiusuraFiscale.resx">
+      <DependentUpon>ChiusuraFiscale.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\FatturazioneElettronica\CoordinateSYNC.resx">
+      <DependentUpon>CoordinateSYNC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\GlobalUtilities\Errore.resx">
+      <DependentUpon>Errore.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\GlobalUtilities\Attenzione.resx">
+      <DependentUpon>Attenzione.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\FormMain.resx">
+      <DependentUpon>FormMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Impostazione\FormUtility.resx">
+      <DependentUpon>FormUtility.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\FatturazioneElettronica\InvioFatture.resx">
+      <DependentUpon>InvioFatture.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\StampanteFiscale\LetturaMF.resx">
+      <DependentUpon>LetturaMF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\StampanteFiscale\LetturaDGFE.resx">
+      <DependentUpon>LetturaDGFE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\StampanteFiscale\RegistratoreTelematico.resx">
+      <DependentUpon>RegistratoreTelematico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\ArchiviazioneStorico\RipristinoDBOriginale.resx">
+      <DependentUpon>RipristinoDBOriginale.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\ArchiviazioneStorico\CaricamentoDBStorico.resx">
+      <DependentUpon>CaricamentoDBStorico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\SAT.resx">
+      <DependentUpon>SAT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\BannerLogoPenta.resx">
+      <DependentUpon>BannerLogoPenta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\ArchiviazioneStorico\BannerStorico.resx">
+      <DependentUpon>BannerStorico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\SpegniPC.resx">
+      <DependentUpon>SpegniPC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\RiavvioPC.resx">
+      <DependentUpon>RiavvioPC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Impostazione\TipoLogoPenta.resx">
+      <DependentUpon>TipoLogoPenta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Manutenzione\AvvioTricovers.resx">
+      <DependentUpon>AvvioTricovers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\ArchiviazioneStorico\UnitaArchiviazioneStorico.resx">
+      <DependentUpon>UnitaArchiviazioneStorico.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Logo solo.ico" />
+    <None Include="Resources\destra.png" />
+    <None Include="Resources\sinistra.png" />
+    <None Include="Resources\Bordes2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Shell32">
+      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>call "$(SolutionDir)zipper.bat"
+call "$(SolutionDir)xml.bat" 1.5.0.0</PostBuildEvent>
+  </PropertyGroup>
+</Project>
