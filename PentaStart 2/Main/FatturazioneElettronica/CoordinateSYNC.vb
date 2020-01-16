@@ -150,7 +150,7 @@ Public Class CoordinateSYNC
 
     Private Sub CoordinateSYNC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tbCoorXChiusura1.Text = CoordinateButtonXChiusura1.Value
-        tbCoorYChiusura1.Text = CoordinateButtonYChiusura1.Valued
+        tbCoorYChiusura1.Text = CoordinateButtonYChiusura1.Value
         tbCoorXChiusura2.Text = CoordinateButtonXChiusura2.Value
         tbCoorYChiusura2.Text = CoordinateButtonYChiusura2.Value
         tbCoorXChiusura3.Text = CoordinateButtonXChiusura3.Value

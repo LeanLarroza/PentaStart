@@ -37,7 +37,7 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\..\..\..\..\..\Proyectos VB.Net\PentaStart\Output\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\..\Proyectos VB.Net\PentaStart\Output\</OutputPath>
     <DocumentationFile>
     </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
@@ -87,10 +87,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AxInterop.COECRCOMLib">
-      <HintPath>..\..\..\..\..\..\Proyectos VB.Net\MultiServer 3logis\AxInterop.COECRCOMLib.dll</HintPath>
+      <HintPath>..\packages\CoEcrCom\AxInterop.COECRCOMLib.dll</HintPath>
     </Reference>
     <Reference Include="FirebirdSql.Data.FirebirdClientOLD">
-      <HintPath>..\..\..\..\..\..\Proyectos VB.Net\FireBirdOld\FirebirdSql.Data.FirebirdClientOLD.dll</HintPath>
+      <HintPath>..\packages\Firebird\FirebirdSql.Data.FirebirdClientOLD.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
