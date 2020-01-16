@@ -9,11 +9,11 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("PentaStart")>
-<Assembly: AssemblyDescription("Launcher 3logis")>
+<Assembly: AssemblyDescription("PentaStart Launcher")>
 <Assembly: AssemblyCompany("Penta Electronic")>
 <Assembly: AssemblyProduct("PentaStart")>
-<Assembly: AssemblyCopyright("Copyright ©  2018")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyCopyright("Copyright ©  2020")>
+<Assembly: AssemblyTrademark("Penta Electronic")>
 
 <Assembly: ComVisible(False)>
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.4.0.0")>
-<Assembly: AssemblyFileVersion("1.4.0.0")>
+<Assembly: AssemblyVersion("2.0.0.0")>
+<Assembly: AssemblyFileVersion("2.0.0.0")>
