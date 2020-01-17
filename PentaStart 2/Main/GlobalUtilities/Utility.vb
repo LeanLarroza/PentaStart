@@ -149,7 +149,7 @@ Public Class Utility
                     Return False
                 End If
             Else
-                MsgBox("Software non configurato", MsgBoxStyle.Information, "PentaStart")
+                MostraAttenzione("Software non configurato")
                 Return False
             End If
         Else
@@ -208,7 +208,11 @@ Public Class Utility
     Public Shared Function EsisteStampanteMCT() As Boolean
         If mct.Value = "true" Then
 
-            Directory.CreateDirectory(PercorsoMultiDriver.Value & "/TOSEND")
+            Try
+                Directory.CreateDirectory(PercorsoMultiDriver.Value & "/TOSEND")
+            Catch ex As Exception
+                MostraAttenzione("Impossibile creare percorso: " & PercorsoMultiDriver.Value & "/TOSEND")
+            End Try
 
             If Not File.Exists(Application.StartupPath + "/MULTIDRIVER_SERVER.lnk") Then
                 Dim wsh As WshShell = New WshShell()
@@ -237,10 +241,8 @@ Public Class Utility
             Try
                 Directory.CreateDirectory(PercorsoWinEcr.Value & "/TOSEND")
             Catch ex As Exception
-                LogFile.WriteLog("Impossibile creare percorso: " & PercorsoWinEcr.Value & "/TOSEND")
-                MessageBox.Show("Impossibile creare percorso: " & PercorsoWinEcr.Value & "/TOSEND", "PentaStart")
+                MostraAttenzione("Impossibile creare percorso: " & PercorsoWinEcr.Value & "/TOSEND")
             End Try
-
 
             If Not File.Exists(Application.StartupPath + "/SoEcrCom.lnk") Then
                 Dim wsh As WshShell = New WshShell()
@@ -267,8 +269,7 @@ Public Class Utility
                 Directory.CreateDirectory("C:/EPSON/ERRORI")
                 Directory.CreateDirectory("C:/EPSON/LOGS")
             Catch ex As Exception
-                LogFile.WriteLog("Impossibile creare percorso: " & PercorsoWinEcr.Value & "/TOSEND")
-                MessageBox.Show("Impossibile creare percorso: " & PercorsoWinEcr.Value & "/TOSEND", "PentaStart")
+                MostraAttenzione("Impossibile creare percorso: " & PercorsoFpMate.Value & "/TOSEND")
             End Try
 
             If Not File.Exists(Application.StartupPath + "/EpsonFpMate.lnk") Then
@@ -369,8 +370,8 @@ Public Class Utility
         If FormCalendar.DialogResult = DialogResult.OK Then
             testo.Text = FormCalendar.DataScelta.ToString("dd/MM/yy")
         End If
-        FormCalendar.Dispose()
         sender.Show()
+        FormCalendar.Dispose()
     End Sub
 
     Public Shared Sub MostraErrore(ByVal sender As Form, messagio As String, Optional ByVal errore As Exception = Nothing)
@@ -379,11 +380,11 @@ Public Class Utility
         FormErrore.Messagio = messagio
         LogFile.WriteLog(messagio)
         If Not IsNothing(errore) Then
-            LogFile.WriteLog("Errore: " & errore.ToString())
+            LogFile.WriteLog("[ERRORE]: " & errore.ToString())
         End If
         FormErrore.ShowDialog()
-        FormErrore.Dispose()
         sender.Show()
+        FormErrore.Dispose()
     End Sub
 
     Public Shared Sub InSviluppo(ByVal sender As Form)
@@ -391,18 +392,19 @@ Public Class Utility
         Dim FormErrore As New Errore
         FormErrore.Messagio = "IN SVILUPPO"
         FormErrore.ShowDialog()
-        FormErrore.Dispose()
         sender.Show()
+        FormErrore.Dispose()
     End Sub
 
     Public Shared Sub MostraAttenzione(messagio As String)
+        LogFile.WriteLog("[ATTENZIONE]: " & messagio)
         Dim FormAttenzione As New Attenzione
         FormAttenzione.Messagio = messagio
         FormAttenzione.ShowDialog()
         FormAttenzione.Dispose()
     End Sub
 
-    Public Shared Sub MostraEAggiornaNumero(sender As Form, numeroiniziale As String, ByRef testo As TextBox)
+    Public Shared Sub MostraEAggiornaNumero(sender As Form, numeroiniziale As String, ByRef testo As TextBox, Optional ByVal MinLenght As Integer = 0, Optional ByVal MaxLenght As Integer = 0)
         sender.Hide()
         Dim FormNumero As New NumeroForm
         Try
@@ -410,12 +412,18 @@ Public Class Utility
         Catch
             FormNumero.NumeroIniziale = 0
         End Try
+        If MinLenght <> 0 Then
+            FormNumero.MinLenght = MinLenght
+        End If
+        If MinLenght <> 0 Then
+            FormNumero.MaxLenght = MaxLenght
+        End If
         FormNumero.ShowDialog()
         If FormNumero.DialogResult = DialogResult.OK Then
             testo.Text = FormNumero.NumeroInserito.ToString()
         End If
+        sender.Show()
         FormNumero.Dispose()
-        sender.Hide()
     End Sub
 
     Public Shared Sub ChiusuraProgramma(programma As String)

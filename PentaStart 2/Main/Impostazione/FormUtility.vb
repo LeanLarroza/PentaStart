@@ -25,7 +25,7 @@ Public Class formutility
                         If (result9 = DialogResult.Yes) Then
                             ModificaKey(mct, "false")
                             ModificaKey(PercorsoMultiDriver, "null")
-                            MostraAttenzione("Stampante MCT cancellata con sucesso." & Environment.NewLine & "Riavvio PentaStart In corso...")
+                            MostraAttenzione("Stampante MCT cancellata con sucesso." & Environment.NewLine & "Riavvio PentaStart in corso...")
                             LogFile.WriteLog("Fine impostazione Stampante MCT (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
                             RiavvioPentaStart()
                             Return
@@ -76,7 +76,7 @@ Public Class formutility
                         If (result9 = DialogResult.Yes) Then
                             ModificaKey(ditron, "false")
                             ModificaKey(PercorsoWinEcr, "null")
-                            MostraAttenzione("Stampante Ditron cancellata con sucesso." & Environment.NewLine & "Riavvio PentaStart In corso...")
+                            MostraAttenzione("Stampante Ditron cancellata con sucesso." & Environment.NewLine & "Riavvio PentaStart in corso...")
                             LogFile.WriteLog("Fine impostazione Stampante DITRON (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
                             RiavvioPentaStart()
                             Return
@@ -149,7 +149,7 @@ Public Class formutility
                     If resultinserimento = DialogResult.OK Then
                         ModificaKey(MatricolaRT, FormInserimentoMatricolaRT.TestoScritto)
                     Else
-                        MostraErrore(Me, "ERRORE INSERIMENTO MATRICOLA RT. INSERIRE MATRICOLA RT MANUALMENTE DENTRO PENTASTART.INI")
+                        MostraErrore(Me, "ERRORE INSERIMENTO MATRICOLA RT. INSERIRE MATRICOLA RT MANUALMENTE DENTRO PENTASTART.INI (PERCORSO: " & MatricolaRT.Percorso & " - KEY:" & MatricolaRT.Key & ")")
                     End If
 
                     Try
@@ -165,7 +165,7 @@ Public Class formutility
 
                     If File.Exists("C:\trilogis\PentaUtilities\FpMate\Settings.xml") Then
                         Try
-                            File.Copy("C:\trilogis\PentaUtilities\FpMate\Settings.xml", "C:\ProgramData\EPSON\EpsonFpMate\Settings.xml")
+                            File.Copy("C:\trilogis\PentaUtilities\FpMate\Settings.xml", "C:\ProgramData\EPSON\EpsonFpMate\Settings.xml", True)
                             LogFile.WriteLog("Copia File Settings.xml riuscita: C:\ProgramData\EPSON\EpsonFpMate")
                         Catch ex As Exception
                             LogFile.WriteLog("Errore copia File Settings.xml. Copiare manualmente su C:\ProgramData\EPSON\EpsonFpMate")
@@ -175,7 +175,6 @@ Public Class formutility
                     ModificaKey(mct, "false")
                     ModificaKey(ditron, "false")
                     ModificaKey(epson, "true")
-
             End Select
 
             If (Variables.Software.Value = "trilogis") Then
@@ -235,14 +234,13 @@ Public Class formutility
             End If
 
             InizializzareInfoAggiuntivaScontrino()
-            MostraAttenzione("Stampante " & Stampante & " impostata con sucesso. Riavvio PentaStart In corso...")
+            MostraAttenzione("Stampante " & Stampante & " impostata con sucesso. Riavvio PentaStart in corso...")
             LogFile.WriteLog("Fine impostazione Stampante " & Stampante & " (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
             RiavvioPentaStart()
+            Return
         ElseIf (result = DialogResult.Abort) Then
-            LogFile.WriteLog("Impostazione " & Stampante & " annullata")
             MostraAttenzione("Impostazione stampante " & Stampante & " annullata.")
         Else
-            LogFile.WriteLog("Errore inserimento password")
             MostraErrore(Me, "ERRORE INSERIMENTO PASSWORD")
         End If
         LogFile.WriteLog("Fine impostazione Stampante " & Stampante & " (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
@@ -317,7 +315,7 @@ Public Class formutility
                     Dim result9 As DialogResult = FormDomanda.ShowDialog()
                     If (result9 = DialogResult.Yes) Then
                         ModificaKey(SpeakerNomePronto, "null")
-                        MostraAttenzione("Modulo Speaker Nome Pronto disattivato con sucesso." & Environment.NewLine & "Riavvio PentaStart In corso...")
+                        MostraAttenzione("Modulo Speaker Nome Pronto disattivato con sucesso." & Environment.NewLine & "Riavvio PentaStart in corso...")
                         LogFile.WriteLog("Fine impostazione Modulo SpeakerPronto (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
                         RiavvioPentaStart()
                     Else
@@ -331,7 +329,7 @@ Public Class formutility
                 Dim result2 As DialogResult = FormDomanda2.ShowDialog()
                 If (result2 = DialogResult.Yes) Then
                     ModificaKey(SpeakerNomePronto, "true")
-                    MostraAttenzione("Modulo Speaker Nome Pronto attivato con sucesso." & Environment.NewLine & "Riavvio PentaStart In corso...")
+                    MostraAttenzione("Modulo Speaker Nome Pronto attivato con sucesso." & Environment.NewLine & "Riavvio PentaStart in corso...")
                     LogFile.WriteLog("Fine impostazione Modulo SpeakerPronto (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
                     RiavvioPentaStart()
                 Else
@@ -356,23 +354,28 @@ Public Class formutility
             If (result = DialogResult.OK) Then
 
                 If FatturazioneElett.Value = "true" Then
-                    Dim result9 As DialogResult = MessageBox.Show("Disattivare modulo Fatturazione Elettronica?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    Dim FormDomanda As New Domanda With {.Messagio = "Disattivare Modulo Fatturazione Elettronica?"}
+                    Dim result9 As DialogResult = FormDomanda.ShowDialog()
                     If (result9 = DialogResult.Yes) Then
                         ModificaKey(FatturazioneElett, "false")
+                        MostraAttenzione("Modulo Fatturazione Elettronica disattivato con sucesso." & Environment.NewLine & "Riavvio PentaStart in corso...")
+                        LogFile.WriteLog("Fine impostazione Stampante Modulo Fatturazione Elettronica (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
                         RiavvioPentaStart()
+                        Return
                     Else
+                        Me.Activate()
+                        Me.BringToFront()
                         Return
                     End If
                 End If
 
                 If (File.Exists(Path.GetPathRoot(Environment.SystemDirectory) + "trilogis\FattElett.exe") And Variables.Software.Value = "trilogis") Then
-                    Dim result2 As DialogResult = MessageBox.Show("Attivare Fatturazione Elettronica (Generazione file XML)?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    Dim FormDomanda As New Domanda With {.Messagio = "Attivare Fatturazione Elettronica (Generazione file XML)?"}
+                    Dim result2 As DialogResult = FormDomanda.ShowDialog()
                     If (result2 = DialogResult.Yes) Then
                         ModificaKey(FatturazioneElett, "true")
                         LogFile.WriteLog("Modulo Fatturazione Elettronica (Generazione file XML) attivato")
-                        MsgBox("Modulo Fatturazione Elettronica (Generazione file XML) attivato.", MsgBoxStyle.OkOnly, "PentaStart")
                         LogFile.WriteLog("Richiesta percorso Fatturazione Elettronica")
-
                         Dim cercaspercorsofatt As FolderBrowserDialog = New FolderBrowserDialog With {
                             .SelectedPath = Path.GetPathRoot(Environment.SystemDirectory),
                             .RootFolder = Environment.SpecialFolder.MyComputer,
@@ -383,18 +386,21 @@ Public Class formutility
                             LogFile.WriteLog("Percorso Fatturazione Elettronica confermato. (" + cercaspercorsofatt.SelectedPath + ")")
                             ModificaKey(PercorsoFatture, cercaspercorsofatt.SelectedPath)
                         Else
-                            LogFile.WriteLog("Impostazione Fatturazione Elettronica annullata")
                             ModificaKey(PercorsoFatture, "null")
+                            MostraErrore(Me, "Impostazione Fatturazione Elettronica annullata")
+                            Return
                         End If
-                        LogFile.WriteLog("Percorso Fatture impostato.Riavvio PentaStart in corso...")
-                        LogFile.ChisuraProgramma()
-                        MsgBox("Percorso Fatture impostato. Riavvio PentaStart in corso..
-" + cercaspercorsofatt.SelectedPath, MsgBoxStyle.OkOnly, "PentaStart")
-                        Application.Restart()
+                        MostraAttenzione("Percorso Fatture impostato (" & cercaspercorsofatt.SelectedPath & "). Riavvio PentaStart in corso..")
+                        LogFile.WriteLog("Fine impostazione Modulo Fatturazione Elettronica (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
+                        RiavvioPentaStart()
+                        Return
                     Else
-                        ModificaKey(FatturazioneElett, "false")
-                        LogFile.WriteLog("Modulo Fatturazione Elettronica (Generazione file XML) disattivato.")
-                        MsgBox("Modulo Fatturazione Elettronica (Generazione file XML) disattivato.", MsgBoxStyle.OkOnly, "PentaStart")
+                        ModificaKey(PercorsoFatture, "null")
+                        ModificaKey(FatturazioneElett, "False")
+                        MostraAttenzione("Modulo Fatturazione Elettronica (Generazione file XML) disattivato. Riavvio PentaStart in corso..")
+                        LogFile.WriteLog("Fine impostazione Modulo Fatturazione Elettronica (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
+                        RiavvioPentaStart()
+                        Return
                     End If
                 ElseIf (Variables.Software.Value <> "trilogis") Then
                     LogFile.WriteLog("Richiesta percorso Fatturazione Elettronica")
@@ -405,25 +411,27 @@ Public Class formutility
                         .ShowNewFolderButton = True
                     }
                     If cercaspercorsofatt.ShowDialog() = DialogResult.OK Then
-                        LogFile.WriteLog("Percorso Fatturazione Elettronica confermato. (" + cercaspercorsofatt.SelectedPath + ")")
-                        ModificaKey(PercorsoFatture, cercaspercorsofatt.SelectedPath)
+                        MostraAttenzione("Percorso Fatture impostato (" & cercaspercorsofatt.SelectedPath & "). Riavvio PentaStart in corso..")
+                        LogFile.WriteLog("Fine impostazione Modulo Fatturazione Elettronica (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
+                        RiavvioPentaStart()
+                        Return
                     Else
-                        LogFile.WriteLog("Percorso Fatturazione Elettronica cancellato.")
                         ModificaKey(PercorsoFatture, "null")
+                        ModificaKey(FatturazioneElett, "False")
+                        MostraAttenzione("Modulo Fatturazione Elettronica (Generazione file XML) disattivato. Riavvio PentaStart in corso..")
+                        LogFile.WriteLog("Fine impostazione Modulo Fatturazione Elettronica (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
+                        RiavvioPentaStart()
+                        Return
                     End If
-                    LogFile.WriteLog("Percorso Fatture impostato.Riavvio PentaStart in corso...")
-                    MsgBox("Percorso Fatture impostato. Riavvio PentaStart in corso..
-" + cercaspercorsofatt.SelectedPath, MsgBoxStyle.OkOnly, "PentaStart")
-                    RiavvioPentaStart()
                 End If
             Else
-                LogFile.WriteLog("Errore inserimento password")
-                MsgBox("Errore password.", MsgBoxStyle.Critical, "PentaStart")
-
+                MostraErrore(Me, "ERRORE INSERIMENTO PASSWORD")
+                Me.Show()
+                Return
             End If
         Else
-            LogFile.WriteLog("Errore impostazione software. (Software: " + Variables.Software.Value + ")")
-            MsgBox("Errore impostazione software.", MsgBoxStyle.Critical, "PentaStart")
+            MostraErrore(Me, "Errore impostazione software.(Software: " & Variables.Software.Value & ")")
+            Me.Show()
         End If
     End Sub
 
@@ -431,21 +439,50 @@ Public Class formutility
         Dim Inizio As Date = Now
         LogFile.WriteLog("Avvio impostazione Modulo SYNC")
 
-
         Dim adminpassword As New PasswordForm()
         Dim resultpassword = adminpassword.ShowDialog()
         If (resultpassword = DialogResult.OK) Then
 
             If InvioSYNC.Value = "true" Then
-                Dim result9 As DialogResult = MessageBox.Show("Disattivare Invio SYNC?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                Dim FormDomanda2 As New Domanda With {.Messagio = "Disattivare Invio SYNC?"}
+                Dim result9 As DialogResult = FormDomanda2.ShowDialog()
                 If (result9 = DialogResult.Yes) Then
                     ModificaKey(InvioSYNC, "false")
+                    MostraAttenzione("Modulo SYNC disattivato con sucesso." & Environment.NewLine & "Riavvio PentaStart in corso...")
+                    LogFile.WriteLog("Fine impostazione Stampante MCT (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
                     RiavvioPentaStart()
-                Else
                     Return
+                Else
+                    Dim FormDomanda3 As New Domanda With {.Messagio = "Modificare impostazione Invio SYNC?"}
+                    Dim result11 As DialogResult = FormDomanda3.ShowDialog()
+                    If (result11 = DialogResult.Yes) Then
+                        Dim FormCoordinate As CoordinateSYNC = New CoordinateSYNC()
+                        FormCoordinate.PercorsoMacro = PercorsoMacroMiniMouse.Value
+                        FormCoordinate.PercorsoSync = Variables.PercorsoSYNC.Value
+                        Dim risultatocoor As DialogResult = FormCoordinate.ShowDialog()
+                        If risultatocoor = DialogResult.OK Then
+                            MostraAttenzione("Modulo SYNC modificato. Riavvio PentaStart in corso...")
+                            Me.Show()
+                            RiavvioPentaStart()
+                            Return
+                        Else
+                            MostraErrore(Me, "Impostazione Modulo SYNC annullata")
+                            Return
+                        End If
+                    Else
+                        Me.Activate()
+                        Me.BringToFront()
+                        Return
+                    End If
                 End If
             End If
 
+            Dim FormDomanda As New Domanda With {.Messagio = "L'installazione di SYNC è già stata eseguita?"}
+            Dim result2 As DialogResult = FormDomanda.ShowDialog()
+            If (result2 <> DialogResult.Yes) Then
+                MostraErrore(Me, "Errore installazione SYNC. Eseguire l'installazione prima della impostazione.")
+                Return
+            End If
 
             Dim sceltapercorsosync As FolderBrowserDialog = New FolderBrowserDialog()
             sceltapercorsosync.Description = "Specificare la cartella dove si trova il SYNC"
@@ -459,11 +496,12 @@ Public Class formutility
                     LogFile.WriteLog("Percorso SYNC confermato: " + sceltapercorsosync.SelectedPath)
                     ModificaKey(PercorsoSYNC, sceltapercorsosync.SelectedPath)
 
-                    Dim result As DialogResult = MessageBox.Show("Attivare invio SYNC?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    FormDomanda = New Domanda With {.Messagio = "Attivare invio SYNC?"}
+                    Dim result As DialogResult = FormDomanda.ShowDialog()
                     If result = DialogResult.Yes Then
                         LogFile.WriteLog("Richiesta percorso 1.mmmacro (MiniMouse)")
                         Dim sceltapercorsomacro As FolderBrowserDialog = New FolderBrowserDialog()
-                        sceltapercorsomacro.Description = "Specificare la cartella dove si trova 1.mmmacro (Cartella software)"
+                        sceltapercorsomacro.Description = "Specificare la cartella dove salvare 1.mmmacro (Cartella software)"
                         sceltapercorsomacro.RootFolder = Environment.SpecialFolder.MyComputer
                         sceltapercorsomacro.ShowNewFolderButton = False
                         Dim dialogresult As DialogResult = sceltapercorsomacro.ShowDialog()
@@ -473,6 +511,9 @@ Public Class formutility
                             CreateRegFile(sceltapercorsomacro.SelectedPath)
                             Process.Start(sceltapercorsomacro.SelectedPath + "\Macro.reg").WaitForExit()
                         Else
+                            ModificaKey(InvioSYNC, "false")
+                            ModificaKey(PercorsoSYNC, "null")
+                            MostraErrore(Me, "Impostazione Modulo SYNC annullata")
                             Return
                         End If
                         Dim FormCoordinate As CoordinateSYNC = New CoordinateSYNC()
@@ -480,37 +521,81 @@ Public Class formutility
                         FormCoordinate.PercorsoSync = Variables.PercorsoSYNC.Value
                         Dim risultatocoor As DialogResult = FormCoordinate.ShowDialog()
                         If risultatocoor = DialogResult.OK Then
-                            Dim ini As New IniFile
-                            ini.Load(Application.StartupPath + "\PentaStart.ini")
-                            ini.SetKeyValue("MODULI", "InvioSYNC", "true")
-                            ini.Save(Application.StartupPath + "\PentaStart.ini")
-                            MsgBox("Modulo invio SYNC attivato. Riavvio PentaStart in corso..", MsgBoxStyle.OkOnly, "PentaStart")
-                            Variables.InvioSYNC.Value = "true"
-                            Application.Restart()
+                            ModificaKey(InvioSYNC, "true")
+                            MostraAttenzione("Modulo SYNC attivato. Riavvio PentaStart in corso...")
+                            Me.Show()
+                            RiavvioPentaStart()
+                            Return
                         Else
+                            MostraErrore(Me, "Impostazione Modulo SYNC annullata")
                             Return
                         End If
                     Else
                         ModificaKey(InvioSYNC, "false")
-                        MsgBox("Modulo invio SYNC disattivato.", MsgBoxStyle.OkOnly, "PentaStart")
+                        MostraAttenzione("Modulo SYNC disattivato. Riavvio PentaStart in corso...")
+                        Me.Show()
+                        RiavvioPentaStart()
+                        Return
                     End If
-                    LogFile.WriteLog("Modulo SYNC attivato.Riavvio PentaStart in corso...")
-                    MsgBox("Modulo SYNC attivato. Riavvio PentaStart in corso...", MsgBoxStyle.OkOnly, "PentaStart")
-                    RiavvioPentaStart()
+                ElseIf (File.Exists(sceltapercorsosync.SelectedPath & "\FatturazioneElettronica\BrainTeamFatturaElettronica.exe")) Then
+                    sceltapercorsosync.SelectedPath = sceltapercorsosync.SelectedPath & "\FatturazioneElettronica"
+                    LogFile.WriteLog("Percorso SYNC confermato: " + sceltapercorsosync.SelectedPath)
+                    ModificaKey(PercorsoSYNC, sceltapercorsosync.SelectedPath)
+
+                    FormDomanda = New Domanda With {.Messagio = "Attivare invio SYNC?"}
+                    Dim result As DialogResult = FormDomanda.ShowDialog()
+                    If result = DialogResult.Yes Then
+                        LogFile.WriteLog("Richiesta percorso 1.mmmacro (MiniMouse)")
+                        Dim sceltapercorsomacro As FolderBrowserDialog = New FolderBrowserDialog()
+                        sceltapercorsomacro.Description = "Specificare la cartella dove salvare 1.mmmacro (Cartella software)"
+                        sceltapercorsomacro.RootFolder = Environment.SpecialFolder.MyComputer
+                        sceltapercorsomacro.ShowNewFolderButton = False
+                        Dim dialogresult As DialogResult = sceltapercorsomacro.ShowDialog()
+                        If dialogresult = DialogResult.OK Then
+                            LogFile.WriteLog("Percorso 1.mmmacro (MiniMouse) scelto: " + sceltapercorsomacro.SelectedPath)
+                            ModificaKey(PercorsoMacroMiniMouse, sceltapercorsomacro.SelectedPath)
+                            CreateRegFile(sceltapercorsomacro.SelectedPath)
+                            Process.Start(sceltapercorsomacro.SelectedPath + "\Macro.reg").WaitForExit()
+                        Else
+                            ModificaKey(InvioSYNC, "false")
+                            ModificaKey(PercorsoSYNC, "null")
+                            MostraErrore(Me, "Impostazione Modulo SYNC annullata")
+                            Return
+                        End If
+                        Dim FormCoordinate As CoordinateSYNC = New CoordinateSYNC()
+                        FormCoordinate.PercorsoMacro = sceltapercorsomacro.SelectedPath
+                        FormCoordinate.PercorsoSync = Variables.PercorsoSYNC.Value
+                        Dim risultatocoor As DialogResult = FormCoordinate.ShowDialog()
+                        If risultatocoor = DialogResult.OK Then
+                            ModificaKey(InvioSYNC, "true")
+                            MostraAttenzione("Modulo SYNC attivato. Riavvio PentaStart in corso...")
+                            Me.Show()
+                            RiavvioPentaStart()
+                            Return
+                        Else
+                            MostraErrore(Me, "Impostazione Modulo SYNC annullata")
+                            Return
+                        End If
+                    Else
+                        ModificaKey(InvioSYNC, "false")
+                        ModificaKey(PercorsoSYNC, "null")
+                        MostraErrore(Me, "Impostazione Modulo SYNC annullata")
+                        Return
+                    End If
                 Else
-                    LogFile.WriteLog("Errore attivazione Modulo SYNC. BrainTeamFatturaElettronica non trovato ")
-                    MsgBox("ERRORE MODULO.
-Modulo SYNC non installato.
-Percorso: " + Variables.PercorsoSYNC.Value, MsgBoxStyle.Critical, "PentaStart")
+                    MostraErrore(Me, "Errore attivazione Modulo SYNC. BrainTeamFatturaElettronica non trovato ")
+                    Me.Show()
+                    LogFile.WriteLog("Fine impostazione Modulo SYNC (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
+                    Return
                 End If
             Else
-                LogFile.WriteLog("Impostazione Modulo SYNC annullato")
-
+                MostraErrore(Me, "Impostazione Modulo SYNC annullata")
+                Return
             End If
         Else
-            LogFile.WriteLog("Errore inserimento password")
-            MsgBox("Errore password.", MsgBoxStyle.Critical, "PentaStart")
-
+            MostraErrore(Me, "ERRORE INSERIMENTO PASSWORD")
+            Me.Show()
+            LogFile.WriteLog("Fine impostazione Modulo SYNC (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
             Return
         End If
         LogFile.WriteLog("Fine impostazione Modulo SYNC (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
@@ -654,13 +739,12 @@ Percorso: " + Variables.PercorsoSYNC.Value, MsgBoxStyle.Critical, "PentaStart")
         Dim Inizio As Date = Now
         LogFile.WriteLog("Avvio impostazione Archiviazione Database")
 
-
         Dim adminpassword As New PasswordForm()
         Dim result = adminpassword.ShowDialog()
         If (result = DialogResult.OK) Then
-
             If Variables.Software.Value = "trilogis" Then
-                Dim result2 = MessageBox.Show("Attivare archiviazione database in chiusura?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                Dim FormDomanda As New Domanda With {.Messagio = "Attivare archiviazione database in chiusura?"}
+                Dim result2 = FormDomanda.ShowDialog()
                 If (result2 = DialogResult.Yes) Then
                     Dim unitaarc As New UnitaArchiviazioneStorico()
                     Dim unita = unitaarc.ShowDialog()
@@ -669,24 +753,27 @@ Percorso: " + Variables.PercorsoSYNC.Value, MsgBoxStyle.Critical, "PentaStart")
                         LogFile.WriteLog("Unita Archiviazione scelta: " + unitaarc.UnitaArchiviazione)
                         ModificaKey(TipoArchiviazione, unitaarc.TipoArchiviazione)
                         ModificaKey(UnitaArchiviazione, unitaarc.UnitaArchiviazione)
-                        LogFile.WriteLog("Archiviazione attivata con succeso. Riavvio PentaStart in corso...")
-                        LogFile.ChisuraProgramma()
-                        MessageBox.Show("Archiviazione attivata con succeso. Riavvio PentaStart in corso...", "PentaStart")
-                        Application.Restart()
+                        LogFile.WriteLog("Fine impostazione Logo Penta (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
+                        MostraAttenzione("Archiviazione Tipo: " & TipoArchiviazione.Value & " su " & UnitaArchiviazione.Value & " attivata con succeso. Riavvio PentaStart in corso...")
+                        Me.Show()
+                        RiavvioPentaStart()
+                        Return
+                    Else
+                        MostraAttenzione("Impostazione Logo Penta annullata.")
+                        Return
                     End If
+                Else
+                    MostraAttenzione("Impostazione Archiviazione database annullata.")
                 End If
             End If
         Else
-            LogFile.WriteLog("Errore inserimento password")
-            MsgBox("Errore password.", MsgBoxStyle.Critical, "PentaStart")
-
+            MostraAttenzione("Impostazione Archiviazione database annullata.")
         End If
     End Sub
 
     Private Sub ButtonLogoPenta_Click(sender As Object, e As EventArgs) Handles ButtonLogoPenta.Click
         Dim Inizio As Date = Now
         LogFile.WriteLog("Avvio impostazione Logo Penta")
-
 
         Dim adminpassword As New PasswordForm()
         Dim result = adminpassword.ShowDialog()
@@ -706,17 +793,21 @@ Percorso: " + Variables.PercorsoSYNC.Value, MsgBoxStyle.Critical, "PentaStart")
                 Case Else
                     Return
             End Select
+            MostraAttenzione("Logo Penta N. " & LogoPenta.Value & " attivato. Riavvio PentaStart in corso...")
             LogFile.WriteLog("Fine impostazione Logo Penta (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
+            Me.Show()
+            RiavvioPentaStart()
+            Return
         Else
-            LogFile.WriteLog("Errore inserimento password")
-            MsgBox("Errore password.", MsgBoxStyle.Critical, "PentaStart")
-
+            MostraAttenzione("Impostazione Logo Penta annullata.")
+            Return
         End If
     End Sub
 
     Private Sub AggSoftware_Click(sender As Object, e As EventArgs) Handles AggSoftware.Click
         If AggiornamentiAttivi() Then
-            Dim result As DialogResult = MessageBox.Show("Si desidera aggiornare PentaStart?", "PentaStart", MessageBoxButtons.YesNo)
+            Dim FormDomanda As New Domanda With {.Messagio = "Aggiornare software Penta Electronic"}
+            Dim result As DialogResult = FormDomanda.ShowDialog()
             If result = DialogResult.Yes Then
                 LogFile.WriteLog("Rilevato aggiornamento forzato")
                 FormMain.AggiornamentoPenta()

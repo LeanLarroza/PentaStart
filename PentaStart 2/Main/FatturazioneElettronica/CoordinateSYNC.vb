@@ -25,20 +25,20 @@ Public Class CoordinateSYNC
     End Sub
 
     Private Sub PulFEC_Click(sender As Object, e As EventArgs) Handles pulFEC.Click
-        tbCoorXChiusura1.Text = "0"
-        tbCoorYChiusura1.Text = "0"
-        tbCoorXChiusura2.Text = "0"
-        tbCoorYChiusura2.Text = "0"
-        tbCoorXChiusura3.Text = "0"
-        tbCoorYChiusura3.Text = "0"
-        tbCoorXCInvio.Text = "0"
-        tbCoorYCInvio.Text = "0"
-        tbCoorXErrori.Text = "0"
-        tbCoorYErrori.Text = "0"
-        tbCoorXFatt.Text = "0"
-        tbCoorYFatt.Text = "0"
-        tbCoorXInvio.Text = "0"
-        tbCoorYInvio.Text = "0"
+        tbCoorXChiusura1.Text = "1900"
+        tbCoorYChiusura1.Text = "3"
+        tbCoorXChiusura2.Text = "1000"
+        tbCoorYChiusura2.Text = "700"
+        tbCoorXChiusura3.Text = "820"
+        tbCoorYChiusura3.Text = "660"
+        tbCoorXCInvio.Text = "1115"
+        tbCoorYCInvio.Text = "610"
+        tbCoorXErrori.Text = "1160"
+        tbCoorYErrori.Text = "200"
+        tbCoorXFatt.Text = "1000"
+        tbCoorYFatt.Text = "355"
+        tbCoorXInvio.Text = "700"
+        tbCoorYInvio.Text = "100"
     End Sub
 
     Private Sub PulEmpty_Click(sender As Object, e As EventArgs) Handles pulEmpty.Click

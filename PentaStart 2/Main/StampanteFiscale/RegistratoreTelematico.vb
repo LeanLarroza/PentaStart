@@ -6,6 +6,7 @@ Imports PentaStart.Utility
 Public Class RegistratoreTelematico
     Private AxCoEcrCom1 As AxCOECRCOMLib.AxCoEcrCom
     Private Sub regtelematico_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        AdjustText(Label3)
         LogFile.WriteLog("Avvio schermata gestione registratore telematico in corso...")
         ControlloDriverInvioScontrino()
         If EsisteStampanteDitron() And Variables.Software.Value = "menu" Then
@@ -83,7 +84,7 @@ Public Class RegistratoreTelematico
             Dim Percorso As String = Variables.PercorsoMultiDriver.Value + "/TOSEND/scontrino.txt"
             ScrivereFile(commandi, Percorso)
             Me.Hide()
-            AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA LETTURA GIORNALERA. RIPROVARE")
+            AttendereRispostaStampante(Percorso, commandi, "ERRORE RESET STAMPANTE")
             Me.Show()
         ElseIf EsisteStampanteDitron() Then
             If Variables.Software.Value = "comus" Or Variables.Software.Value = "trilogis" Then
@@ -91,12 +92,16 @@ Public Class RegistratoreTelematico
                 Dim Percorso As String = Variables.PercorsoWinEcr.Value.Replace("/", "\") + "\TOSEND\scontrino.txt"
                 ScrivereFile(commandi, Percorso)
                 Me.Hide()
-                AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA LETTURA GIORNALERA. RIPROVARE")
+                AttendereRispostaStampante(Percorso, commandi, "ERRORE RESET STAMPANTE")
                 Me.Show()
             End If
         ElseIf EsisteStampanteEpson() Then
-            Dim commandi() As String = {"chiave reg"}
-            ScrivereFile(commandi, Variables.PercorsoFpMate.Value.Replace("/", "\") + "\TOSEND\scontrino.txt")
+            Dim commandi() As String = {"resetPrinter|1"}
+            Dim Percorso As String = Variables.PercorsoFpMate.Value.Replace("/", "\") + "\TOSEND\scontrino.txt"
+            ScrivereFile(commandi, Percorso)
+            Me.Hide()
+            AttendereRispostaStampante(Percorso, commandi, "ERRORE RESET STAMPANTE")
+            Me.Show()
         End If
     End Sub
 
@@ -108,11 +113,19 @@ Public Class RegistratoreTelematico
     Private Sub ButtonInvioAE_Click(sender As Object, e As EventArgs) Handles ButtonInvioAE.Click
         If EsisteStampanteMCT() Then
             Dim commandi() As String = {"=K", "=C3", "=C422", "=C1"}
-            ScrivereFile(commandi, Variables.PercorsoMultiDriver.Value + "/TOSEND/scontrino.txt")
+            Dim Percorso As String = Variables.PercorsoMultiDriver.Value + "/TOSEND/scontrino.txt"
+            ScrivereFile(commandi, Percorso)
+            Me.Hide()
+            AttendereRispostaStampante(Percorso, commandi, "ERRORE INVIO AGENZIA DELL'ENTRATE")
+            Me.Show()
         ElseIf EsisteStampanteDitron() Then
             If Variables.Software.Value = "comus" Or Variables.Software.Value = "trilogis" Then
                 Dim commandi() As String = {"CHIAVE Z", "INP NUM=99, TERM=145", "CHIAVE REG"}
-                ScrivereFile(commandi, Variables.PercorsoWinEcr.Value.Replace("/", "\") + "\TOSEND\scontrino.txt")
+                Dim Percorso As String = Variables.PercorsoWinEcr.Value.Replace("/", "\") + "\TOSEND\scontrino.txt"
+                ScrivereFile(commandi, Percorso)
+                Me.Hide()
+                AttendereRispostaStampante(Percorso, commandi, "ERRORE INVIO AGENZIA DELL'ENTRATE")
+                Me.Show()
             End If
         ElseIf EsisteStampanteEpson() Then
             MostraErrore(Me, "L'INVIO DEI CORRISPETTIVI VIENE ESEGUITO INSIEME ALLA CHIUSURA GIORNALERA")
@@ -128,5 +141,9 @@ Public Class RegistratoreTelematico
         Me.Dispose()
         FormMain.BringToFront()
         FormMain.Show()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        RiavvioProgrammaScontrinoPenta()
     End Sub
 End Class

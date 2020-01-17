@@ -54,7 +54,7 @@ Partial Class AvvioTricovers
         Me.ButtonSI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonSI.Font = New System.Drawing.Font("Century Gothic", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSI.ForeColor = System.Drawing.Color.Black
-        Me.ButtonSI.Location = New System.Drawing.Point(37, 328)
+        Me.ButtonSI.Location = New System.Drawing.Point(285, 328)
         Me.ButtonSI.Name = "ButtonSI"
         Me.ButtonSI.Size = New System.Drawing.Size(168, 89)
         Me.ButtonSI.TabIndex = 25
@@ -72,7 +72,7 @@ Partial Class AvvioTricovers
         Me.ButtonNO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonNO.Font = New System.Drawing.Font("Century Gothic", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonNO.ForeColor = System.Drawing.Color.Black
-        Me.ButtonNO.Location = New System.Drawing.Point(285, 328)
+        Me.ButtonNO.Location = New System.Drawing.Point(37, 328)
         Me.ButtonNO.Name = "ButtonNO"
         Me.ButtonNO.Size = New System.Drawing.Size(168, 89)
         Me.ButtonNO.TabIndex = 26

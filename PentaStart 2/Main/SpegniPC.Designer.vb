@@ -54,7 +54,7 @@ Partial Class SpegniPC
         Me.ButtonSI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonSI.Font = New System.Drawing.Font("Century Gothic", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSI.ForeColor = System.Drawing.Color.Black
-        Me.ButtonSI.Location = New System.Drawing.Point(37, 326)
+        Me.ButtonSI.Location = New System.Drawing.Point(285, 326)
         Me.ButtonSI.Name = "ButtonSI"
         Me.ButtonSI.Size = New System.Drawing.Size(168, 89)
         Me.ButtonSI.TabIndex = 17
@@ -72,7 +72,7 @@ Partial Class SpegniPC
         Me.ButtonNO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonNO.Font = New System.Drawing.Font("Century Gothic", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonNO.ForeColor = System.Drawing.Color.Black
-        Me.ButtonNO.Location = New System.Drawing.Point(285, 326)
+        Me.ButtonNO.Location = New System.Drawing.Point(37, 326)
         Me.ButtonNO.Name = "ButtonNO"
         Me.ButtonNO.Size = New System.Drawing.Size(168, 89)
         Me.ButtonNO.TabIndex = 18
@@ -104,7 +104,7 @@ Partial Class SpegniPC
         Me.Label1.Text = "ATTENZIONE"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'spegni
+        'SpegniPC
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
@@ -118,7 +118,7 @@ Partial Class SpegniPC
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "spegni"
+        Me.Name = "SpegniPC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PentaStart"
         Me.Panel.ResumeLayout(False)

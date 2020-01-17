@@ -28,8 +28,8 @@ Public Class BannerLogoPenta
             LogFile.WriteLog("Caricamento logo PENTA - Tipo: 1 - In Alto")
             x = Screen.PrimaryScreen.WorkingArea.Width / 2
             y = 0
+            Me.Location = New Point(x, y)
         End If
-
     End Sub
 
     Private Sub PictureBox1_MouseClick(sender As Object, e As MouseEventArgs) Handles PictureBox1.MouseClick, MyBase.MouseClick
@@ -54,8 +54,7 @@ Public Class BannerLogoPenta
             LogFile.WriteLog("Apertura TeamViewer in corso...")
             Process.Start(Application.StartupPath + "\TeamViewer.lnk")
         Else
-            LogFile.WriteLog("TeamViewer non trovato")
-            MsgBox("Il programma di TeleAssistenza non è stato installato",, "PentaStart")
+            MostraErrore(Me, "Impossibile trovare il programma di TeleAssistenza")
         End If
     End Sub
 End Class

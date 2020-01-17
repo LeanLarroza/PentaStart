@@ -6,6 +6,7 @@ Public Class TestoForm
     Private Maioscolo As Boolean = False
     Private abc As String() = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
     Public Intestazione As String = ""
+    Public TestoIniziale As String = ""
     Public TestoScritto As String = ""
     Public MinLenght As Integer
     Public MaxLenght As Integer
@@ -13,9 +14,10 @@ Public Class TestoForm
     Private Sub AdminPassword_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogFile.WriteLog("Inserimento testo:" & Intestazione & " in corso...")
         Label1.Text = Intestazione
+        textLabel.Text = TestoIniziale
         AdjustText(Label1)
         textLabel.PasswordChar = ""
-        NasconderePassword = True
+        NasconderePassword = False
         Maioscolo = False
         Me.ActiveControl = textLabel
     End Sub
@@ -44,15 +46,13 @@ Public Class TestoForm
 
     Private Sub ButtonConferma_Click(sender As Object, e As EventArgs) Handles ButtonConferma.Click
         If Not MinLenght = 0 And Not MaxLenght = 0 Then
-            If True Then
-                If textLabel.Text.Length >= MinLenght And textLabel.Text.Length <= MaxLenght Then
-                    TestoScritto = textLabel.Text
-                    Me.DialogResult = DialogResult.OK
-                    Me.Dispose()
-                Else
-                    textLabel.BackColor = Color.Red
-                    Return
-                End If
+            If textLabel.Text.Length >= MinLenght And textLabel.Text.Length <= MaxLenght Then
+                TestoScritto = textLabel.Text
+                Me.DialogResult = DialogResult.OK
+                Me.Dispose()
+            Else
+                textLabel.BackColor = Color.Red
+                Return
             End If
         Else
             TestoScritto = textLabel.Text

@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-
+Imports PentaStart.Utility
 Public Class TipoPagamento
 
     Public Str As String = ""
@@ -16,8 +16,7 @@ Public Class TipoPagamento
             Try
                 File.WriteAllText(percorsowinecr.Replace("/", "\") + "\TOSEND\scontrini.txt", Str)
             Catch ex As Exception
-                MsgBox("Impossibile creare il file scontrini.
-" + ex.ToString())
+                MostraErrore(Me, "Impossibile stampare lo scontrino.", ex)
             End Try
             Me.Dispose()
         Else

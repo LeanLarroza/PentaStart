@@ -43,11 +43,11 @@ Public Class CaricamentoDBStorico
                             Me.Hide()
                             AvvioTrilogis()
                         Else
-                            MessageBox.Show("Errore recupero database", "PentaStart")
+                            MostraErrore(Me, "Errore recupero database")
                             Return
                         End If
                     Else
-                        MessageBox.Show("Errore salvataggio database", "PentaStart")
+                        MostraErrore(Me, "Errore salvataggio database")
                         Return
                     End If
                 Else
@@ -60,22 +60,19 @@ Public Class CaricamentoDBStorico
                     If copiacorretta Then
                         AvvioTrilogis()
                     Else
-                        MessageBox.Show("Errore recupero database", "PentaStart")
+                        MostraErrore(Me, "Errore recupero database")
                         Return
                     End If
                 Else
-                    MessageBox.Show("Errore salvataggio database", "PentaStart")
+                    MostraErrore(Me, "Errore salvataggio database")
                     Return
                 End If
             Else
-                MessageBox.Show("Archivio storico non trovato", "PentaStart")
+                MostraErrore(Me, "Archivio storico non trovato")
                 Return
             End If
         Else
-            Me.Hide()
-            Dim FormErrore As New Errore
-            FormErrore.Messagio = "PENDRIVE NON TROVATO"
-            FormErrore.ShowDialog()
+            MostraErrore(Me, "PENDRIVE NON TROVATO")
             Me.Dispose()
         End If
         LogFile.WriteLog("Fine caricamento archivio storico (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
@@ -128,9 +125,7 @@ Public Class CaricamentoDBStorico
             Copiaok = True
             LogFile.WriteLog("Recupero File riuscito: " + PercorsoArchiviazione + annoScelto + "/trilogis.fb20")
         Catch ex As Exception
-            LogFile.WriteLog("Errore Recupero Database: " + PercorsoArchiviazione + annoScelto + "/trilogis.fb20")
-            LogFile.WriteLog("Errore Recupero Database: " + ex.ToString())
-            MessageBox.Show("Errore recupero Database storico trilogis + " + ex.ToString(), "PentaStart")
+            MostraErrore(Me, "Errore recupero Database storico trilogis (" & PercorsoArchiviazione + annoScelto & "/trilogis.fb20)", ex)
             Copiaok = False
         End Try
         Try
@@ -138,9 +133,7 @@ Public Class CaricamentoDBStorico
             Copiaok = True
             LogFile.WriteLog("Recupero File riuscito: " + PercorsoArchiviazione + annoScelto + "/trilogislocalconf.fb20")
         Catch ex As Exception
-            LogFile.WriteLog("Errore Recupero Database: " + PercorsoArchiviazione + annoScelto + "/trilogislocalconf.fb20")
-            LogFile.WriteLog("Errore Recupero Database: " + ex.ToString())
-            MessageBox.Show("Errore recupero Database storico trilogislocalconf " + ex.ToString(), "PentaStart")
+            MostraErrore(Me, "Errore recupero Database storico trilogislocalconf (" & PercorsoArchiviazione + annoScelto & "/trilogislocalconf.fb20)", ex)
             Copiaok = False
         End Try
         Try
@@ -148,9 +141,7 @@ Public Class CaricamentoDBStorico
             Copiaok = True
             LogFile.WriteLog("Recupero File riuscito: " + PercorsoArchiviazione + annoScelto + "/trilogisremoteconf.fb20")
         Catch ex As Exception
-            LogFile.WriteLog("Errore Recupero Database: " + PercorsoArchiviazione + annoScelto + "/trilogisremoteconf.fb20")
-            LogFile.WriteLog("Errore Recupero Database: " + ex.ToString())
-            MessageBox.Show("Errore recupero Database storico trilogisremoteconf " + ex.ToString(), "PentaStart")
+            MostraErrore(Me, "Errore recupero Database storico trilogisremoteconf (" & PercorsoArchiviazione + annoScelto & "/trilogisremoteconf.fb20)", ex)
             Copiaok = False
         End Try
 
@@ -174,9 +165,7 @@ Public Class CaricamentoDBStorico
             Copiaok = True
             LogFile.WriteLog("Copia File riuscita: " + Variables.PercorsoDatabase.Value + "/trilogis.fb20")
         Catch ex As Exception
-            LogFile.WriteLog("Errore Salvataggio Database: " + Variables.PercorsoDatabase.Value + "/trilogis.fb20")
-            LogFile.WriteLog("Errore Salvataggio Database: " + ex.ToString())
-            MessageBox.Show("Errore salvataggio Database trilogis", "PentaStart")
+            MostraErrore(Me, "Errore Salvataggio Database: " & Variables.PercorsoDatabase.Value & "/trilogis.fb20", ex)
             Copiaok = False
         End Try
         Try
@@ -184,9 +173,7 @@ Public Class CaricamentoDBStorico
             Copiaok = True
             LogFile.WriteLog("Copia File riuscita: " + Variables.PercorsoDatabase.Value + "/trilogislocalconf.fb20")
         Catch ex As Exception
-            LogFile.WriteLog("Errore Salvataggio Database: " + Variables.PercorsoDatabase.Value + "/trilogislocalconf.fb20")
-            LogFile.WriteLog("Errore Salvataggio Database: " + ex.ToString())
-            MessageBox.Show("Errore salvataggio Database trilogislocalconf", "PentaStart")
+            MostraErrore(Me, "Errore Salvataggio Database: " & Variables.PercorsoDatabase.Value & "/trilogislocalconf.fb20", ex)
             Copiaok = False
         End Try
         Try
@@ -194,9 +181,7 @@ Public Class CaricamentoDBStorico
             Copiaok = True
             LogFile.WriteLog("Copia File riuscita: " + Variables.PercorsoDatabase.Value + "/trilogisremoteconf.fb20")
         Catch ex As Exception
-            LogFile.WriteLog("Errore Salvataggio Database: " + Variables.PercorsoDatabase.Value + "/trilogisremoteconf.fb20")
-            LogFile.WriteLog("Errore Salvataggio Database: " + ex.ToString())
-            MessageBox.Show("Errore salvataggio Database trilogisremoteconf", "PentaStart")
+            MostraErrore(Me, "Errore Salvataggio Database: " & Variables.PercorsoDatabase.Value & "/trilogisremoteconf.fb20", ex)
             Copiaok = False
         End Try
 

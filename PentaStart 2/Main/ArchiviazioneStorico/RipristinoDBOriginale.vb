@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Threading
 Imports PentaStart.Utility
+Imports PentaStart.Variables
 
 Public Class RipristinoDBOriginale
     Private Sub RicuperoDB_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -20,9 +21,7 @@ Public Class RipristinoDBOriginale
             Copiaok = True
             LogFile.WriteLog("Ripristino File riuscito: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogis.fb20")
         Catch ex As Exception
-            LogFile.WriteLog("Errore Ripristino Database: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogis.fb20")
-            LogFile.WriteLog("Errore Ripristino Database: " + ex.ToString())
-            MessageBox.Show("Errore recupero Database storico trilogis " + ex.ToString(), "PentaStart")
+            MostraErrore(Me, "Errore Ripristino Database: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogis.fb20", ex)
             Copiaok = False
         End Try
         Try
@@ -30,9 +29,7 @@ Public Class RipristinoDBOriginale
             Copiaok = True
             LogFile.WriteLog("Ripristino File riuscito: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogislocalconf.fb20")
         Catch ex As Exception
-            LogFile.WriteLog("Errore Ripristino Database: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogislocalconf.fb20")
-            LogFile.WriteLog("Errore Ripristino Database: " + ex.ToString())
-            MessageBox.Show("Errore recupero Database storico trilogislocalconf " + ex.ToString(), "PentaStart")
+            MostraErrore(Me, "Errore Ripristino Database: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogislocalconf.fb20", ex)
             Copiaok = False
         End Try
         Try
@@ -40,9 +37,7 @@ Public Class RipristinoDBOriginale
             Copiaok = True
             LogFile.WriteLog("Ripristino File riuscito: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogisremoteconf.fb20")
         Catch ex As Exception
-            LogFile.WriteLog("Errore Ripristino Database: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogisremoteconf.fb20")
-            LogFile.WriteLog("Errore Ripristino Database: " + ex.ToString())
-            MessageBox.Show("Errore recupero Database storico trilogisremoteconf " + ex.ToString(), "PentaStart")
+            MostraErrore(Me, "Errore Ripristino Database: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogisremoteconf.fb20", ex)
             Copiaok = False
         End Try
 
@@ -50,7 +45,7 @@ Public Class RipristinoDBOriginale
             LogFile.WriteLog("===============================================")
             LogFile.WriteLog("Errore Ripristino Database: Fare copia manuale")
             LogFile.WriteLog("===============================================")
-            MessageBox.Show("Errore nel ripristino del database. Copiare manuelamente i files dentro C:/trilogis/DBBK", "PentaStart")
+            MostraErrore(Me, "Errore nel ripristino del database. Copiare manuelamente i files C:/trilogis/DBBK su " & PercorsoDatabase.Value)
         End If
 
         Me.Invoke(New MethodInvoker(AddressOf Me.Close))

@@ -12,4 +12,8 @@ Public Class ChiusuraPentaStart
         Me.Hide()
         FormMain.Show()
     End Sub
+
+    Private Sub ChiusuraPentaStart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        AdjustText(Label1)
+    End Sub
 End Class

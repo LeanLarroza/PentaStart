@@ -70,12 +70,11 @@ Public Class FormMain
         LogFile.ChisuraProgramma()
         Try
             Process.Start(Application.StartupPath + "/PentaUpdate.exe")
+            Environment.Exit(0)
         Catch ex As Exception
-            LogFile.WriteLog("Errore apertura PentaUpdate")
-            LogFile.WriteLog("Errore: " & ex.ToString())
-            MessageBox.Show("PentaUpdate.exe non trovato", "PentaStart")
+            MostraErrore(Me, "Errore apertura PentaUpdate", ex)
+            Return
         End Try
-        Environment.Exit(0)
     End Sub
 
     Public Shared Function ControlloConnessionePenta() As Boolean
@@ -132,7 +131,8 @@ Public Class FormMain
                         SAT.Show()
                     End If
                 Else
-                    MsgBox("Errore impostazione software", MsgBoxStyle.Critical, "PentaStart")
+                    MostraErrore(Me, "Errore impostazione software")
+                    Me.Show()
                 End If
             End If
         Else
@@ -152,7 +152,6 @@ Public Class FormMain
             trilogis.EnableRaisingEvents = True
             AddHandler trilogis.Exited, AddressOf ChiusuraTrilogis
         End If
-
         Return trilogis
     End Function
 
@@ -163,7 +162,7 @@ Public Class FormMain
 
     Private Sub ControlloStorico()
         If Software.Value = "trilogis" And TipoArchiviazione.Value = "2" Then
-            Buttonnas.Text = "Rec. Storico"
+            Buttonnas.Text = "Storico"
         Else
             Buttonnas.Text = "SMS"
         End If
@@ -234,7 +233,7 @@ Public Class FormMain
                 Try
                     Process.Start("C:\Program Files (x86)\Laundry32\AggDatabase.exe").WaitForExit()
                 Catch ex As Exception
-                    MsgBox("Agg. Database non trovato.")
+                    MostraErrore(Me, "Impossibile trovare software Archiviazione", ex)
                 End Try
             ElseIf TipoArchiviazione.Value = "3" Then
                 LogFile.WriteLog("Avvio AggDatabase (Laundry) - Rilevato Tipo Archiviazione: 3 (Ogni 180 secondi)")
@@ -258,7 +257,7 @@ Public Class FormMain
                     Dim testWatcher As FileSystemWatcher = New FileSystemWatcher(PercorsoFatture.Value, "*.xml")
                     AddHandler testWatcher.Created, AddressOf NuovaFattXML
                 Catch ex As Exception
-                    MessageBox.Show("Errore percorso Fatt. Elettroniche.", "PentaStart")
+                    MostraErrore(Me, "Errore percorso fatture.", ex)
                 End Try
                 Buttonfattelett.Text = "Fatt. Elettronica (" + paths.Length.ToString() + ")"
                 Me.Show()
@@ -270,7 +269,7 @@ Public Class FormMain
                     Buttonfattelett.Text = "Fatt. Elettronica (" + paths.Length.ToString() + ")"
                 End If
             Catch ex As Exception
-                MessageBox.Show("Errore percorso Fatt. Elettroniche.", "PentaStart")
+                MostraErrore(Me, "Errore percorso fatture.", ex)
             End Try
         End If
     End Sub
@@ -278,7 +277,7 @@ Public Class FormMain
     Private Sub NuovaFattXML(sender As Object, e As FileSystemEventArgs)
         Dim paths() As String = IO.Directory.GetFiles(PercorsoFatture.Value, "*.xml")
         If paths.Length > 0 Then
-            Buttonfattelett.Text = "Fatt. Elettronica - " + paths.Length.ToString()
+            Buttonfattelett.Text = "Fatt. Elettronica (" + paths.Length.ToString() + ")"
         End If
     End Sub
 
@@ -324,7 +323,7 @@ Public Class FormMain
                 regKey = Registry.CurrentUser.OpenSubKey("Software\PENTA", True)
                 Dim ver = regKey.GetValue("Control", 0.0)
                 If Now < ver Then
-                    MsgBox("Verifica la data di Windows.", MsgBoxStyle.Information, "PentaStart")
+                    MostraErrore(Me, "Aggionare Data e Ora del computer.")
                     SoftwareScaduto = True
                     regKey.Close()
                     LogFile.WriteLog("Modificata data di windows (Trovata data precedente)")
@@ -426,7 +425,7 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
         If Now < SATsc Then
             Dim ver = regKey.GetValue("Control", 0.0)
             If Now < ver Then
-                MsgBox("Verificare la data di Windows.", MsgBoxStyle.Critical, "PentaStart")
+                MostraErrore(Me, "Aggionare Data e Ora del computer.")
                 regKey.Close()
                 LogFile.WriteLog("Modificata data di windows (Trovata data precedente)")
                 LogFile.ChisuraProgramma()
@@ -464,63 +463,52 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
 
     Private Sub InizializzareDemo()
         LogFile.WriteLog("Avvio impostazione DEMO")
-        Dim richiestaScadenza As DialogResult = MessageBox.Show("Impostare data di scadenza software?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If richiestaScadenza = DialogResult.Yes Then
-            LogFile.WriteLog("Avvio inizializzazione DEMO")
-            Dim diascadenza As Integer = "0"
-            Dim messcadenza As Integer = "0"
-            Dim anoscadenza As Integer = "0"
-            Dim IntConfirmed As Boolean = False
-            Do Until IntConfirmed = True And diascadenza >= 0 And diascadenza < 32
-                IntConfirmed = Integer.TryParse(InputBox("Giorno di scadenza software", "PentaStart", Now.Day.ToString), diascadenza)
-            Loop
-            LogFile.WriteLog("Giorno scadenza software: " + diascadenza)
-            IntConfirmed = False
-            Do Until IntConfirmed = True And messcadenza >= 0 And messcadenza < 13
-                IntConfirmed = Integer.TryParse(InputBox("Mese di scadenza software", "PentaStart", Now.Month.ToString), messcadenza)
-            Loop
-            LogFile.WriteLog("Mese scadenza software: " + messcadenza)
-            IntConfirmed = False
-            Do Until IntConfirmed = True And anoscadenza >= 0 And anoscadenza < 9999
-                IntConfirmed = Integer.TryParse(InputBox("Anno di scadenza software", "PentaStart", Now.Year.ToString), anoscadenza)
-            Loop
-            LogFile.WriteLog("Anno scadenza software: " + anoscadenza)
-            IntConfirmed = False
-            Dim result As DialogResult = MessageBox.Show("Scadenza software: " + diascadenza.ToString() + "/" + messcadenza.ToString() + "/" + anoscadenza.ToString(), "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            While result <> DialogResult.Yes
-                LogFile.WriteLog("Data scadenza software resettata")
-                Do Until IntConfirmed = True And diascadenza >= 0 And diascadenza < 32
-                    IntConfirmed = Integer.TryParse(InputBox("Giorno di scadenza software", "PentaStart", Now.Day.ToString), diascadenza)
-                Loop
-                LogFile.WriteLog("Giorno scadenza software: " + diascadenza)
-                IntConfirmed = False
-                Do Until IntConfirmed = True And messcadenza >= 0 And messcadenza < 13
-                    IntConfirmed = Integer.TryParse(InputBox("Mese di scadenza software", "PentaStart", Now.Month.ToString), messcadenza)
-                Loop
-                LogFile.WriteLog("Mese scadenza software: " + messcadenza)
-                IntConfirmed = False
-                Do Until IntConfirmed = True And anoscadenza >= 0 And anoscadenza < 9999
-                    IntConfirmed = Integer.TryParse(InputBox("Anno di scadenza software", "PentaStart", Now.Year.ToString), anoscadenza)
-                Loop
-                LogFile.WriteLog("Anno scadenza software: " + anoscadenza)
-                IntConfirmed = False
-                result = MessageBox.Show("Scadenza software: " + diascadenza.ToString() + "/" + messcadenza.ToString() + "/" + anoscadenza.ToString(), "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            End While
-            If diascadenza.ToString() = "0" And messcadenza.ToString() = "0" And anoscadenza.ToString() = "0" Then
-                LogFile.WriteLog("Disattivata scelta DEMO (Data Inserita 0/0/0)")
-            Else
-                Dim fechascadenza As String = diascadenza.ToString() + "/" + messcadenza.ToString() + "/" + anoscadenza.ToString()
-                My.Settings.scadenzademo = Date.ParseExact(fechascadenza, "d/M/yyyy", System.Globalization.CultureInfo.InvariantCulture)
-                My.Settings.Save()
-                LogFile.WriteLog("Data DEMO impostata (Data Inserita " + fechascadenza + ")")
-                Dim percorsodemo As String = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\sdc.dll"
-                If Not File.Exists(percorsodemo) Then
-                    File.Create(percorsodemo)
-                    LogFile.WriteLog("Creato file DEMO")
+        Dim DataScadenzaSoftwareConfermata As Boolean = False
+        Dim DataScadenzaSoftware As Date = Now
+
+        While Not DataScadenzaSoftwareConfermata
+            DataScadenzaSoftware = Now
+            Dim FormDomandaScadenza As New Domanda With {.Messagio = "Impostare data di scadenza software?"}
+            Dim richiestaScadenza As DialogResult = FormDomandaScadenza.ShowDialog()
+            If richiestaScadenza = DialogResult.Yes Then
+                LogFile.WriteLog("Avvio inizializzazione DEMO")
+                Dim SceltaScadenzaSoftware As New CalendarForm With {.DataIniziale = Now}
+                Dim resultdatascelta As DialogResult = SceltaScadenzaSoftware.ShowDialog()
+                If resultdatascelta = DialogResult.OK Then
+                    If CInt(SceltaScadenzaSoftware.DataScelta.ToString("yyyyMMdd")) <= CInt(Now.ToString("yyyyMMdd")) Then
+                        DataScadenzaSoftwareConfermata = False
+                    Else
+                        DataScadenzaSoftware = SceltaScadenzaSoftware.DataScelta
+                        Dim FormConfermaData As New Domanda With {.Messagio = "Confermare data di scadenza software: " & DataScadenzaSoftware.ToString("dd/MM/yyyy") & "?"}
+                        Dim confermascadenza As DialogResult = FormConfermaData.ShowDialog()
+                        If True Then
+                            DataScadenzaSoftwareConfermata = True
+                        End If
+                    End If
+                Else
+                    DataScadenzaSoftwareConfermata = False
                 End If
+            Else
+                DataScadenzaSoftwareConfermata = True
             End If
+        End While
+
+        If Not CInt(DataScadenzaSoftware.ToString("yyyyMMdd")) <= CInt(Now.ToString("yyyyMMdd")) Then
+            My.Settings.scadenzademo = DataScadenzaSoftware
+            My.Settings.Save()
+            LogFile.WriteLog("Data DEMO impostata (Data Inserita " + DataScadenzaSoftware.ToString("dd/MM/yyyy") + ")")
+            Dim percorsodemo As String = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\sdc.dll"
+            If Not File.Exists(percorsodemo) Then
+                File.Create(percorsodemo)
+                LogFile.WriteLog("Creato file DEMO")
+                LogFile.WriteLog("Fine impostazione DEMO")
+                MostraAttenzione("DEMO Attivata")
+            End If
+        Else
+            LogFile.WriteLog("Disattivata scelta DEMO")
+            LogFile.WriteLog("Fine impostazione DEMO")
+            MostraAttenzione("DEMO disattivata")
         End If
-        LogFile.WriteLog("Fine impostazione DEMO")
     End Sub
 
     Private Sub OnTimedEvent(sender As Object, e As Timers.ElapsedEventArgs)
@@ -531,7 +519,7 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
         Try
             Process.Start("C:\Program Files (x86)\Laundry32\AggDatabase.exe")
         Catch ex As Exception
-            MsgBox("Agg. Database non trovato.")
+            MostraAttenzione("Software Archiviazione database non trovato.")
         End Try
     End Sub
 
@@ -571,22 +559,22 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
                             Try
                                 Dim paths() As String = IO.Directory.GetFiles(PercorsoFatture.Value, "*.xml")
                                 If paths.Length > 0 Then
-                                    Buttonfattelett.Text = "Fatt. Elettronica - " + paths.Length.ToString()
+                                    Buttonfattelett.Text = "Fatt. Elettronica (" + paths.Length.ToString() + ")"
                                     Me.Hide()
                                     InvioFatture.ShowDialog()
                                 End If
                             Catch ex As Exception
-                                MessageBox.Show("Errore percorso Fatt. Elettroniche.", "PentaStart")
+                                MostraErrore(Me, "Errore percorso fatture.", ex)
                             End Try
                         End If
                     ElseIf (PercorsoFatture.Value <> "null") And (FatturazioneElett.Value = "true") Then
                         Try
                             Dim paths() As String = IO.Directory.GetFiles(PercorsoFatture.Value, "*.xml")
                             If paths.Length > 0 Then
-                                Buttonfattelett.Text = "Fatt. Elettronica - " + paths.Length.ToString()
+                                Buttonfattelett.Text = "Fatt. Elettronica (" + paths.Length.ToString() + ")"
                             End If
                         Catch ex As Exception
-                            MessageBox.Show("Errore percorso Fatt. Elettroniche.", "PentaStart")
+                            MostraErrore(Me, "Errore percorso fatture.", ex)
                         End Try
                     End If
                     SpegniPC.Show()
@@ -664,7 +652,7 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
                 End If
             End If
         Else
-            MsgBox("Errore impostazione software", MsgBoxStyle.Critical, "PentaStart")
+            MostraErrore(Me, "Errore impostazione software.")
         End If
     End Sub
 
@@ -700,7 +688,8 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
         Else
             Dim Inizio As Date = Now
             LogFile.WriteLog("Avvio impostazione Software")
-            Dim result As DialogResult = MessageBox.Show("Impostare avvio 3Logis?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            Dim FormDomanda As New Domanda With {.Messagio = "Impostare avvio 3Logis?"}
+            Dim result As DialogResult = FormDomanda.ShowDialog()
             If (result = DialogResult.Yes) Then
                 ModificaKey(Software, "trilogis")
                 ModificaKey(CausaleAnnullo, "LAVAGGIO INDUMENTI")
@@ -709,7 +698,7 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
                 Dim cercaspercorsodb As FolderBrowserDialog = New FolderBrowserDialog With {
                     .SelectedPath = Path.GetPathRoot(Environment.SystemDirectory) + "trilogis\",
                     .RootFolder = Environment.SpecialFolder.MyComputer,
-                    .Description = "Scegliere il percorso del Database.",
+                    .Description = "Scegliere il percorso del database (trilogis.fb20).",
                     .ShowNewFolderButton = False
                 }
                 If cercaspercorsodb.ShowDialog() = DialogResult.OK Then
@@ -717,7 +706,7 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
                     LogFile.WriteLog("Impostato percorso database 3logis (" + PercorsoDatabase.Value + ")")
                 Else
                     ModificaKey(Software, "null")
-                    LogFile.WriteLog("Percorso database trilogis non trovato. Rollback..")
+                    MostraErrore(Me, "Percorso database trilogis non trovato. Rollback.")
                     LogFile.ChisuraProgramma()
                     Environment.Exit(0)
                 End If
@@ -725,14 +714,35 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
                 While connfirebird = False
                     Dim InizioConnessione As Date = Now
                     LogFile.WriteLog("Avvio impostazione credenziali database")
-                    Dim utente As String = InputBox("Utente Database (Default: SYSDBA)", "PentaStart", "SYSDBA")
-                    LogFile.WriteLog("Utente inserito: " + utente)
-                    Dim password As String = InputBox("Password Database (Default: masterkey)", "PentaStart", "masterkey")
-                    LogFile.WriteLog("Password inserita: " + password)
+                    Dim FormInserimentoUtenteDatabase As New TestoForm With {.Intestazione = "INSERIRE UTENTE DATABASE", .TestoIniziale = "SYSDBA"}
+                    Dim resultinserimento As DialogResult = FormInserimentoUtenteDatabase.ShowDialog()
+                    If resultinserimento = DialogResult.OK Then
+                        ModificaKey(UtenteDatabase, FormInserimentoUtenteDatabase.TestoScritto)
+                    Else
+                        ModificaKey(Software, "null")
+                        MostraErrore(Me, "Errore inserimento utente Database. Rollback.")
+                        Me.Show()
+                        LogFile.ChisuraProgramma()
+                        Environment.Exit(0)
+                    End If
+                    LogFile.WriteLog("Utente inserito: " + UtenteDatabase.Value)
+                    Dim FormInserimentoPasswordDatabase As New TestoForm With {.Intestazione = "INSERIRE PASSWORD DATABASE", .TestoIniziale = "masterkey"}
+                    Dim resultinserimentopassword As DialogResult = FormInserimentoPasswordDatabase.ShowDialog()
+                    If resultinserimentopassword = DialogResult.OK Then
+                        ModificaKey(PasswordDatabase, FormInserimentoPasswordDatabase.TestoScritto)
+                    Else
+                        ModificaKey(UtenteDatabase, "null")
+                        ModificaKey(Software, "null")
+                        MostraErrore(Me, "Errore inserimento password Database. Rollback.")
+                        Me.Show()
+                        LogFile.ChisuraProgramma()
+                        Environment.Exit(0)
+                    End If
+                    LogFile.WriteLog("Password inserita: " + PasswordDatabase.Value)
                     Dim fb_string As FbConnectionStringBuilder = New FbConnectionStringBuilder
                     fb_string.ServerType = FbServerType.Default
-                    fb_string.UserID = utente
-                    fb_string.Password = password
+                    fb_string.UserID = UtenteDatabase.Value
+                    fb_string.Password = PasswordDatabase.Value
                     fb_string.Database = cercaspercorsodb.SelectedPath + "\trilogis.fb20"
                     fb_string.Pooling = False
                     Try
@@ -740,21 +750,17 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
                         Dim connection As FbConnection = New FbConnection(fb_string.ConnectionString)
                         connection.Open()
                         If connection.State = ConnectionState.Open Then
-                            MsgBox("Apertura connessione database riuscita.", MsgBoxStyle.Information, "PentaStart")
-                            ModificaKey(UtenteDatabase, utente)
-                            ModificaKey(PasswordDatabase, password)
+                            MostraAttenzione("Apertura connessione database riuscita.")
                             connfirebird = True
                         End If
-                    Catch err As FbException
-                        LogFile.WriteLog("Errore apertura connessione database")
-                        LogFile.WriteLog("Errore: " + err.ToString())
-                        MsgBox("Connessione rifiutata.
-ERRORE: " & err.Message, MsgBoxStyle.Information, "PentaStart")
+                    Catch ex As FbException
+                        MostraErrore(Me, "Errore apertura connessione database", ex)
                         connfirebird = False
                     End Try
                 End While
             ElseIf (result = DialogResult.No) Then
-                Dim result2 As DialogResult = MessageBox.Show("Impostare avvio Laundry?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                Dim FormDomanda2 As New Domanda With {.Messagio = "Impostare avvio Laundry?"}
+                Dim result2 As DialogResult = FormDomanda2.ShowDialog()
                 If (result2 = DialogResult.Yes) Then
                     ModificaKey(Software, "laundry")
                     ModificaKey(CausaleAnnullo, "LAVAGGIO INDUMENTI")
@@ -764,19 +770,20 @@ ERRORE: " & err.Message, MsgBoxStyle.Information, "PentaStart")
                         .RootFolder = Environment.SpecialFolder.MyComputer,
                         .SelectedPath = Path.GetPathRoot(Environment.SystemDirectory) + "LaundryData\",
                         .ShowNewFolderButton = False,
-                        .Description = "Scegliere il percorso del Database."
+                        .Description = "Scegliere il percorso del Database (Laundry.mdb)."
                     }
                     If cercaspercorsodb.ShowDialog() = DialogResult.OK Then
                         ModificaKey(PercorsoDatabase, cercaspercorsodb.SelectedPath)
                         LogFile.WriteLog("Impostato percorso database Laundry (" + PercorsoDatabase.Value + ")")
                     Else
                         ModificaKey(Software, "null")
-                        LogFile.WriteLog("Percorso database trilogis non trovato. Rollback..")
+                        MostraErrore(Me, "Percorso database Laundry non trovato. Rollback.")
                         LogFile.ChisuraProgramma()
                         Environment.Exit(0)
                     End If
                 ElseIf (result2 = DialogResult.No) Then
-                    Dim result3 As DialogResult = MessageBox.Show("Impostare avvio Menu?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    Dim FormDomanda3 As New Domanda With {.Messagio = "Impostare avvio Menu?"}
+                    Dim result3 As DialogResult = FormDomanda3.ShowDialog()
                     If (result3 = DialogResult.Yes) Then
                         ModificaKey(Software, "menu")
                         ModificaKey(CausaleAnnullo, "STORNO MENU")
@@ -786,19 +793,20 @@ ERRORE: " & err.Message, MsgBoxStyle.Information, "PentaStart")
                             .RootFolder = Environment.SpecialFolder.MyComputer,
                             .SelectedPath = Path.GetPathRoot(Environment.SystemDirectory) + "Menù\Clients\",
                             .ShowNewFolderButton = False,
-                            .Description = "Scegliere il percorso del Database."
+                            .Description = "Scegliere il percorso del Database del programma Menu."
                         }
                         If cercaspercorsodb.ShowDialog() = DialogResult.OK Then
                             ModificaKey(PercorsoDatabase, cercaspercorsodb.SelectedPath)
                             LogFile.WriteLog("Impostato percorso database Menu (" + PercorsoDatabase.Value + ")")
                         Else
                             ModificaKey(Software, "null")
-                            LogFile.WriteLog("Percorso database trilogis non trovato. Rollback..")
+                            MostraErrore(Me, "Percorso database Menu non trovato. Rollback.")
                             LogFile.ChisuraProgramma()
                             Environment.Exit(0)
                         End If
                     ElseIf (result3 = DialogResult.No) Then
-                        Dim result4 As DialogResult = MessageBox.Show("Impostare avvio Comus?", "PentaStart", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                        Dim FormDomanda4 As New Domanda With {.Messagio = "Impostare avvio Comus?"}
+                        Dim result4 As DialogResult = FormDomanda4.ShowDialog()
                         If (result4 = DialogResult.Yes) Then
                             ModificaKey(Software, "comus")
                             ModificaKey(CausaleAnnullo, "STORNO MENU")
@@ -815,7 +823,7 @@ ERRORE: " & err.Message, MsgBoxStyle.Information, "PentaStart")
                                 LogFile.WriteLog("Impostato percorso database Comus (" + PercorsoDatabase.Value + ")")
                             Else
                                 ModificaKey(Software, "null")
-                                LogFile.WriteLog("Percorso database trilogis non trovato. Rollback..")
+                                MostraErrore(Me, "Percorso database Comuss non trovato. Rollback.")
                                 LogFile.ChisuraProgramma()
                                 Environment.Exit(0)
                             End If
@@ -825,7 +833,7 @@ ERRORE: " & err.Message, MsgBoxStyle.Information, "PentaStart")
                     End If
                 End If
             End If
-            LogFile.WriteLog("Fine impostazione Software (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
+            LogFile.WriteLog("Fine impostazione Software: " & Software.Value & " (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
         End If
     End Sub
 
@@ -911,22 +919,10 @@ ERRORE: " & err.Message, MsgBoxStyle.Information, "PentaStart")
         LogFile.WriteLog("Fine lettura file PentaStart.ini (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
     End Sub
 
-    Private Sub ControlloAutomatismoSync(ini As IniFile, unused As String)
-        LogFile.WriteLog("Avvio controllo coordinate SYNC - File PentaStart.ini")
-
-        LogFile.WriteLog("Fine controllo coordinate SYNC - File PentaStart.ini")
-    End Sub
-
     Private Sub ButtonChiusura_Click(sender As Object, e As EventArgs) Handles ButtonChiusura.Click
         If EsisteStampanteMCT() Or EsisteStampanteDitron() Or EsisteStampanteEpson() Then
             Me.Hide()
-            If ControlloSoftwareAperto() Then
-                Me.Show()
-                Return
-            End If
             RegistratoreTelematico.Show()
-        Else
-            MsgBox("Nessun registratore telematico impostato", MsgBoxStyle.Critical, "PentaStart")
         End If
     End Sub
 
@@ -950,7 +946,8 @@ ERRORE: " & err.Message, MsgBoxStyle.Information, "PentaStart")
             End If
             Process.Start(Application.StartupPath + "\TeamViewer.lnk")
         Else
-            MsgBox("Il programma di TeleAssistenza non è stato installato",, "PentaStart")
+            MostraErrore(Me, "Impossibile avviare il programma di TeleAssitenza")
+            Me.Show()
         End If
     End Sub
 
@@ -1002,16 +999,16 @@ ERRORE: " & err.Message, MsgBoxStyle.Information, "PentaStart")
             Try
                 Process.Start(UrlFatturazione.Value)
             Catch ex As Exception
-                MsgBox("Indirizzo Web Fatturazione Elettronica non trovato.", "PentaStart")
+                MostraErrore(Me, "Errore avvio Fatturazione Elettronica.", ex)
             End Try
         ElseIf PercorsoSYNC.Value <> "null" Then
             If File.Exists(PercorsoSYNC.Value + "\BrainTeamFatturaElettronica.exe") Then
                 Process.Start(PercorsoSYNC.Value + "\BrainTeamFatturaElettronica.exe")
             Else
-                MsgBox("SYNC non trovato",, "PentaStart")
+                MostraErrore(Me, "Errore avvio SYNC")
             End If
         Else
-            MsgBox("Indirizzo Web Fatturazione Elettronica non trovato.",, "PentaStart")
+            MostraErrore(Me, "Errore avvio Fatturazione Elettronica.")
         End If
     End Sub
 

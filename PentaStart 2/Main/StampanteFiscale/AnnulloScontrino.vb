@@ -13,7 +13,7 @@ Public Class AnnulloScontrino
         TextBox2.Text = ""
         TextBox1.Text = Now.ToString("dd/MM/yy")
         ImportoAnn.Text = ""
-        If EsisteStampanteMCT() Then
+        If EsisteStampanteMCT() OrElse EsisteStampanteEpson() Then
             Label5.Visible = False
             Label6.Visible = False
             ImportoAnn.Visible = False
@@ -43,7 +43,7 @@ Public Class AnnulloScontrino
     End Sub
 
     Private Sub TextBox2_Click(sender As Object, e As EventArgs) Handles TextBox2.Click
-        MostraEAggiornaNumero(Me, TextBox2.Text, TextBox2)
+        MostraEAggiornaNumero(Me, TextBox2.Text, TextBox2, 8, 8)
         Me.Show()
     End Sub
 
@@ -53,7 +53,8 @@ Public Class AnnulloScontrino
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim nazz, nscont As String
+        Dim nazz As String = ""
+        Dim nscont As String = ""
 
         If Not TextBox2.Text.Replace("-", "").Length = 8 Then
             LogFile.WriteLog("Numero di documento errato: " & TextBox2.Text)
