@@ -17,27 +17,27 @@ Public Class RipristinoDBOriginale
         Threading.Thread.Sleep(2000)
         Dim Copiaok As Boolean = False
         Try
-            File.Copy(Variables.PercorsoDatabase.Value + "/DBBK/trilogis.fb20", Variables.PercorsoDatabase.Value + "/trilogis.fb20", True)
+            File.Copy(Variables.PercorsoDatabase.Value & "/DBBK/trilogis.fb20", Variables.PercorsoDatabase.Value & "/trilogis.fb20", True)
             Copiaok = True
-            LogFile.WriteLog("Ripristino File riuscito: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogis.fb20")
+            LogFile.WriteLog("Ripristino File riuscito: " & Variables.PercorsoDatabase.Value & "/DBBK/trilogis.fb20")
         Catch ex As Exception
-            MostraErrore(Me, "Errore Ripristino Database: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogis.fb20", ex)
+            MostraErrore(Me, "Errore Ripristino Database: " & Variables.PercorsoDatabase.Value & "/DBBK/trilogis.fb20", ex)
             Copiaok = False
         End Try
         Try
-            File.Copy(Variables.PercorsoDatabase.Value + "/DBBK/trilogislocalconf.fb20", Variables.PercorsoDatabase.Value + "/trilogislocalconf.fb20", True)
+            File.Copy(Variables.PercorsoDatabase.Value & "/DBBK/trilogislocalconf.fb20", Variables.PercorsoDatabase.Value & "/trilogislocalconf.fb20", True)
             Copiaok = True
-            LogFile.WriteLog("Ripristino File riuscito: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogislocalconf.fb20")
+            LogFile.WriteLog("Ripristino File riuscito: " & Variables.PercorsoDatabase.Value & "/DBBK/trilogislocalconf.fb20")
         Catch ex As Exception
-            MostraErrore(Me, "Errore Ripristino Database: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogislocalconf.fb20", ex)
+            MostraErrore(Me, "Errore Ripristino Database: " & Variables.PercorsoDatabase.Value & "/DBBK/trilogislocalconf.fb20", ex)
             Copiaok = False
         End Try
         Try
-            File.Copy(Variables.PercorsoDatabase.Value + "/DBBK/trilogisremoteconf.fb20", Variables.PercorsoDatabase.Value + "/trilogisremoteconf.fb20", True)
+            File.Copy(Variables.PercorsoDatabase.Value & "/DBBK/trilogisremoteconf.fb20", Variables.PercorsoDatabase.Value & "/trilogisremoteconf.fb20", True)
             Copiaok = True
-            LogFile.WriteLog("Ripristino File riuscito: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogisremoteconf.fb20")
+            LogFile.WriteLog("Ripristino File riuscito: " & Variables.PercorsoDatabase.Value & "/DBBK/trilogisremoteconf.fb20")
         Catch ex As Exception
-            MostraErrore(Me, "Errore Ripristino Database: " + Variables.PercorsoDatabase.Value + "/DBBK/trilogisremoteconf.fb20", ex)
+            MostraErrore(Me, "Errore Ripristino Database: " & Variables.PercorsoDatabase.Value & "/DBBK/trilogisremoteconf.fb20", ex)
             Copiaok = False
         End Try
 

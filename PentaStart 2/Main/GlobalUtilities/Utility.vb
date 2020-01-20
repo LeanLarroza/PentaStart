@@ -24,21 +24,21 @@ Public Class Utility
         Dim CoordinateButtonXChiusura3 As String = Variables.CoordinateButtonXChiusura3.Value
         Dim CoordinateButtonYChiusura3 As String = Variables.CoordinateButtonYChiusura3.Value
         Dim percorsosync As String = Variables.PercorsoSYNC.Value
-        Dim VersioneSYNC As String = AssemblyName.GetAssemblyName(Variables.PercorsoSYNC.Value + "\BrainTeamFatturaElettronica.exe").Version.ToString()
-        Dim StringFile = "1 | IF | PROCESS NAME | BRAINTEAMFATTURAELETTRONICA | NOT EXIST | GOTO MACRO LINE | 2" + Environment.NewLine +
-        "2 | IF | PROCESS NAME | BRAINTEAMFATTURAELETTRONICA | NOT EXIST | GOTO MACRO LINE | 1" + Environment.NewLine +
-        "3 | IF | WINDOW TITLE | BrainTeam Fatturazione Elettronica v." + VersioneSYNC + " | NOT EXIST | GOTO MACRO LINE | 4" + Environment.NewLine +
-        "4 | IF | WINDOW TITLE | BrainTeam Fatturazione Elettronica v." + VersioneSYNC + " | NOT EXIST | GOTO MACRO LINE | 3" + Environment.NewLine +
-        "5 | RUN ACTION | SELECT WINDOW BY NAME | BrainTeam" + Environment.NewLine +
-        "6 | " + CoordinateButtonXFatturazione + " | " + CoordinateButtonYFatturazione + " | 1265 | Left Click" + Environment.NewLine +
-        "7 | RUN ACTION | SELECT WINDOW BY NAME | BrainTeam Fatturazione Elettronica" + Environment.NewLine +
-        "8 | " + CoordinateButtonXInvio + " | " + CoordinateButtonYInvio + " | 3703 | Left Click" + Environment.NewLine +
-        "9 | RUN ACTION | WAIT SECONDS | 10" + Environment.NewLine +
-        "10 | IF | PIXEL COLOR | Color [R=89, G=89, B=89]::At Location [X:" + CoordinateXInvio + " Y:" + CoordinateYInvio + "] | IS THE SAME | GOTO MACRO LINE | 9" + Environment.NewLine +
-        "11 | IF | PIXEL COLOR | Color [R=70, G=130, B=180]::At Location [X:" + CoordinateXErrore + " Y:" + CoordinateYErrore + "] | IS THE SAME | STOP" + Environment.NewLine +
-        "12 | " + CoordinateButtonXChiusura1 + " | " + CoordinateButtonYChiusura1 + " | 4961 | Left Click" + Environment.NewLine +
-        "13 | " + CoordinateButtonXChiusura2 + " | " + CoordinateButtonYChiusura2 + " | 1172 | Left Click" + Environment.NewLine +
-        "14 | " + CoordinateButtonXChiusura3 + " | " + CoordinateButtonYChiusura3 + " | 1172 | Left Click"
+        Dim VersioneSYNC As String = AssemblyName.GetAssemblyName(Variables.PercorsoSYNC.Value & "\BrainTeamFatturaElettronica.exe").Version.ToString()
+        Dim StringFile = "1 | IF | PROCESS NAME | BRAINTEAMFATTURAELETTRONICA | NOT EXIST | GOTO MACRO LINE | 2" & Environment.NewLine &
+        "2 | IF | PROCESS NAME | BRAINTEAMFATTURAELETTRONICA | NOT EXIST | GOTO MACRO LINE | 1" & Environment.NewLine &
+        "3 | IF | WINDOW TITLE | BrainTeam Fatturazione Elettronica v." & VersioneSYNC & " | NOT EXIST | GOTO MACRO LINE | 4" & Environment.NewLine &
+        "4 | IF | WINDOW TITLE | BrainTeam Fatturazione Elettronica v." & VersioneSYNC & " | NOT EXIST | GOTO MACRO LINE | 3" & Environment.NewLine &
+        "5 | RUN ACTION | SELECT WINDOW BY NAME | BrainTeam" & Environment.NewLine &
+        "6 | " & CoordinateButtonXFatturazione & " | " & CoordinateButtonYFatturazione & " | 1265 | Left Click" & Environment.NewLine &
+        "7 | RUN ACTION | SELECT WINDOW BY NAME | BrainTeam Fatturazione Elettronica" & Environment.NewLine &
+        "8 | " & CoordinateButtonXInvio & " | " & CoordinateButtonYInvio & " | 3703 | Left Click" & Environment.NewLine &
+        "9 | RUN ACTION | WAIT SECONDS | 10" & Environment.NewLine &
+        "10 | IF | PIXEL COLOR | Color [R=89, G=89, B=89]::At Location [X:" & CoordinateXInvio & " Y:" & CoordinateYInvio & "] | IS THE SAME | GOTO MACRO LINE | 9" & Environment.NewLine &
+        "11 | IF | PIXEL COLOR | Color [R=70, G=130, B=180]::At Location [X:" & CoordinateXErrore & " Y:" & CoordinateYErrore & "] | IS THE SAME | STOP" & Environment.NewLine &
+        "12 | " & CoordinateButtonXChiusura1 & " | " & CoordinateButtonYChiusura1 & " | 4961 | Left Click" & Environment.NewLine &
+        "13 | " & CoordinateButtonXChiusura2 & " | " & CoordinateButtonYChiusura2 & " | 1172 | Left Click" & Environment.NewLine &
+        "14 | " & CoordinateButtonXChiusura3 & " | " & CoordinateButtonYChiusura3 & " | 1172 | Left Click"
 
         File.WriteAllText(PercorsoMacroMiniMouse.Value & "\1.mmmacro", StringFile)
 
@@ -164,9 +164,9 @@ Public Class Utility
             ini.AddSection(Variable.Percorso)
             ini.AddSection(Variable.Percorso).AddKey(Variable.Key)
             ini.SetKeyValue(Variable.Percorso, Variable.Key, defaultvalue)
-            LogFile.WriteLog("[INI] Creata Key PentaStart.ini: Percorso: " + Variable.Percorso + " - Key: " + Variable.Key + " - Valore: " + defaultvalue)
+            LogFile.WriteLog("[INI] Creata Key PentaStart.ini: Percorso: " & Variable.Percorso & " - Key: " & Variable.Key & " - Valore: " & defaultvalue)
         Else
-            LogFile.WriteLog("[INI] Lettura PentaStart.ini: Percorso: " + Variable.Percorso + " - Key: " + Variable.Key + " - Valore: " + Variable.Value)
+            LogFile.WriteLog("[INI] Lettura PentaStart.ini: Percorso: " & Variable.Percorso & " - Key: " & Variable.Key & " - Valore: " & Variable.Value)
         End If
     End Sub
 
@@ -197,13 +197,13 @@ Public Class Utility
 
     Public Shared Sub ModificaKey(ByRef Variable As KeyIni, value As String)
         Dim ini As New IniFile
-        ini.Load(Application.StartupPath + "\PentaStart.ini")
+        ini.Load(Application.StartupPath & "\PentaStart.ini")
         ini.SetKeyValue(Variable.Percorso, Variable.Key, value)
-        ini.Save(Application.StartupPath + "\PentaStart.ini")
-        LogFile.WriteLog("[INI] Modificata Key PentaStart.ini: Percorso: " + Variable.Percorso + " - Key: " + Variable.Key + " - Valore: " + value)
+        ini.Save(Application.StartupPath & "\PentaStart.ini")
+        LogFile.WriteLog("[INI] Modificata Key PentaStart.ini: Percorso: " & Variable.Percorso & " - Key: " & Variable.Key & " - Valore: " & value)
         Dim nomevariabilestatica As String = Variable.Value
         Variable.Value = value
-        LogFile.WriteLog("[INI] Valore globale caricato: Prima: " + nomevariabilestatica + " - Adesso: " + Variable.Value)
+        LogFile.WriteLog("[INI] Valore globale caricato: Prima: " & nomevariabilestatica & " - Adesso: " & Variable.Value)
     End Sub
     Public Shared Function EsisteStampanteMCT() As Boolean
         If mct.Value = "true" Then
@@ -214,15 +214,15 @@ Public Class Utility
                 MostraAttenzione("Impossibile creare percorso: " & PercorsoMultiDriver.Value & "/TOSEND")
             End Try
 
-            If Not File.Exists(Application.StartupPath + "/MULTIDRIVER_SERVER.lnk") Then
+            If Not File.Exists(Application.StartupPath & "/MULTIDRIVER_SERVER.lnk") Then
                 Dim wsh As WshShell = New WshShell()
-                Dim Shortcut As IWshRuntimeLibrary.IWshShortcut = wsh.CreateShortcut(Application.StartupPath + "/MULTIDRIVER_SERVER.lnk")
+                Dim Shortcut As IWshRuntimeLibrary.IWshShortcut = wsh.CreateShortcut(Application.StartupPath & "/MULTIDRIVER_SERVER.lnk")
                 Shortcut.Arguments = ""
-                Shortcut.TargetPath = PercorsoMultiDriver.Value + "/MULTIDRIVER_SERVER.exe"
+                Shortcut.TargetPath = PercorsoMultiDriver.Value & "/MULTIDRIVER_SERVER.exe"
                 Shortcut.WindowStyle = 1
                 Shortcut.Description = "MULTIDRIVER_SERVER"
-                Shortcut.WorkingDirectory = PercorsoMultiDriver.Value + "/MULTIDRIVER_SERVER.exe"
-                Shortcut.IconLocation = PercorsoMultiDriver.Value + "/MULTIDRIVER_SERVER.exe"
+                Shortcut.WorkingDirectory = PercorsoMultiDriver.Value & "/MULTIDRIVER_SERVER.exe"
+                Shortcut.IconLocation = PercorsoMultiDriver.Value & "/MULTIDRIVER_SERVER.exe"
                 Shortcut.Save()
             End If
             Return True
@@ -244,15 +244,15 @@ Public Class Utility
                 MostraAttenzione("Impossibile creare percorso: " & PercorsoWinEcr.Value & "/TOSEND")
             End Try
 
-            If Not File.Exists(Application.StartupPath + "/SoEcrCom.lnk") Then
+            If Not File.Exists(Application.StartupPath & "/SoEcrCom.lnk") Then
                 Dim wsh As WshShell = New WshShell()
-                Dim Shortcut As IWshRuntimeLibrary.IWshShortcut = wsh.CreateShortcut(Application.StartupPath + "/SoEcrCom.lnk")
+                Dim Shortcut As IWshRuntimeLibrary.IWshShortcut = wsh.CreateShortcut(Application.StartupPath & "/SoEcrCom.lnk")
                 Shortcut.Arguments = ""
-                Shortcut.TargetPath = PercorsoWinEcr.Value + "\\Drivers\\SoEcrCom.exe"
+                Shortcut.TargetPath = PercorsoWinEcr.Value & "\\Drivers\\SoEcrCom.exe"
                 Shortcut.WindowStyle = 1
                 Shortcut.Description = "SoEcrCom"
-                Shortcut.WorkingDirectory = PercorsoWinEcr.Value + "\\Drivers\\SoEcrCom.exe"
-                Shortcut.IconLocation = PercorsoWinEcr.Value + "\\Drivers\\SoEcrCom.exe"
+                Shortcut.WorkingDirectory = PercorsoWinEcr.Value & "\\Drivers\\SoEcrCom.exe"
+                Shortcut.IconLocation = PercorsoWinEcr.Value & "\\Drivers\\SoEcrCom.exe"
                 Shortcut.Save()
             End If
             Return True
@@ -272,15 +272,15 @@ Public Class Utility
                 MostraAttenzione("Impossibile creare percorso: " & PercorsoFpMate.Value & "/TOSEND")
             End Try
 
-            If Not File.Exists(Application.StartupPath + "/EpsonFpMate.lnk") Then
+            If Not File.Exists(Application.StartupPath & "/EpsonFpMate.lnk") Then
                 Dim wsh As WshShell = New WshShell()
-                Dim Shortcut As IWshRuntimeLibrary.IWshShortcut = wsh.CreateShortcut(Application.StartupPath + "/EpsonFpMate.lnk")
+                Dim Shortcut As IWshRuntimeLibrary.IWshShortcut = wsh.CreateShortcut(Application.StartupPath & "/EpsonFpMate.lnk")
                 Shortcut.Arguments = ""
-                Shortcut.TargetPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + "\EpsonFpMate\EpsonFpMate.exe"
+                Shortcut.TargetPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) & "\EpsonFpMate\EpsonFpMate.exe"
                 Shortcut.WindowStyle = 1
                 Shortcut.Description = "EpsonFpMate"
-                Shortcut.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + "\EpsonFpMate"
-                Shortcut.IconLocation = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + "\EpsonFpMate\EpsonFpMate.exe"
+                Shortcut.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) & "\EpsonFpMate"
+                Shortcut.IconLocation = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) & "\EpsonFpMate\EpsonFpMate.exe"
                 Shortcut.Save()
             End If
             Return True
@@ -296,7 +296,7 @@ Public Class Utility
                 p.Kill()
             Next p
             Dim scontrinopenta As System.Diagnostics.Process = New System.Diagnostics.Process()
-            scontrinopenta.StartInfo.FileName = Application.StartupPath + "\ScontrinoPenta.exe"
+            scontrinopenta.StartInfo.FileName = Application.StartupPath & "\ScontrinoPenta.exe"
             Try
                 scontrinopenta.Start()
             Catch ex As Exception
@@ -315,12 +315,12 @@ Public Class Utility
         FormAttendere.Refresh()
         Dim secondi As Integer = 0
         While File.Exists(percorsofile)
-            If secondi = 20 Then
+            If secondi = 55 Then
                 secondi += 1
                 RiavvioDriverScontrino()
                 Threading.Thread.Sleep(1000)
                 ScrivereFile(commandi, percorsofile)
-            ElseIf secondi = 35 Then
+            ElseIf secondi = 100 Then
                 Try
                     File.Delete(percorsofile)
                     FormAttendere.Hide()
@@ -331,7 +331,7 @@ Public Class Utility
                     FormErrore.ShowDialog()
                     FormErrore.Dispose()
                 Catch ex As Exception
-                    secondi = 10
+                    secondi = 0
                 End Try
             Else
                 Threading.Thread.Sleep(1000)
@@ -347,13 +347,13 @@ Public Class Utility
         LogFile.WriteLog("Riavvio driver scontrino in corso...")
         If EsisteStampanteMCT() Then
             ChiusuraProgramma("MULTIDRIVER_SERVER")
-            Process.Start(Application.StartupPath + "/MULTIDRIVER_SERVER.lnk")
+            Process.Start(Application.StartupPath & "/MULTIDRIVER_SERVER.lnk")
         ElseIf EsisteStampanteDitron() Then
             ChiusuraProgramma("SoEcrCom")
-            Process.Start(Application.StartupPath + "/SoEcrCom.lnk")
+            Process.Start(Application.StartupPath & "/SoEcrCom.lnk")
         ElseIf EsisteStampanteEpson() Then
             ChiusuraProgramma("EpsonFpMate")
-            Process.Start(Application.StartupPath + "/EpsonFpMate.lnk")
+            Process.Start(Application.StartupPath & "/EpsonFpMate.lnk")
         End If
         LogFile.WriteLog("Fine riavvio driver scontrino")
     End Sub
@@ -427,7 +427,7 @@ Public Class Utility
     End Sub
 
     Public Shared Sub ChiusuraProgramma(programma As String)
-        LogFile.WriteLog("Chiusura " + programma + " in corso...")
+        LogFile.WriteLog("Chiusura " & programma & " in corso...")
         Dim localByName As Process() = Process.GetProcessesByName(programma)
         For Each p As Process In localByName
             p.Kill()
@@ -452,17 +452,17 @@ Public Class Utility
         If EsisteStampanteMCT() Then
             Dim multidriver() As Process = Process.GetProcessesByName("MULTIDRIVER_SERVER")
             If (multidriver.Length = 0) Then
-                AvviareProgramma(Application.StartupPath + "\\MULTIDRIVER_SERVER.lnk")
+                AvviareProgramma(Application.StartupPath & "\\MULTIDRIVER_SERVER.lnk")
             End If
         ElseIf EsisteStampanteDitron() Then
             Dim ditron() As Process = Process.GetProcessesByName("SoEcrCom")
             If (ditron.Length = 0) Then
-                AvviareProgramma(Application.StartupPath + "\\SoEcrCom.lnk")
+                AvviareProgramma(Application.StartupPath & "\\SoEcrCom.lnk")
             End If
         ElseIf EsisteStampanteEpson() Then
             Dim epson() As Process = Process.GetProcessesByName("EpsonFpMate")
             If (epson.Length = 0) Then
-                AvviareProgramma(Application.StartupPath + "\\EpsonFpMate.lnk")
+                AvviareProgramma(Application.StartupPath & "\\EpsonFpMate.lnk")
             End If
         End If
     End Sub

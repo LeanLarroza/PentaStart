@@ -41,7 +41,7 @@ Public Class FormMain
         If AggiornamentiAttivi() Then
             If ControlloConnessionePenta() Then
                 LogFile.WriteLog("Connessione internet trovata")
-                LogFile.WriteLog("Data di controllo aggiornamento: " + Date.ParseExact(DataProssimoAggiornamento.Value, "yyyyMMdd", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy"))
+                LogFile.WriteLog("Data di controllo aggiornamento: " & Date.ParseExact(DataProssimoAggiornamento.Value, "yyyyMMdd", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy"))
                 If DataProssimoAggiornamento.Value <= Now.ToString("yyyyMMdd") Then
                     ModificaKey(ForzareAggiornamento, Now.AddDays(7).ToString("yyyyMMdd"))
                     AggiornamentoPenta()
@@ -69,7 +69,7 @@ Public Class FormMain
         ChiusuraProgramma("NomePronto")
         LogFile.ChisuraProgramma()
         Try
-            Process.Start(Application.StartupPath + "/PentaUpdate.exe")
+            Process.Start(Application.StartupPath & "/PentaUpdate.exe")
             Environment.Exit(0)
         Catch ex As Exception
             MostraErrore(Me, "Errore apertura PentaUpdate", ex)
@@ -200,10 +200,10 @@ Public Class FormMain
             AddHandler FileScontrinoComusDitron.Created, AddressOf FileSystemWatcher1_Created
             FileScontrinoComusDitron.EnableRaisingEvents = True
 
-            Directory.CreateDirectory(PercorsoWinEcr.Value + "\TOSEND")
+            Directory.CreateDirectory(PercorsoWinEcr.Value & "\TOSEND")
 
             ChiusuraProgramma("SoEcrCom")
-            Process.Start(Application.StartupPath + "/SoEcrCom.lnk")
+            Process.Start(Application.StartupPath & "/SoEcrCom.lnk")
             LogFile.WriteLog("Fine inizializzazione WinEcr per COMUS")
         End If
     End Sub
@@ -250,7 +250,7 @@ Public Class FormMain
                 Dim paths() As String = IO.Directory.GetFiles(PercorsoFatture.Value, "*.xml")
                 Try
                     If paths.Length > 0 Then
-                        Buttonfattelett.Text = "Fatt. Elettronica (" + paths.Length.ToString() + ")"
+                        Buttonfattelett.Text = "Fatt. Elettronica (" & paths.Length.ToString() & ")"
                         Me.Hide()
                         InvioFatture.ShowDialog()
                     End If
@@ -259,14 +259,14 @@ Public Class FormMain
                 Catch ex As Exception
                     MostraErrore(Me, "Errore percorso fatture.", ex)
                 End Try
-                Buttonfattelett.Text = "Fatt. Elettronica (" + paths.Length.ToString() + ")"
+                Buttonfattelett.Text = "Fatt. Elettronica (" & paths.Length.ToString() & ")"
                 Me.Show()
             End If
         ElseIf (PercorsoFatture.Value <> "null") And (FatturazioneElett.Value = "true") Then
             Try
                 Dim paths() As String = IO.Directory.GetFiles(PercorsoFatture.Value, "*.xml")
                 If paths.Length > 0 Then
-                    Buttonfattelett.Text = "Fatt. Elettronica (" + paths.Length.ToString() + ")"
+                    Buttonfattelett.Text = "Fatt. Elettronica (" & paths.Length.ToString() & ")"
                 End If
             Catch ex As Exception
                 MostraErrore(Me, "Errore percorso fatture.", ex)
@@ -277,7 +277,7 @@ Public Class FormMain
     Private Sub NuovaFattXML(sender As Object, e As FileSystemEventArgs)
         Dim paths() As String = IO.Directory.GetFiles(PercorsoFatture.Value, "*.xml")
         If paths.Length > 0 Then
-            Buttonfattelett.Text = "Fatt. Elettronica (" + paths.Length.ToString() + ")"
+            Buttonfattelett.Text = "Fatt. Elettronica (" & paths.Length.ToString() & ")"
         End If
     End Sub
 
@@ -287,7 +287,7 @@ Public Class FormMain
             Dim fecha = DateTime.Now.ToString("dd-MM-yyyy")
             Select Case currday
                 Case 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365
-                    Dim Backups = Directory.GetDirectories(PercorsoBackup.Value + "\Backups")
+                    Dim Backups = Directory.GetDirectories(PercorsoBackup.Value & "\Backups")
                     Dim quantitaBkps As Integer = Backups.Length
                     If quantitaBkps > 4 Then
                         Dim bkpvecchio As DirectoryInfo = Backups(0)
@@ -299,16 +299,16 @@ Public Class FormMain
                         Directory.Delete(bkpvecchio.FullName)
                     End If
                     If (Software.Value = "trilogis") Then
-                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value + "\trilogis.fb20", PercorsoBackup.Value + "\Backups\Backup " + fecha + "\trilogis.fb20", True)
-                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value + "\trilogislocalconf.fb20", PercorsoBackup.Value + "\Backups\Backup " + fecha + "\trilogislocalconf.fb20", True)
-                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value + "\trilogisremoteconf.fb20", PercorsoBackup.Value + "\Backups\Backup " + fecha + "\trilogisremoteconf.fb20", True)
-                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value + "\trilogis.ini", PercorsoBackup.Value + "\Backups\Backup " + fecha + "\trilogis.ini", True)
+                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value & "\trilogis.fb20", PercorsoBackup.Value & "\Backups\Backup " & fecha & "\trilogis.fb20", True)
+                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value & "\trilogislocalconf.fb20", PercorsoBackup.Value & "\Backups\Backup " & fecha & "\trilogislocalconf.fb20", True)
+                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value & "\trilogisremoteconf.fb20", PercorsoBackup.Value & "\Backups\Backup " & fecha & "\trilogisremoteconf.fb20", True)
+                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value & "\trilogis.ini", PercorsoBackup.Value & "\Backups\Backup " & fecha & "\trilogis.ini", True)
                     ElseIf (Software.Value = "laundry") Then
-                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value + "\Database.mdb", PercorsoBackup.Value + "\Backups\Backup " + fecha + "\Database-" + fecha + ".mdb", True)
+                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value & "\Database.mdb", PercorsoBackup.Value & "\Backups\Backup " & fecha & "\Database-" & fecha & ".mdb", True)
                     ElseIf (Software.Value = "menu") Then
-                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value + "\Banchetti.mdb", PercorsoBackup.Value + "\Backups\Backup " + fecha + "\Database-" + fecha + ".mdb", True)
+                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value & "\Banchetti.mdb", PercorsoBackup.Value & "\Backups\Backup " & fecha & "\Database-" & fecha & ".mdb", True)
                     ElseIf (Software.Value = "comus") Then
-                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value + "\Comus.mdb", PercorsoBackup.Value + "\Backups\Backup " + fecha + "\Database-" + fecha + ".mdb", True)
+                        FileIO.FileSystem.CopyFile(PercorsoDatabase.Value & "\Comus.mdb", PercorsoBackup.Value & "\Backups\Backup " & fecha & "\Database-" & fecha & ".mdb", True)
                     End If
             End Select
         End If

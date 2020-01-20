@@ -115,33 +115,33 @@ Public Class CaricamentoDBStorico
 
     Private Function CaricaDatabaseStorico(annoScelto As String) As Boolean
         Dim Copiaok As Boolean = False
-        If Not Directory.Exists(PercorsoArchiviazione + annoScelto) Then
-            LogFile.WriteLog("Creazione cartella: " + Variables.PercorsoDatabase.Value + "/DBBK")
+        If Not Directory.Exists(PercorsoArchiviazione & annoScelto) Then
+            LogFile.WriteLog("Creazione cartella: " & Variables.PercorsoDatabase.Value & "/DBBK")
             Return False
         End If
 
         Try
-            File.Copy(PercorsoArchiviazione + annoScelto + "/trilogis.fb20", Variables.PercorsoDatabase.Value + "/trilogis.fb20", True)
+            File.Copy(PercorsoArchiviazione & annoScelto & "/trilogis.fb20", Variables.PercorsoDatabase.Value & "/trilogis.fb20", True)
             Copiaok = True
-            LogFile.WriteLog("Recupero File riuscito: " + PercorsoArchiviazione + annoScelto + "/trilogis.fb20")
+            LogFile.WriteLog("Recupero File riuscito: " & PercorsoArchiviazione & annoScelto & "/trilogis.fb20")
         Catch ex As Exception
-            MostraErrore(Me, "Errore recupero Database storico trilogis (" & PercorsoArchiviazione + annoScelto & "/trilogis.fb20)", ex)
+            MostraErrore(Me, "Errore recupero Database storico trilogis (" & PercorsoArchiviazione & annoScelto & "/trilogis.fb20)", ex)
             Copiaok = False
         End Try
         Try
-            File.Copy(PercorsoArchiviazione + annoScelto + "/trilogislocalconf.fb20", Variables.PercorsoDatabase.Value + "/trilogislocalconf.fb20", True)
+            File.Copy(PercorsoArchiviazione & annoScelto & "/trilogislocalconf.fb20", Variables.PercorsoDatabase.Value & "/trilogislocalconf.fb20", True)
             Copiaok = True
-            LogFile.WriteLog("Recupero File riuscito: " + PercorsoArchiviazione + annoScelto + "/trilogislocalconf.fb20")
+            LogFile.WriteLog("Recupero File riuscito: " & PercorsoArchiviazione & annoScelto & "/trilogislocalconf.fb20")
         Catch ex As Exception
-            MostraErrore(Me, "Errore recupero Database storico trilogislocalconf (" & PercorsoArchiviazione + annoScelto & "/trilogislocalconf.fb20)", ex)
+            MostraErrore(Me, "Errore recupero Database storico trilogislocalconf (" & PercorsoArchiviazione & annoScelto & "/trilogislocalconf.fb20)", ex)
             Copiaok = False
         End Try
         Try
-            File.Copy(PercorsoArchiviazione + annoScelto + "/trilogisremoteconf.fb20", Variables.PercorsoDatabase.Value + "/trilogisremoteconf.fb20", True)
+            File.Copy(PercorsoArchiviazione & annoScelto & "/trilogisremoteconf.fb20", Variables.PercorsoDatabase.Value & "/trilogisremoteconf.fb20", True)
             Copiaok = True
-            LogFile.WriteLog("Recupero File riuscito: " + PercorsoArchiviazione + annoScelto + "/trilogisremoteconf.fb20")
+            LogFile.WriteLog("Recupero File riuscito: " & PercorsoArchiviazione & annoScelto & "/trilogisremoteconf.fb20")
         Catch ex As Exception
-            MostraErrore(Me, "Errore recupero Database storico trilogisremoteconf (" & PercorsoArchiviazione + annoScelto & "/trilogisremoteconf.fb20)", ex)
+            MostraErrore(Me, "Errore recupero Database storico trilogisremoteconf (" & PercorsoArchiviazione & annoScelto & "/trilogisremoteconf.fb20)", ex)
             Copiaok = False
         End Try
 
@@ -155,31 +155,31 @@ Public Class CaricamentoDBStorico
 
     Private Function CopiaDatabaseCorrente() As Boolean
         Dim Copiaok As Boolean = False
-        If Not Directory.Exists(Variables.PercorsoDatabase.Value + "/DBBK") Then
-            Directory.CreateDirectory(Variables.PercorsoDatabase.Value + "/DBBK")
-            LogFile.WriteLog("Creazione cartella: " + Variables.PercorsoDatabase.Value + "/DBBK")
+        If Not Directory.Exists(Variables.PercorsoDatabase.Value & "/DBBK") Then
+            Directory.CreateDirectory(Variables.PercorsoDatabase.Value & "/DBBK")
+            LogFile.WriteLog("Creazione cartella: " & Variables.PercorsoDatabase.Value & "/DBBK")
         End If
 
         Try
-            File.Copy(Variables.PercorsoDatabase.Value + "/trilogis.fb20", Variables.PercorsoDatabase.Value + "/DBBK/trilogis.fb20", True)
+            File.Copy(Variables.PercorsoDatabase.Value & "/trilogis.fb20", Variables.PercorsoDatabase.Value & "/DBBK/trilogis.fb20", True)
             Copiaok = True
-            LogFile.WriteLog("Copia File riuscita: " + Variables.PercorsoDatabase.Value + "/trilogis.fb20")
+            LogFile.WriteLog("Copia File riuscita: " & Variables.PercorsoDatabase.Value & "/trilogis.fb20")
         Catch ex As Exception
             MostraErrore(Me, "Errore Salvataggio Database: " & Variables.PercorsoDatabase.Value & "/trilogis.fb20", ex)
             Copiaok = False
         End Try
         Try
-            File.Copy(Variables.PercorsoDatabase.Value + "/trilogislocalconf.fb20", Variables.PercorsoDatabase.Value + "/DBBK/trilogislocalconf.fb20", True)
+            File.Copy(Variables.PercorsoDatabase.Value & "/trilogislocalconf.fb20", Variables.PercorsoDatabase.Value & "/DBBK/trilogislocalconf.fb20", True)
             Copiaok = True
-            LogFile.WriteLog("Copia File riuscita: " + Variables.PercorsoDatabase.Value + "/trilogislocalconf.fb20")
+            LogFile.WriteLog("Copia File riuscita: " & Variables.PercorsoDatabase.Value & "/trilogislocalconf.fb20")
         Catch ex As Exception
             MostraErrore(Me, "Errore Salvataggio Database: " & Variables.PercorsoDatabase.Value & "/trilogislocalconf.fb20", ex)
             Copiaok = False
         End Try
         Try
-            File.Copy(Variables.PercorsoDatabase.Value + "/trilogisremoteconf.fb20", Variables.PercorsoDatabase.Value + "/DBBK/trilogisremoteconf.fb20", True)
+            File.Copy(Variables.PercorsoDatabase.Value & "/trilogisremoteconf.fb20", Variables.PercorsoDatabase.Value & "/DBBK/trilogisremoteconf.fb20", True)
             Copiaok = True
-            LogFile.WriteLog("Copia File riuscita: " + Variables.PercorsoDatabase.Value + "/trilogisremoteconf.fb20")
+            LogFile.WriteLog("Copia File riuscita: " & Variables.PercorsoDatabase.Value & "/trilogisremoteconf.fb20")
         Catch ex As Exception
             MostraErrore(Me, "Errore Salvataggio Database: " & Variables.PercorsoDatabase.Value & "/trilogisremoteconf.fb20", ex)
             Copiaok = False

@@ -23,7 +23,7 @@ Public Class ArchiviazioneTrilogis
             For Each p As Process In localByName
                 p.Kill()
             Next p
-            Process.Start(Application.StartupPath + "/ArchiviazioneTrilogis.exe").WaitForExit()
+            Process.Start(Application.StartupPath & "/ArchiviazioneTrilogis.exe").WaitForExit()
             Me.Dispose()
         Else
             Dim FormErrore As New Errore

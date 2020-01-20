@@ -6,7 +6,7 @@ Public Class UnitaArchiviazioneStorico
     Public TipoArchiviazione As String
     Private Sub UnitaArchiviazione_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ini As New IniFile
-        ini.Load(Application.StartupPath + "/PentaStart.ini")
+        ini.Load(Application.StartupPath & "/PentaStart.ini")
         TipoArchiviazione = ini.GetKeyValue("DB", "TipoArchiviazione")
         UnitaArchiviazione = ini.GetKeyValue("DB", "UnitaArchiviazione")
 
