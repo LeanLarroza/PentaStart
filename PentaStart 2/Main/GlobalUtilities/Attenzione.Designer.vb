@@ -27,6 +27,7 @@ Partial Class Attenzione
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Buttonexito = New System.Windows.Forms.Button()
         Me.lbMessagio = New System.Windows.Forms.Label()
+        Me.LabelSecondi = New System.Windows.Forms.Label()
         Me.Panel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -46,7 +47,7 @@ Partial Class Attenzione
         Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label3.AutoEllipsis = True
         Me.Label3.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 45.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(0, 0)
+        Me.Label3.Location = New System.Drawing.Point(0, 1)
         Me.Label3.Margin = New System.Windows.Forms.Padding(0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(490, 117)
@@ -64,7 +65,7 @@ Partial Class Attenzione
         Me.Buttonexito.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Buttonexito.Font = New System.Drawing.Font("Century Gothic", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Buttonexito.ForeColor = System.Drawing.Color.Black
-        Me.Buttonexito.Location = New System.Drawing.Point(161, 328)
+        Me.Buttonexito.Location = New System.Drawing.Point(156, 313)
         Me.Buttonexito.Name = "Buttonexito"
         Me.Buttonexito.Size = New System.Drawing.Size(168, 89)
         Me.Buttonexito.TabIndex = 7
@@ -84,6 +85,18 @@ Partial Class Attenzione
         Me.lbMessagio.TabIndex = 8
         Me.lbMessagio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'LabelSecondi
+        '
+        Me.LabelSecondi.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.LabelSecondi.AutoEllipsis = True
+        Me.LabelSecondi.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelSecondi.Location = New System.Drawing.Point(422, 410)
+        Me.LabelSecondi.Margin = New System.Windows.Forms.Padding(0)
+        Me.LabelSecondi.Name = "LabelSecondi"
+        Me.LabelSecondi.Size = New System.Drawing.Size(59, 36)
+        Me.LabelSecondi.TabIndex = 9
+        Me.LabelSecondi.TextAlign = System.Drawing.ContentAlignment.BottomRight
+        '
         'Attenzione
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -92,6 +105,7 @@ Partial Class Attenzione
         Me.BackgroundImage = Global.PentaStart.My.Resources.Resources.Bordes2
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(490, 455)
+        Me.Controls.Add(Me.LabelSecondi)
         Me.Controls.Add(Me.lbMessagio)
         Me.Controls.Add(Me.Buttonexito)
         Me.Controls.Add(Me.Panel)
@@ -112,4 +126,5 @@ Partial Class Attenzione
     Friend WithEvents Buttonexito As Button
     Friend WithEvents lbMessagio As Label
     Friend WithEvents Label3 As Label
+    Friend WithEvents LabelSecondi As Label
 End Class

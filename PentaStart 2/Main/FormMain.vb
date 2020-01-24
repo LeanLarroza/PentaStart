@@ -758,8 +758,15 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
                         connfirebird = False
                     End Try
                 End While
+                Dim FormDomandaAggiornamenti As New Domanda With {.Messagio = "Attivare aggiornamenti?"}
+                Dim result2 As DialogResult = FormDomandaAggiornamenti.ShowDialog()
+                If (result2 = DialogResult.Yes) Then
+                    ModificaKey(Aggiornamenti, "true")
+                Else
+                    ModificaKey(Aggiornamenti, "false")
+                End If
             ElseIf (result = DialogResult.No) Then
-                Dim FormDomanda2 As New Domanda With {.Messagio = "Impostare avvio Laundry?"}
+                    Dim FormDomanda2 As New Domanda With {.Messagio = "Impostare avvio Laundry?"}
                 Dim result2 As DialogResult = FormDomanda2.ShowDialog()
                 If (result2 = DialogResult.Yes) Then
                     ModificaKey(Software, "laundry")
@@ -890,6 +897,7 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
         CaricamentoKeyIni(ini, DettaglioCapi, "false")
         CaricamentoKeyIni(ini, ScontrinoParlante, "false")
         CaricamentoKeyIni(ini, Postazione, "1")
+        CaricamentoKeyIni(ini, TimeoutStampante, "9")
         CaricamentoKeyIni(ini, MatricolaRT, "null")
         CaricamentoKeyIni(ini, FatturazioneElett, "false")
         CaricamentoKeyIni(ini, SpeakerNomePronto, "false")

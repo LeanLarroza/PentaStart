@@ -115,9 +115,6 @@ Public Class RegistratoreTelematico
             Dim commandi() As String = {"=K", "=C3", "=C422", "=C1"}
             Dim Percorso As String = Variables.PercorsoMultiDriver.Value + "/TOSEND/scontrino.txt"
             ScrivereFile(commandi, Percorso)
-            Me.Hide()
-            AttendereRispostaStampante(Percorso, commandi, "ERRORE INVIO AGENZIA DELL'ENTRATE")
-            Me.Show()
         ElseIf EsisteStampanteDitron() Then
             If Variables.Software.Value = "comus" Or Variables.Software.Value = "trilogis" Then
                 Dim commandi() As String = {"CHIAVE Z", "INP NUM=99, TERM=145", "CHIAVE REG"}

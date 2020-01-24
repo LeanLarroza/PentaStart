@@ -27,8 +27,6 @@ Public Class ChiusuraFiscale
             Dim commandi() As String = {"=K", "=C3", "=C10", "=C1", "=C1"}
             Dim Percorso As String = Variables.PercorsoMultiDriver.Value + "/TOSEND/scontrino.txt"
             ScrivereFile(commandi, Percorso)
-            Me.Hide()
-            AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA CHIUSURA FISCALE." & Environment.NewLine & " ESEGUIRE CHIUSURA FISCALE MANUALMENTE")
         ElseIf EsisteStampanteDitron() Then
             LogFile.WriteLog("Chiusura fiscale stampante Ditron in corso...")
             If Variables.Software.Value = "menu" Then

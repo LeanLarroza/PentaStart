@@ -7,7 +7,7 @@
     Public Shared UnitaArchiviazione As New KeyIni With {.Percorso = "DB", .Key = "UnitaArchiviazione"}
     Public Shared UtenteDatabase As New KeyIni With {.Percorso = "DB", .Key = "User"}
     Public Shared PasswordDatabase As New KeyIni With {.Percorso = "DB", .Key = "Password"}
-    Public Shared TipoArchiviazione As New KeyIni With {.Percorso = "DB", .Key = "Tucker"}
+    Public Shared TipoArchiviazione As New KeyIni With {.Percorso = "DB", .Key = "TipoArchiviazione"}
     Public Shared IndirizzoIpDatabase As New KeyIni With {.Percorso = "DB", .Key = "IP"}
     Public Shared mct As New KeyIni With {.Percorso = "STAMPANTI", .Key = "MCT"}
     Public Shared ditron As New KeyIni With {.Percorso = "STAMPANTI", .Key = "Ditron"}
@@ -21,6 +21,7 @@
     Public Shared DettaglioCapi As New KeyIni With {.Percorso = "STAMPANTI", .Key = "DettaglioCapi"}
     Public Shared ScontrinoParlante As New KeyIni With {.Percorso = "STAMPANTI", .Key = "ScontrinoParlante"}
     Public Shared Postazione As New KeyIni With {.Percorso = "STAMPANTI", .Key = "Postazione"}
+    Public Shared TimeoutStampante As New KeyIni With {.Percorso = "STAMPANTI", .Key = "TimeoutStampante"}
     Public Shared MatricolaRT As New KeyIni With {.Percorso = "STAMPANTI", .Key = "MatricolaRT"}
     Public Shared FatturazioneElett As New KeyIni With {.Percorso = "MODULI", .Key = "FattElett"}
     Public Shared SpeakerNomePronto As New KeyIni With {.Percorso = "MODULI", .Key = "SpeakerPronto"}

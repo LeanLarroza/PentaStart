@@ -2,13 +2,15 @@
 Imports PentaStart.Utility
 Public Class Errore
     Public Messagio As String = ""
-
+    Public Secondi As Integer = 10
     Private Sub ButtonNO_Click(sender As Object, e As EventArgs) Handles ButtonNO.Click
         Me.Dispose()
         FormMain.Show()
     End Sub
 
     Private Sub Errore_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Secondi = 10
+        LabelSecondi.Text = Secondi.ToString()
         Dim sb As StringBuilder = New StringBuilder(Messagio)
         Dim spaces As Integer = 0
         Dim length As Integer = sb.Length
@@ -27,5 +29,20 @@ Public Class Errore
         lbErrore.Text = sb.ToString()
         AdjustText(Label1)
         AdjustText(lbErrore)
+        Dim TimerAutoclose As New Timer
+        TimerAutoclose.Interval = 1000
+        TimerAutoclose.Start()
+        AddHandler TimerAutoclose.Tick, AddressOf OnTick
+    End Sub
+
+    Private Sub OnTick(sender As Timer, e As EventArgs)
+        If Secondi > 1 Then
+            Secondi = Secondi - 1
+            LabelSecondi.Text = Secondi.ToString()
+            sender.Stop()
+            sender.Start()
+        Else
+            Me.Dispose()
+        End If
     End Sub
 End Class

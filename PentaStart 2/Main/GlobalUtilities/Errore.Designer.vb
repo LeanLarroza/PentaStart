@@ -27,6 +27,7 @@ Partial Class Errore
         Me.ButtonNO = New System.Windows.Forms.Button()
         Me.Panel = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.LabelSecondi = New System.Windows.Forms.Label()
         Me.Panel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -47,10 +48,10 @@ Partial Class Errore
         'ButtonNO
         '
         Me.ButtonNO.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ButtonNO.BackColor = System.Drawing.Color.Silver
+        Me.ButtonNO.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ButtonNO.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.ButtonNO.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
-        Me.ButtonNO.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.ButtonNO.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.ButtonNO.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ButtonNO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonNO.Font = New System.Drawing.Font("Century Gothic", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonNO.ForeColor = System.Drawing.Color.Black
@@ -78,13 +79,25 @@ Partial Class Errore
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label1.AutoEllipsis = True
         Me.Label1.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 45.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(-5, 0)
+        Me.Label1.Location = New System.Drawing.Point(0, 1)
         Me.Label1.Margin = New System.Windows.Forms.Padding(0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(490, 117)
         Me.Label1.TabIndex = 7
         Me.Label1.Text = "ERRORE"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LabelSecondi
+        '
+        Me.LabelSecondi.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.LabelSecondi.AutoEllipsis = True
+        Me.LabelSecondi.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelSecondi.Location = New System.Drawing.Point(422, 410)
+        Me.LabelSecondi.Margin = New System.Windows.Forms.Padding(0)
+        Me.LabelSecondi.Name = "LabelSecondi"
+        Me.LabelSecondi.Size = New System.Drawing.Size(59, 36)
+        Me.LabelSecondi.TabIndex = 24
+        Me.LabelSecondi.TextAlign = System.Drawing.ContentAlignment.BottomRight
         '
         'Errore
         '
@@ -94,6 +107,7 @@ Partial Class Errore
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(490, 455)
+        Me.Controls.Add(Me.LabelSecondi)
         Me.Controls.Add(Me.lbErrore)
         Me.Controls.Add(Me.ButtonNO)
         Me.Controls.Add(Me.Panel)
@@ -113,4 +127,5 @@ Partial Class Errore
     Friend WithEvents ButtonNO As Button
     Friend WithEvents Panel As Panel
     Friend WithEvents Label1 As Label
+    Friend WithEvents LabelSecondi As Label
 End Class
