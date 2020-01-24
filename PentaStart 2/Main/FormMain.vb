@@ -32,7 +32,7 @@ Public Class FormMain
             AvvioProgramma()
         Catch ex As Exception
             MostraErrore(Me, "ERRORE CRITICO AVVIO PROGRAMMA. CONTATTERE L'ASSISTENZA.", ex)
-            Environment.Exit(0)
+            Application.Restart()
         End Try
     End Sub
 
