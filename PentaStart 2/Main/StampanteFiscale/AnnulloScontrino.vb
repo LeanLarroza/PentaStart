@@ -60,10 +60,6 @@ Public Class AnnulloScontrino
             LogFile.WriteLog("Numero di documento errato: " & TextBox2.Text)
             MostraErrore(Me, "NUMERO DI DOCUMENTO NON VALIDO.")
             Return
-        ElseIf Not Integer.TryParse(TextBox2.Text.Substring(0, 4), nazz) And Not Integer.TryParse(TextBox2.Text.Substring(4), nscont) Then
-            LogFile.WriteLog("Numero di documento errato: " & TextBox2.Text)
-            MostraErrore(Me, "NUMERO DI DOCUMENTO NON VALIDO.")
-            Return
         End If
 
         nazz = CInt(nazz).ToString("0000")
