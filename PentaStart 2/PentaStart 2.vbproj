@@ -500,6 +500,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PostBuildEvent>call "$(SolutionDir)zipper.bat"
-call "$(SolutionDir)xml.bat" 2.5.0.0</PostBuildEvent>
+call "$(SolutionDir)xml.bat" 2.6.0.0</PostBuildEvent>
   </PropertyGroup>
 </Project>
