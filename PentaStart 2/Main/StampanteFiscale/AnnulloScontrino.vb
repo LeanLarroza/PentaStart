@@ -53,8 +53,8 @@ Public Class AnnulloScontrino
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim nazz As String = ""
-        Dim nscont As String = ""
+        Dim nazz As String = TextBox2.Text.Substring(0, 4)
+        Dim nscont As String = TextBox2.Text.Substring(4)
 
         If Not TextBox2.Text.Replace("-", "").Length = 8 Then
             LogFile.WriteLog("Numero di documento errato: " & TextBox2.Text)
