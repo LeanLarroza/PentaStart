@@ -10,7 +10,7 @@ Public Class SpegniPC
         ChiusuraDriverScontrino()
         LogFile.WriteLog("Chiusura PC in corso...")
         LogFile.ChisuraProgramma()
-        System.Diagnostics.Process.Start("shutdown", "-s -t 00")
+        System.Diagnostics.Process.Start("shutdown", "-s -t 05")
         Application.Exit()
     End Sub
 

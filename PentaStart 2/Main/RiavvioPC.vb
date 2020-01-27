@@ -2,7 +2,7 @@
 Public Class RiavvioPC
     Private Sub ButtonSI_Click(sender As Object, e As EventArgs) Handles ButtonSI.Click
         ChiusuraDriverScontrino()
-        System.Diagnostics.Process.Start("shutdown", "-r -t 00")
+        System.Diagnostics.Process.Start("shutdown", "-r -t 05")
         LogFile.WriteLog("Riavvio PC in corso...")
         LogFile.ChisuraProgramma()
         Application.Exit()
