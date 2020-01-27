@@ -36,12 +36,12 @@ Partial Class RiavvioPC
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoEllipsis = True
         Me.Label2.Font = New System.Drawing.Font("Lucida Sans", 19.2!)
-        Me.Label2.Location = New System.Drawing.Point(45, 126)
+        Me.Label2.Location = New System.Drawing.Point(13, 126)
         Me.Label2.Margin = New System.Windows.Forms.Padding(0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(392, 174)
+        Me.Label2.Size = New System.Drawing.Size(468, 174)
         Me.Label2.TabIndex = 23
-        Me.Label2.Text = "SEI SICURO DI ESEGUIRE IL RIAVVIO DEL SISTEMA?"
+        Me.Label2.Text = "ESEGUIRE IL RIAVVIO DEL SISTEMA?"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ButtonSI
@@ -54,7 +54,7 @@ Partial Class RiavvioPC
         Me.ButtonSI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonSI.Font = New System.Drawing.Font("Century Gothic", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSI.ForeColor = System.Drawing.Color.Black
-        Me.ButtonSI.Location = New System.Drawing.Point(37, 328)
+        Me.ButtonSI.Location = New System.Drawing.Point(285, 328)
         Me.ButtonSI.Name = "ButtonSI"
         Me.ButtonSI.Size = New System.Drawing.Size(168, 89)
         Me.ButtonSI.TabIndex = 21
@@ -72,7 +72,7 @@ Partial Class RiavvioPC
         Me.ButtonNO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonNO.Font = New System.Drawing.Font("Century Gothic", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonNO.ForeColor = System.Drawing.Color.Black
-        Me.ButtonNO.Location = New System.Drawing.Point(285, 328)
+        Me.ButtonNO.Location = New System.Drawing.Point(37, 328)
         Me.ButtonNO.Name = "ButtonNO"
         Me.ButtonNO.Size = New System.Drawing.Size(168, 89)
         Me.ButtonNO.TabIndex = 22
@@ -104,7 +104,7 @@ Partial Class RiavvioPC
         Me.Label1.Text = "ATTENZIONE"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'spegni2
+        'RiavvioPC
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.AutoSize = True
@@ -119,7 +119,7 @@ Partial Class RiavvioPC
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "spegni2"
+        Me.Name = "RiavvioPC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PentaStart"
         Me.Panel.ResumeLayout(False)

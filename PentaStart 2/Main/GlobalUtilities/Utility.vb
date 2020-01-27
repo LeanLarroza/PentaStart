@@ -358,6 +358,20 @@ Public Class Utility
         LogFile.WriteLog("Fine riavvio driver scontrino")
     End Sub
 
+    Public Shared Sub ChiusuraDriverScontrino()
+        LogFile.WriteLog("Chiusura driver scontrino in corso...")
+        If EsisteStampanteMCT() Then
+            ChiusuraProgramma("MULTIDRIVER_SERVER")
+        ElseIf EsisteStampanteDitron() Then
+            ChiusuraProgramma("SoEcrCom")
+        ElseIf EsisteStampanteEpson() Then
+            Dim commandi() As String = {"applicationExit"}
+            Dim Percorso As String = Variables.PercorsoFpMate.Value + "/TOSEND/scontrino.txt"
+            ScrivereFile(commandi, Percorso)
+        End If
+        LogFile.WriteLog("Fine chiusura driver scontrino")
+    End Sub
+
     Public Shared Sub MostraCalendarioEAggiornaTesto(ByVal sender As Form, [date] As Date, ByRef testo As TextBox)
         sender.Hide()
         Dim FormCalendar As New CalendarForm

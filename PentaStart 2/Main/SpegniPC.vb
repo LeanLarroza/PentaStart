@@ -7,6 +7,7 @@ Public Class SpegniPC
             Process.Start(Application.StartupPath + "\ArchiviazioneTrilogis.exe").WaitForExit()
             LogFile.WriteLog("Fine ArchiviazioneTrilogis (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
         End If
+        ChiusuraDriverScontrino()
         LogFile.WriteLog("Chiusura PC in corso...")
         LogFile.ChisuraProgramma()
         System.Diagnostics.Process.Start("shutdown", "-s -t 00")
@@ -20,5 +21,6 @@ Public Class SpegniPC
 
     Private Sub SpegniPC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         AdjustText(Label1)
+        AdjustText(Label2)
     End Sub
 End Class

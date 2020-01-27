@@ -36,12 +36,12 @@ Partial Class ChiusuraPentaStart
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoEllipsis = True
         Me.Label2.Font = New System.Drawing.Font("Lucida Sans", 19.2!)
-        Me.Label2.Location = New System.Drawing.Point(49, 119)
+        Me.Label2.Location = New System.Drawing.Point(9, 119)
         Me.Label2.Margin = New System.Windows.Forms.Padding(0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(392, 174)
+        Me.Label2.Size = New System.Drawing.Size(472, 174)
         Me.Label2.TabIndex = 15
-        Me.Label2.Text = "SEI SICURO DI CHIUDERE PENTASTART?"
+        Me.Label2.Text = "CHIUDERE PENTASTART?"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ButtonSI

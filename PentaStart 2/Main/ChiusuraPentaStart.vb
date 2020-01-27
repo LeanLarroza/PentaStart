@@ -4,6 +4,7 @@ Public Class ChiusuraPentaStart
         ChiusuraProgramma("FattElett")
         ChiusuraProgramma("SoEcrCom")
         ChiusuraProgramma("NomePronto")
+        ChiusuraDriverScontrino()
         LogFile.ChisuraProgramma()
         Application.Exit()
     End Sub
@@ -15,5 +16,6 @@ Public Class ChiusuraPentaStart
 
     Private Sub ChiusuraPentaStart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         AdjustText(Label1)
+        AdjustText(Label2)
     End Sub
 End Class
