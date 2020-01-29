@@ -279,9 +279,9 @@ Public Class formutility
         FormDomanda = New Domanda With {.Messagio = "Attivare stampa scontrino parlante?"}
         Dim result5 As DialogResult = FormDomanda.ShowDialog()
         If (result5 = DialogResult.Yes) Then
-            ModificaKey(ScontrinoParlante, "True")
+            ModificaKey(ScontrinoParlante, "true")
         Else
-            ModificaKey(ScontrinoParlante, "False")
+            ModificaKey(ScontrinoParlante, "false")
         End If
     End Sub
 
