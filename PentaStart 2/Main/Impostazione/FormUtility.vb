@@ -103,9 +103,15 @@ Public Class formutility
                                 If File.Exists(cercaspercorsodb.SelectedPath + "/Utilities/WinEcrConf.exe") Then
                                     LogFile.WriteLog("Percorso WinEcr confermato. (WinEcrConf trovato)")
                                     Try
-                                        If Not Directory.Exists(cercaspercorsodb.SelectedPath + "/TOSEND") Then Directory.CreateDirectory(cercaspercorsodb.SelectedPath + "/TOSEND")
+                                        Directory.CreateDirectory(cercaspercorsodb.SelectedPath + "/TOSEND")
                                     Catch ex As Exception
                                         MostraErrore(Me, "Errore creazione cartella " & cercaspercorsodb.SelectedPath, ex)
+                                        ModificaKey(ditron, "false")
+                                        ModificaKey(PercorsoWinEcr, "null")
+                                        MostraAttenzione("Stampante Ditron cancellata." & Environment.NewLine & "Riavvio PentaStart in corso...")
+                                        LogFile.WriteLog("Fine impostazione Stampante DITRON (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
+                                        RiavvioPentaStart()
+                                        Return
                                     End Try
                                     ModificaKey(PercorsoWinEcr, cercaspercorsodb.SelectedPath)
                                 Else
@@ -161,6 +167,13 @@ Public Class formutility
                         ModificaKey(PercorsoFpMate, "C:/Epson")
                     Catch ex As Exception
                         MostraErrore(Me, "ERRORE CREAZIONE CARTELLA TOSEND IN PERCORSO C:/EPSON", ex)
+                        ModificaKey(epson, "false")
+                        ModificaKey(PercorsoFpMate, "null")
+                        ModificaKey(MatricolaRT, "null")
+                        MostraAttenzione("Stampante EPSON cancellata." & Environment.NewLine & "Riavvio PentaStart in corso...")
+                        LogFile.WriteLog("Fine impostazione Stampante EPSON (" & Now.Subtract(Inizio).TotalSeconds & " secondi)")
+                        RiavvioPentaStart()
+                        Return
                     End Try
 
                     If File.Exists("C:\trilogis\PentaUtilities\FpMate\Settings.xml") Then
@@ -806,7 +819,7 @@ Public Class formutility
 
     Private Sub AggSoftware_Click(sender As Object, e As EventArgs) Handles AggSoftware.Click
         If AggiornamentiAttivi() Then
-            Dim FormDomanda As New Domanda With {.Messagio = "Aggiornare software Penta Electronic"}
+            Dim FormDomanda As New Domanda With {.Messagio = "Aggiornare software Penta Electronic?"}
             Dim result As DialogResult = FormDomanda.ShowDialog()
             If result = DialogResult.Yes Then
                 LogFile.WriteLog("Rilevato aggiornamento forzato")

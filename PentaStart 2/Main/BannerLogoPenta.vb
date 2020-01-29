@@ -26,7 +26,9 @@ Public Class BannerLogoPenta
             Me.Location = New Point(x, y)
         ElseIf Variables.LogoPenta.Value = 1 Then
             LogFile.WriteLog("Caricamento logo PENTA - Tipo: 1 - In Alto")
-            x = Screen.PrimaryScreen.WorkingArea.Width / 2
+            Me.Width = 250
+            Me.Height = 33
+            x = (Screen.PrimaryScreen.WorkingArea.Width / 2) - 125
             y = 0
             Me.Location = New Point(x, y)
         End If

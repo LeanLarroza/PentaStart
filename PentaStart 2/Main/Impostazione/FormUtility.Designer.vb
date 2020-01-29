@@ -79,7 +79,7 @@ Partial Class formutility
         Me.ButtonLogoPenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonLogoPenta.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 25.0!)
         Me.ButtonLogoPenta.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.ButtonLogoPenta.Location = New System.Drawing.Point(431, 200)
+        Me.ButtonLogoPenta.Location = New System.Drawing.Point(431, 286)
         Me.ButtonLogoPenta.Name = "ButtonLogoPenta"
         Me.ButtonLogoPenta.Size = New System.Drawing.Size(312, 69)
         Me.ButtonLogoPenta.TabIndex = 13
@@ -113,7 +113,7 @@ Partial Class formutility
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button3.Font = New System.Drawing.Font("Franklin Gothic Medium Cond", 25.0!)
         Me.Button3.ForeColor = System.Drawing.Color.LimeGreen
-        Me.Button3.Location = New System.Drawing.Point(431, 286)
+        Me.Button3.Location = New System.Drawing.Point(431, 200)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(312, 69)
         Me.Button3.TabIndex = 13
