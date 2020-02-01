@@ -59,7 +59,7 @@ Public Class RegistratoreTelematico
                 Me.Show()
             End If
         ElseIf EsisteStampanteEpson() Then
-            Dim commandi() As String = {"printerFiscalReport", "Printer|1", "printXReport"}
+            Dim commandi() As String = {"printerFiscalReport", "Printer|1", "printXReport|1"}
             Dim Percorso As String = Variables.PercorsoFpMate.Value + "/TOSEND/scontrino.txt"
             ScrivereFile(commandi, Percorso)
             Me.Hide()
@@ -96,12 +96,12 @@ Public Class RegistratoreTelematico
                 Me.Show()
             End If
         ElseIf EsisteStampanteEpson() Then
-            Dim commandi() As String = {"resetPrinter|1"}
-            Dim Percorso As String = Variables.PercorsoFpMate.Value.Replace("/", "\") + "\TOSEND\scontrino.txt"
-            ScrivereFile(commandi, Percorso)
-            Me.Hide()
-            AttendereRispostaStampante(Percorso, commandi, "ERRORE RESET STAMPANTE")
-            Me.Show()
+            'Dim commandi() As String = {"Printer|1"}
+            'Dim Percorso As String = Variables.PercorsoFpMate.Value.Replace("/", "\") + "\TOSEND\scontrino.txt"
+            'ScrivereFile(commandi, Percorso)
+            'Me.Hide()
+            'AttendereRispostaStampante(Percorso, commandi, "ERRORE RESET STAMPANTE")
+            'Me.Show()
         End If
     End Sub
 

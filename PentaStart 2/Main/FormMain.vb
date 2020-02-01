@@ -31,7 +31,7 @@ Public Class FormMain
             ControlloStorico()
             AvvioProgramma()
         Catch ex As Exception
-            MostraErrore(Me, "ERRORE CRITICO AVVIO PROGRAMMA. CONTATTERE L'ASSISTENZA.", ex)
+            MostraErrore(Me, "ERRORE CRITICO AVVIO PROGRAMMA. CONTATTARE L'ASSISTENZA.", ex)
             Application.Restart()
         End Try
     End Sub
@@ -287,10 +287,16 @@ Public Class FormMain
             Dim fecha = DateTime.Now.ToString("dd-MM-yyyy")
             Select Case currday
                 Case 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365
-                    Dim Backups = Directory.GetDirectories(PercorsoBackup.Value & "\Backups")
+                    Dim Backups()
+                    Try
+                        Backups = Directory.GetDirectories(PercorsoBackup.Value & "\Backups")
+                    Catch ex As Exception
+                        Directory.CreateDirectory(PercorsoBackup.Value & "\Backups")
+                    End Try
+                    Backups = Directory.GetDirectories(PercorsoBackup.Value & "\Backups")
                     Dim quantitaBkps As Integer = Backups.Length
                     If quantitaBkps > 4 Then
-                        Dim bkpvecchio As DirectoryInfo = Backups(0)
+                        Dim bkpvecchio As DirectoryInfo = New DirectoryInfo(Backups(0))
                         For Each bkp As DirectoryInfo In Backups
                             If bkp.CreationTime < bkpvecchio.CreationTime Then
                                 bkpvecchio = bkp
@@ -436,12 +442,12 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
                 Select Case DateDiff(DateInterval.Day, Now.Date, SATsc.Date)
                     Case 30, 20, 15, 7, 6, 5, 4, 3, 2
                         Label.Text = "Assistenza Anuale in scadenza.
-        Rimasti:" & DateDiff(DateInterval.Day, Now.Date, SATsc.Date) & " giorni."
+        Rimasti: " & DateDiff(DateInterval.Day, Now.Date, SATsc.Date) & " giorni."
                         Label.ForeColor = Color.RoyalBlue
                         LogFile.WriteLog("Rimangono " & DateDiff(DateInterval.Day, Now.Date, SATsc.Date) & " giorni fino alla scadenza del software.")
                     Case 1
                         Label.Text = "Assistenza Anuale in scadenza.
-        Rimasto:" & DateDiff(DateInterval.Day, Now.Date, SATsc.Date) & " giorno."
+        Rimasto: " & DateDiff(DateInterval.Day, Now.Date, SATsc.Date) & " giorno."
                         LogFile.WriteLog("Rimane " & DateDiff(DateInterval.Day, Now.Date, SATsc.Date) & " giorno fino alla scadenza del software.")
                         Label.ForeColor = Color.RoyalBlue
                 End Select

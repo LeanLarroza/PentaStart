@@ -166,14 +166,14 @@ Public Class LetturaDGFE
             End If
         ElseIf EsisteStampanteEpson() Then
             If iscon.Text = "0" And fscon.Text = "0" Then
-                Dim commandi() As String = {"printContentByDate|1|0|" & DataIniziale.Day.ToString("00") & "|" & DataIniziale.Month.ToString("00") & "|" & DataIniziale.Year.ToString("0000") & "|" & DataFinale.Day.ToString("00") & "|" & DataFinale.Month.ToString("00") & "|" & DataFinale.Year.ToString("0000") & ""}
+                Dim commandi() As String = {"printerCommand", "Printer|1", "PrintContent|1|0|" & DataIniziale.Day.ToString("00") & "|" & DataIniziale.Month.ToString("00") & "|" & DataIniziale.Year.ToString("0000") & "|" & DataFinale.Day.ToString("00") & "|" & DataFinale.Month.ToString("00") & "|" & DataFinale.Year.ToString("0000") & ""}
                 Dim Percorso As String = Variables.PercorsoFpMate.Value + "/TOSEND/scontrino.txt"
                 ScrivereFile(commandi, Percorso)
                 Me.Hide()
                 AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA LETTURA CONTENUTO MEMORIA DGFE.")
                 Me.Show()
             Else
-                Dim commandi() As String = {"printContentByDate|1|0|" & DataIniziale.Day.ToString("00") & "|" & DataIniziale.Month.ToString("00") & "|" & DataIniziale.Year.ToString("0000") & "|" & CInt(iscon.Text).ToString("0000") & "|" & CInt(fscon.Text).ToString("0000")}
+                Dim commandi() As String = {"printerCommand", "Printer|1", "PrintContent|1|0|" & DataIniziale.Day.ToString("00") & "|" & DataIniziale.Month.ToString("00") & "|" & DataIniziale.Year.ToString("0000") & "|" & CInt(iscon.Text).ToString("0000") & "|" & CInt(fscon.Text).ToString("0000")}
                 Dim Percorso As String = Variables.PercorsoFpMate.Value + "/TOSEND/scontrino.txt"
                 ScrivereFile(commandi, Percorso)
                 Me.Hide()

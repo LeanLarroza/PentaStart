@@ -159,6 +159,7 @@ Public Class AnnulloScontrino
                 If (result3 = DialogResult.Yes) Then
                     LogFile.WriteLog("Stampa documento di annullamento per lo scontrino " & TextBox2.Text.Replace("-", "") & " con data " & TextBox1.Text & " in corso...")
                     Dim commandi() As String = {"printerFiscalReceipt", "Printer|1", "printRecMessage|1|1|1|1|DOCUMENTO DI ANNULLO", "printRecMessage|1|4|1|1|VOID " & nazz & " " & nscont & " " & DataTextBox.ToString("ddMMyyyy") & " " & MatricolaRT.Value, "printRecTotal|1"}
+                    commandi = {"printerFiscalReceipt", "Printer|1", "printRecMessage|1|1|1|1|DOCUMENTO DI ANNULLO", "printRecMessage|1|4|1|1|VOID " & nazz & " " & nscont & " " & DataTextBox.Day.ToString("00") & DataTextBox.Month.ToString("00") & DataTextBox.Year.ToString("0000") & " " & MatricolaRT.Value}
                     Dim Percorso As String = Variables.PercorsoFpMate.Value.Replace("/", "\") + "\TOSEND\scontrino.txt"
                     ScrivereFile(commandi, Percorso)
                     Me.Hide()

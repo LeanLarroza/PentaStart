@@ -360,11 +360,7 @@ Public Class Utility
 
     Public Shared Sub ChiusuraDriverScontrino()
         LogFile.WriteLog("Chiusura driver scontrino in corso...")
-        If EsisteStampanteMCT() Then
-            ChiusuraProgramma("MULTIDRIVER_SERVER")
-        ElseIf EsisteStampanteDitron() Then
-            ChiusuraProgramma("SoEcrCom")
-        ElseIf EsisteStampanteEpson() Then
+        If EsisteStampanteEpson() Then
             Dim commandi() As String = {"applicationExit"}
             Dim Percorso As String = Variables.PercorsoFpMate.Value + "/TOSEND/scontrino.txt"
             ScrivereFile(commandi, Percorso)
