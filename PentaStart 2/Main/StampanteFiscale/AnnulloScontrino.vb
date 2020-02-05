@@ -112,7 +112,7 @@ Public Class AnnulloScontrino
                         FormAttendere.Refresh()
                         AxCoEcrCom1.EcrCmd("INP TERM=188", result)
                         AxCoEcrCom1.EcrCmd("INP TERM=145", result)
-                        AxCoEcrCom1.EcrCmd("INP TERM=145", result)
+                        AxCoEcrCom1.EcrCmd("INP TERM=145", result)s
                         AxCoEcrCom1.EcrCmd("INP ALFA=" + TextBox2.Text + " , TERM=145", result)
                         Threading.Thread.Sleep(2000)
                         AxCoEcrCom1.EcrCmd("INP TERM=145", result)
@@ -142,7 +142,7 @@ Public Class AnnulloScontrino
                     LogFile.WriteLog("Stampa documento di annullamento per lo scontrino " & TextBox2.Text.Replace("-", "") & ", Importo: €" & ImportoAnn.Text & " con data " & TextBox1.Text & " in corso...")
                     ImportoAnn.Text = ImportoAnn.Text.Replace(".", ",")
                     Dim ImportoAnnullo As String = Convert.ToDouble(ImportoAnn.Text).ToString("0.00")
-                    Dim commandi() As String = {"CHIAVE REG", "INP TERM=188", "INP TERM=145", "INP TERM=145", "INP ALFA=" + TextBox2.Text + " TERM=145", "INP TERM=145", "CLEAR", "vend rep=" + Variables.RepartoAnnullo.Value + ", pre=" + ImportoAnnullo.Replace(",", ".") + ", des='" + Variables.CausaleAnnullo.Value + "'", "CHIUS", "CLEAR"}
+                    Dim commandi() As String = {"CHIAVE REG", "INP TERM=188", "INP TERM=145", "INP TERM=145", "INP ALFA=" + TextBox2.Text + " , TERM=145", "INP TERM=145", "CLEAR", "vend rep=" + Variables.RepartoAnnullo.Value + ", pre=" + ImportoAnnullo.Replace(",", ".") + ", des='" + Variables.CausaleAnnullo.Value + "'", "CHIUS", "CLEAR"}
                     Dim Percorso As String = Variables.PercorsoWinEcr.Value.Replace("/", "\") + "\TOSEND\scontrino.txt"
                     ScrivereFile(commandi, Percorso)
                     Me.Hide()
