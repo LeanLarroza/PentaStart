@@ -112,7 +112,7 @@ Public Class AnnulloScontrino
                         FormAttendere.Refresh()
                         AxCoEcrCom1.EcrCmd("INP TERM=188", result)
                         AxCoEcrCom1.EcrCmd("INP TERM=145", result)
-                        AxCoEcrCom1.EcrCmd("INP TERM=145", result)s
+                        AxCoEcrCom1.EcrCmd("INP TERM=145", result)
                         AxCoEcrCom1.EcrCmd("INP ALFA=" + TextBox2.Text + " , TERM=145", result)
                         Threading.Thread.Sleep(2000)
                         AxCoEcrCom1.EcrCmd("INP TERM=145", result)
