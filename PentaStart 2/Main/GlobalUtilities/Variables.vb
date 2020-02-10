@@ -19,6 +19,7 @@
     Public Shared PercorsoFpMate As New KeyIni With {.Percorso = "STAMPANTI", .Key = "PercorsoFpMate"}
     Public Shared DettaglioNScontrino As New KeyIni With {.Percorso = "STAMPANTI", .Key = "DettaglioNScontrino"}
     Public Shared DettaglioCapi As New KeyIni With {.Percorso = "STAMPANTI", .Key = "DettaglioCapi"}
+    Public Shared StampaElettronico As New KeyIni With {.Percorso = "STAMPANTI", .Key = "StampaElettronico"}
     Public Shared ScontrinoParlante As New KeyIni With {.Percorso = "STAMPANTI", .Key = "ScontrinoParlante"}
     Public Shared Postazione As New KeyIni With {.Percorso = "STAMPANTI", .Key = "Postazione"}
     Public Shared TimeoutStampante As New KeyIni With {.Percorso = "STAMPANTI", .Key = "TimeoutStampante"}

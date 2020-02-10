@@ -4,6 +4,7 @@ Imports File = System.IO.File
 Imports PentaStart.Utility
 Imports System.Globalization
 Imports PentaStart.Variables
+Imports FirebirdSql.Data.FirebirdClient
 
 Public Class AnnulloScontrino
     Private result As String = ""
@@ -91,6 +92,7 @@ Public Class AnnulloScontrino
                 ScrivereFile(commandi, Percorso)
                 Me.Hide()
                 AttendereRispostaStampante(Percorso, commandi, "ERRORE STAMPA DOCUMENTO DI ANNULLAMENTO. RIPROVARE")
+                AnnullaScontrino3Logis(TextBox1.Text, CInt(nscont).ToString())
             End If
         ElseIf EsisteStampanteDitron() Then
             LogFile.WriteLog("Stampa documento di annullamento per lo scontrino " & TextBox2.Text.Replace("-", "") & ", Importo: €" & ImportoAnn.Text & " con data " & TextBox1.Text & " in corso...")
@@ -175,6 +177,30 @@ Public Class AnnulloScontrino
         Me.Dispose()
         RegistratoreTelematico.Show()
     End Sub
+
+    Private Function AnnullaScontrino3Logis(datascontrino As String, numeroscontrino As String) As Boolean
+        Dim DateScontrino As DateTime = Date.ParseExact(datascontrino, "dd/MM/yy", CultureInfo.InvariantCulture)
+        Dim strAggLottoAnnullato As String = "UPDATE LOTTI SET LOTTOATTIVO = 'False' WHERE LOTTOID IN (SELECT LOTTOID FROM DOCUMENTILOTTI WHERE DOCUMENTOLOTTODATA = '" & DateScontrino.ToString("yyyy") & "-" & DateScontrino.ToString("MM") & "-" & DateScontrino.ToString("dd") & "' AND DOCUMENTOLOTTONUMERO = " & numeroscontrino & " AND TIPODOCUMENTOID = 4)"
+        Dim Conexion As New FbConnection
+        Dim fb_string As FbConnectionStringBuilder = New FbConnectionStringBuilder With {
+                .ServerType = FbServerType.Default,
+                .UserID = Variables.UtenteDatabase.Value,
+                .Password = Variables.PasswordDatabase.Value,
+                .Database = "c:\trilogis\trilogis.fb20",
+                .Pooling = False
+                }
+        Try
+            Conexion.ConnectionString = fb_string.ToString
+            Conexion.Open()
+            LogFile.WriteLog("Apertura connessione database per annullo scontrino (3Logis)")
+        Catch err As FbException
+            MostraErrore(Me, "ERRORE APERTURA CONNESSIONE DATABASE", err)
+            Return False
+        End Try
+        Dim cmdAggLottoAnnullato As New FbCommand(strAggLottoAnnullato, Conexion)
+        cmdAggLottoAnnullato.ExecuteNonQuery()
+        Return True
+    End Function
 
     Private Sub ButtonIndietro_Click(sender As Object, e As EventArgs) Handles ButtonIndietro.Click
         ImportoAnn.Text = ""

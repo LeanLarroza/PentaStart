@@ -282,11 +282,20 @@ Public Class FormMain
     End Sub
 
     Private Sub BackupDatabase()
-        Dim currday As Integer = Date.Now.DayOfYear
-        If PercorsoBackup.Value <> "" Then
-            Dim fecha = DateTime.Now.ToString("dd-MM-yyyy")
-            Select Case currday
-                Case 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365
+        Try
+            Dim currday As Integer = Date.Now.DayOfYear
+        Dim giornibkp As New List(Of Integer)
+        Dim giorno As Integer = 0
+        Dim countmese As Integer
+        For countmese = 1 To 12
+            giorno = giorno + 15
+            giornibkp.Add(giorno)
+            giorno = giorno + 16
+            giornibkp.Add(giorno)
+        Next
+            If PercorsoBackup.Value <> "" Then
+                Dim fecha = DateTime.Now.ToString("dd-MM-yyyy")
+                If giornibkp.Contains(currday) And Not Directory.Exists(PercorsoBackup.Value & "\Backups\Backup " & fecha) Then
                     Dim Backups()
                     Try
                         Backups = Directory.GetDirectories(PercorsoBackup.Value & "\Backups")
@@ -295,14 +304,15 @@ Public Class FormMain
                     End Try
                     Backups = Directory.GetDirectories(PercorsoBackup.Value & "\Backups")
                     Dim quantitaBkps As Integer = Backups.Length
-                    If quantitaBkps > 4 Then
+                    If quantitaBkps > 9 Then
                         Dim bkpvecchio As DirectoryInfo = New DirectoryInfo(Backups(0))
-                        For Each bkp As DirectoryInfo In Backups
-                            If bkp.CreationTime < bkpvecchio.CreationTime Then
-                                bkpvecchio = bkp
+                        For Each bkp As String In Backups
+                            Dim currentbkp As DirectoryInfo = New DirectoryInfo(bkp)
+                            If currentbkp.CreationTime < bkpvecchio.CreationTime Then
+                                bkpvecchio = currentbkp
                             End If
                         Next
-                        Directory.Delete(bkpvecchio.FullName)
+                        Directory.Delete(bkpvecchio.FullName, True)
                     End If
                     If (Software.Value = "trilogis") Then
                         FileIO.FileSystem.CopyFile(PercorsoDatabase.Value & "\trilogis.fb20", PercorsoBackup.Value & "\Backups\Backup " & fecha & "\trilogis.fb20", True)
@@ -316,8 +326,11 @@ Public Class FormMain
                     ElseIf (Software.Value = "comus") Then
                         FileIO.FileSystem.CopyFile(PercorsoDatabase.Value & "\Comus.mdb", PercorsoBackup.Value & "\Backups\Backup " & fecha & "\Database-" & fecha & ".mdb", True)
                     End If
-            End Select
-        End If
+                End If
+            End If
+        Catch ex As Exception
+            MostraErrore(Me, "Errore creazine Backup Database.", ex)
+        End Try
     End Sub
 
     Private Sub ControlloScadenzaSoftware()
@@ -418,7 +431,7 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
             regKey.SetValue("SAT", firstRunDate.AddYears(1))
             LogFile.WriteLog("Key SAT: " + firstRunDate.AddYears(1) + " creata")
             regKey.Close()
-            LogFile.WriteLog("Fine creazione Key " + keyName + " (" + Now.Subtract(firstRunDate).TotalSeconds + " secondi)")
+            LogFile.WriteLog("Fine creazione Key " & keyName & " (" & Now.Subtract(firstRunDate).TotalSeconds & " secondi)")
             InizializzareDemo()
         End If
         LogFile.WriteLog("Fine inizializzazione registro")
@@ -902,6 +915,7 @@ Rimasto: " & DateDiff(DateInterval.Day, Now, My.Settings.scadenzademo) & " giorn
         CaricamentoKeyIni(ini, DettaglioNScontrino, "false")
         CaricamentoKeyIni(ini, DettaglioCapi, "false")
         CaricamentoKeyIni(ini, ScontrinoParlante, "false")
+        CaricamentoKeyIni(ini, StampaElettronico, "false")
         CaricamentoKeyIni(ini, Postazione, "1")
         CaricamentoKeyIni(ini, TimeoutStampante, "9")
         CaricamentoKeyIni(ini, MatricolaRT, "null")

@@ -283,6 +283,14 @@ Public Class formutility
         Else
             ModificaKey(ScontrinoParlante, "false")
         End If
+
+        FormDomanda = New Domanda With {.Messagio = "Attivare stampa scontrino fiscale automatico con pagamento elettronico?"}
+        Dim result6 As DialogResult = FormDomanda.ShowDialog()
+        If (result6 = DialogResult.Yes) Then
+            ModificaKey(StampaElettronico, "true")
+        Else
+            ModificaKey(StampaElettronico, "false")
+        End If
     End Sub
 
     Private Sub Indietro_Click(sender As Object, e As EventArgs) Handles ButtonINDITRO.Click
